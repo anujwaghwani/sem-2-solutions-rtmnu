@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Python Programming Notes</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #334155;
+            --border: #e2e8f0;
+            --code-bg: #1e293b;
+            --code-text: #f8fafc;
+            --output-bg: #0f172a;
+            --output-text: #34d399;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; }
+        .subtitle { font-size: 1.1rem; color: #94a3b8; margin-top: 10px; }
+
+        .unit-card {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            border-top: 6px solid var(--secondary);
+        }
+
+        h2 { 
+            color: var(--primary); 
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--border); 
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 { 
+            color: var(--secondary); 
+            margin-top: 2rem; 
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3::before {
+            content: "▸";
+            margin-right: 8px;
+            color: var(--accent);
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        .concept-box {
+            background: #f0fdf4;
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+        }
+
+        code.inline {
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            background: #e2e8f0;
+            color: #b91c1c;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        /* Code and Output Styling */
+        .code-container {
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #cbd5e1;
+        }
+
+        .code-container pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            margin: 0;
+            padding: 15px;
+            border-radius: 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .output-window {
+            background-color: var(--output-bg);
+            color: var(--output-text);
+            padding: 15px;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border-top: 2px solid #334155;
+        }
+
+        .output-header {
+            color: #94a3b8;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        .output-header::before {
+            content: "►";
+            margin-right: 6px;
+            color: #10b981;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+        
+        th { 
+            background: #f1f5f9; 
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .mark-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Python Programming</h1>
+        <div class="subtitle">Complete Revision Notes: Units 1 to 5 (Detailed Operations)</div>
+    </header>
+
+    <!-- ==========================================
+         UNIT 1: INSTALLATION, DATA TYPES, I/O
+         ========================================== -->
+    <div class="unit-card">
+        <h2>UNIT I: Basics, Data Types & I/O</h2>
+
+        <h3>1. Core Features & Architecture</h3>
+        <ul>
+            <li><strong>Features:</strong> Simple, dynamically typed, interpreted, platform-independent, multi-paradigm (OOP & procedural), and huge standard library.</li>
+            <li><strong>Internal Working:</strong> Source Code (.py) &rarr; Compiler &rarr; Bytecode (.pyc) &rarr; Python Virtual Machine (PVM) executes it line-by-line.</li>
+            <li><strong>Tokens:</strong> Smallest units. Includes Keywords (<code class="inline">if</code>), Identifiers (names), Literals (values like <code class="inline">10</code>), Operators (<code class="inline">+</code>), Punctuators (<code class="inline">:</code>).</li>
+        </ul>
+
+        <h3>2. Data Types & Variables</h3>
+        <p>Python is dynamically typed (no need to declare variable types). Core types:</p>
+        <ul>
+            <li><strong>Numeric:</strong> <code class="inline">int</code>, <code class="inline">float</code>, <code class="inline">complex</code> (e.g., 2+3j). Immutable.</li>
+            <li><strong>Sequence:</strong> <code class="inline">str</code> (immutable), <code class="inline">list</code> (mutable), <code class="inline">tuple</code> (immutable).</li>
+            <li><strong>Mapping/Sets:</strong> <code class="inline">dict</code> (mutable, key-value), <code class="inline">set</code> (mutable, unique).</li>
+            <li><strong>Boolean:</strong> <code class="inline">bool</code> (True/False).</li>
+        </ul>
+
+        <h3>3. Input, Output & String Operations</h3>
+        <ul>
+            <li><strong><code class="inline">input()</code>:</strong> Always returns a string. Requires typecasting for math: <code class="inline">int(input())</code>.</li>
+            <li><strong><code class="inline">eval()</code>:</strong> Evaluates a string as Python code. Can automatically detect input types (e.g., <code class="inline">eval("[1,2]")</code> returns a list).</li>
+        </ul>
+        
+        <p><strong>String Operations & Slicing:</strong> Strings are immutable sequences.</p>
+        <ul>
+            <li><strong>Slicing:</strong> <code class="inline">string[start:stop:step]</code>. <code class="inline">"PYTHON"[::-1]</code> reverses the string.</li>
+            <li><strong>Common Methods:</strong></li>
+        </ul>
+        <table>
+            <tr><th>Method</th><th>Description</th><th>Example (' hello ')</th></tr>
+            <tr><td><code class="inline">upper()</code> / <code class="inline">lower()</code></td><td>Converts case</td><td><code class="inline">' HELLO '</code></td></tr>
+            <tr><td><code class="inline">strip()</code></td><td>Removes leading/trailing whitespaces</td><td><code class="inline">'hello'</code></td></tr>
+            <tr><td><code class="inline">split(delim)</code></td><td>Splits string into a list</td><td><code class="inline">"a,b".split(",")</code> &rarr; <code class="inline">['a', 'b']</code></td></tr>
+            <tr><td><code class="inline">join(list)</code></td><td>Joins list elements into string</td><td><code class="inline">"-".join(['a', 'b'])</code> &rarr; <code class="inline">"a-b"</code></td></tr>
+            <tr><td><code class="inline">replace(old, new)</code></td><td>Replaces substring</td><td><code class="inline">"cat".replace("c", "b")</code> &rarr; <code class="inline">"bat"</code></td></tr>
+        </table>
+    </div>
+
+    <!-- ==========================================
+         UNIT 2: OPERATORS AND CONTROL STATEMENTS
+         ========================================== -->
+    <div class="unit-card">
+        <h2>UNIT II: Operators & Control Flow</h2>
+
+        <h3>1. Operators in Detail</h3>
+        <ul>
+            <li><strong>Arithmetic:</strong> <code class="inline">+</code>, <code class="inline">-</code>, <code class="inline">*</code>, <code class="inline">/</code> (float div), <code class="inline">//</code> (floor div), <code class="inline">%</code> (modulus), <code class="inline">**</code> (exponent).</li>
+            <li><strong>Bitwise:</strong> Operates on binary. <code class="inline">&</code> (AND), <code class="inline">|</code> (OR), <code class="inline">^</code> (XOR), <code class="inline">~</code> (NOT), <code class="inline"><<</code> (Left Shift), <code class="inline">>></code> (Right Shift).</li>
+            <li><strong>Identity (<code class="inline">is</code>, <code class="inline">is not</code>):</strong> Checks if two variables point to the exact same memory object.</li>
+            <li><strong>Membership (<code class="inline">in</code>, <code class="inline">not in</code>):</strong> Checks if a sequence contains a specific value.</li>
+        </ul>
+
+        <h3>2. Decision & Loop Control</h3>
+        <ul>
+            <li><strong>Decision:</strong> <code class="inline">if</code>, <code class="inline">elif</code>, <code class="inline">else</code>. Can be nested.</li>
+            <li><strong><code class="inline">while</code> loop:</strong> Repeats while a condition is True. Requires manual iterator update.</li>
+            <li><strong><code class="inline">for</code> loop:</strong> Iterates over sequences. Often used with <code class="inline">range(start, stop, step)</code>.</li>
+            <li><strong>Jump Statements:</strong> 
+                <br>- <code class="inline">break</code>: Terminates the whole loop immediately.
+                <br>- <code class="inline">continue</code>: Skips the rest of the current iteration and goes to the next.
+            </li>
+        </ul>
+    </div>
+
+    <!-- ==========================================
+         UNIT 3: FUNCTIONS AND LISTS
+         ========================================== -->
+    <div class="unit-card">
+        <h2>UNIT III: Functions and Lists</h2>
+
+        <h3>1. Functions</h3>
+        <p>A reusable block of code defined using the <code class="inline">def</code> keyword.</p>
+        <ul>
+            <li><strong>Scope:</strong> <code class="inline">Local</code> variables exist only inside the function. <code class="inline">Global</code> variables exist outside and can be accessed anywhere.</li>
+            <li><strong>Return Statement:</strong> Terminates the function and passes a value back to the caller. If omitted, returns <code class="inline">None</code>.</li>
+            <li><strong>Recursion:</strong> A function that calls itself to solve smaller instances of the same problem (requires a base case to stop).</li>
+            <li><strong>Lambda Functions:</strong> Anonymous, single-line functions. Syntax: <code class="inline">lambda args: expression</code>.</li>
+        </ul>
+
+        <h3>2. List Operations</h3>
+        <p>Lists are ordered, mutable sequences enclosed in brackets <code class="inline">[]</code>. Can hold mixed data types.</p>
+        
+        <table>
+            <tr><th>Operation/Method</th><th>Description</th><th>Example Output <code class="inline">L=[1,2]</code></th></tr>
+            <tr><td><code class="inline">append(x)</code></td><td>Adds a single element to the end.</td><td><code class="inline">L.append(3)</code> &rarr; <code class="inline">[1, 2, 3]</code></td></tr>
+            <tr><td><code class="inline">extend(iter)</code></td><td>Adds multiple elements to the end.</td><td><code class="inline">L.extend([3,4])</code> &rarr; <code class="inline">[1, 2, 3, 4]</code></td></tr>
+            <tr><td><code class="inline">insert(i, x)</code></td><td>Inserts an element at a specific index.</td><td><code class="inline">L.insert(1, 5)</code> &rarr; <code class="inline">[1, 5, 2]</code></td></tr>
+            <tr><td><code class="inline">remove(x)</code></td><td>Removes the first occurrence of x.</td><td><code class="inline">L.remove(1)</code> &rarr; <code class="inline">[2]</code></td></tr>
+            <tr><td><code class="inline">pop([i])</code></td><td>Removes and returns item at index (default last).</td><td><code class="inline">L.pop()</code> returns 2 &rarr; <code class="inline">[1]</code></td></tr>
+            <tr><td><code class="inline">count(x)</code></td><td>Returns the number of times x appears.</td><td><code class="inline">L.count(2)</code> &rarr; <code class="inline">1</code></td></tr>
+            <tr><td><code class="inline">index(x)</code></td><td>Returns the first index of x.</td><td><code class="inline">L.index(2)</code> &rarr; <code class="inline">1</code></td></tr>
+            <tr><td><code class="inline">reverse()</code> / <code class="inline">sort()</code></td><td>Reverses the list / Sorts the list in-place.</td><td><code class="inline">L.reverse()</code> &rarr; <code class="inline">[2, 1]</code></td></tr>
+        </table>
+
+        <div class="code-container">
+<pre><code># List Comprehension Example: Get squares of even numbers
+nums = [1, 2, 3, 4, 5]
+squares = [x**2 for x in nums if x % 2 == 0]
+print("Squares:", squares)</code></pre>
+            <div class="output-window">
+                <div class="output-header">Terminal Output</div>
+                Squares: [4, 16]
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         UNIT 4: TUPLES, SETS AND DICTIONARIES
+         ========================================== -->
+    <div class="unit-card">
+        <h2>UNIT IV: Tuples, Sets & Dictionaries Operations</h2>
+
+        <h3>1. Tuple Operations</h3>
+        <p>Ordered, <strong>immutable</strong> sequences. Enclosed in <code class="inline">()</code>.</p>
+        <ul>
+            <li><strong>Creation:</strong> <code class="inline">t = (1, 2)</code> or <code class="inline">t = 1, 2</code>. Single element requires a comma: <code class="inline">t = (10,)</code>.</li>
+            <li><strong>Math Ops:</strong> Concatenation <code class="inline">(1, 2) + (3, 4)</code>. Repetition <code class="inline">(1, 2) * 2</code>.</li>
+            <li><strong>Methods:</strong> Because they are immutable, they only have two methods:
+                <ul>
+                    <li><code class="inline">count(x)</code>: Counts occurrences of x.</li>
+                    <li><code class="inline">index(x)</code>: Finds first index of x.</li>
+                </ul>
+            </li>
+            <li><strong>zip() and Inverse zip(*):</strong> Pairs elements from multiple iterables. <code class="inline">zip(*)</code> unzips them back.</li>
+        </ul>
+
+        <h3>2. Set Operations</h3>
+        <p>Unordered collections of <strong>unique</strong> elements. Created using <code class="inline">{}</code> or <code class="inline">set()</code>. Mutable.</p>
+        <ul>
+            <li><strong>Modification Methods:</strong> 
+                <br><code class="inline">add(x)</code>: Adds an element.
+                <br><code class="inline">remove(x)</code>: Removes x (throws error if not found).
+                <br><code class="inline">discard(x)</code>: Removes x (does nothing if not found).
+                <br><code class="inline">clear()</code>: Empties the set.
+            </li>
+        </ul>
+        <table>
+            <tr><th>Mathematical Set Operation</th><th>Operator</th><th>Method Equivalent</th></tr>
+            <tr><td><strong>Union</strong> (All unique elements)</td><td><code class="inline">A | B</code></td><td><code class="inline">A.union(B)</code></td></tr>
+            <tr><td><strong>Intersection</strong> (Common elements)</td><td><code class="inline">A & B</code></td><td><code class="inline">A.intersection(B)</code></td></tr>
+            <tr><td><strong>Difference</strong> (In A but not B)</td><td><code class="inline">A - B</code></td><td><code class="inline">A.difference(B)</code></td></tr>
+            <tr><td><strong>Symmetric Diff</strong> (In A or B, but not both)</td><td><code class="inline">A ^ B</code></td><td><code class="inline">A.symmetric_difference(B)</code></td></tr>
+        </table>
+
+        <h3>3. Dictionary Operations</h3>
+        <p>Unordered, mutable collections of <strong>Key-Value pairs</strong>. Created using <code class="inline">{}</code>.</p>
+        <table>
+            <tr><th>Operation/Method</th><th>Description</th></tr>
+            <tr><td><code class="inline">d["key"] = val</code></td><td>Adds a new key-value pair or updates existing key.</td></tr>
+            <tr><td><code class="inline">update(dict2)</code></td><td>Merges dictionary `dict2` into `d`.</td></tr>
+            <tr><td><code class="inline">get(key, default)</code></td><td>Returns value for key. If not found, returns `default` (prevents KeyError).</td></tr>
+            <tr><td><code class="inline">pop(key)</code></td><td>Removes the key and returns its value.</td></tr>
+            <tr><td><code class="inline">keys()</code> / <code class="inline">values()</code></td><td>Returns a view object of all keys / all values.</td></tr>
+            <tr><td><code class="inline">items()</code></td><td>Returns a view of (key, value) tuple pairs (useful for looping).</td></tr>
+        </table>
+        
+        <div class="code-container">
+<pre><code># Looping through a dictionary
+student = {"name": "Alice", "age": 20}
+for key, value in student.items():
+    print(f"{key}: {value}")</code></pre>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         UNIT 5: FILES
+         ========================================== -->
+    <div class="unit-card">
+        <h2>UNIT V: File Handling Operations</h2>
+
+        <h3>1. Opening and Closing Files</h3>
+        <p>Python uses the built-in <code class="inline">open()</code> function. Always close files using <code class="inline">file.close()</code> or implicitly using the <code class="inline">with</code> statement.</p>
+        <ul>
+            <li><code class="inline">"r"</code> (Read): Default. Opens for reading.</li>
+            <li><code class="inline">"w"</code> (Write): Opens for writing. <strong>Overwrites</strong> existing data or creates a new file.</li>
+            <li><code class="inline">"a"</code> (Append): Opens for writing. Appends data to the <strong>end</strong> of the file without overwriting.</li>
+        </ul>
+
+        <h3>2. Reading and Writing Methods</h3>
+        <table>
+            <tr><th>Method</th><th>Description</th></tr>
+            <tr><td><code class="inline">read([size])</code></td><td>Reads the entire file into a single string (or up to `size` bytes).</td></tr>
+            <tr><td><code class="inline">readline()</code></td><td>Reads a single line from the file.</td></tr>
+            <tr><td><code class="inline">readlines()</code></td><td>Reads all lines and returns them as a <strong>list of strings</strong>.</td></tr>
+            <tr><td><code class="inline">write("string")</code></td><td>Writes a single string to the file. <em>(Must cast numbers to string first!)</em></td></tr>
+            <tr><td><code class="inline">writelines(list)</code></td><td>Writes a list of strings to the file (does not add newlines automatically).</td></tr>
+        </table>
+
+        <h3>3. Cursor Operations (Seek and Tell)</h3>
+        <p>When you read or write, a "cursor" (file pointer) moves through the file.</p>
+        <ul>
+            <li><strong><code class="inline">file.tell()</code>:</strong> Returns the current integer position (byte offset) of the cursor within the file.</li>
+            <li><strong><code class="inline">file.seek(offset, whence)</code>:</strong> Moves the cursor to a specific position. 
+                <br>- <code class="inline">seek(0)</code> moves the cursor to the absolute beginning of the file. Useful if you want to read a file again after writing to it.
+            </li>
+        </ul>
+
+        <div class="code-container">
+<pre><code># Writing and Reading Example
+with open("data.txt", "w+") as file:
+    file.writelines(["Line 1\n", "Line 2\n"])
+    
+    print("Cursor position after write:", file.tell())
+    
+    # Move cursor back to beginning to read
+    file.seek(0)
+    print("File Content:\n" + file.read().strip())</code></pre>
+            <div class="output-window">
+                <div class="output-header">Terminal Output</div>
+                Cursor position after write: 14<br>
+                File Content:<br>
+                Line 1<br>Line 2
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

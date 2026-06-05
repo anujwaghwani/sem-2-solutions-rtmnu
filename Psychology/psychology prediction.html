@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Test I - Consciousness Studies</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --accent: #ed8936;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #4a5568;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            margin-bottom: 30px;
+            border-top: 5px solid var(--primary);
+        }
+
+        header h1 {
+            color: var(--primary);
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        header h2 {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin: 5px 0;
+            font-weight: 500;
+        }
+
+        .exam-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .question-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            margin-bottom: 30px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .question-header h3 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 1.25rem;
+            flex: 1;
+            padding-right: 15px;
+        }
+
+        .marks-badge {
+            background-color: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        h4 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: var(--primary);
+        }
+
+        .note-box {
+            background-color: #ebf8ff;
+            border-left: 3px solid var(--secondary);
+            padding: 10px 15px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        @media (max-width: 600px) {
+            .exam-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            .question-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Exam Header -->
+        <header>
+            <h1>Government College of Engineering Nagpur</h1>
+            <h2>B.Tech. Second Semester (EE & ME) (2024-25)</h2>
+            <h2>Class Test - I</h2>
+            <h2>Subject: (IKS) Consciousness Studies</h2>
+            <div class="exam-meta">
+                <span>Date: 26/03/2025</span>
+                <span>Time: 1 Hour</span>
+                <span>Maximum Marks: 20</span>
+            </div>
+            <div class="note-box" style="margin-top: 20px; text-align: left;">
+                <strong>Instruction:</strong> Answer any <em>Four</em> of the following questions (5 Marks each).
+            </div>
+        </header>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <div class="question-header">
+                <h3>Q. 1 Define Psychology and elaborate the origin and history of psychology.</h3>
+                <span class="marks-badge">5 Marks</span>
+            </div>
+            
+            <h4>Definition of Psychology</h4>
+            <p>The term "Psychology" comes from two Greek words: <strong>Psyche</strong> (soul or mind) and <strong>Logos</strong> (study). Modern psychology is defined as the <strong>scientific study of behavior and mental processes</strong>.</p>
+
+            <h4>Origin and History</h4>
+            <ul>
+                <li><strong>Ancient Roots:</strong> Began in Ancient Greece. Philosophers like Socrates, Plato, and Aristotle asked fundamental questions about the mind, consciousness, and free will.</li>
+                <li><strong>Physiological Roots:</strong> Hippocrates explored how the brain controls the body, setting the stage for the biological perspective.</li>
+                <li><strong>Renaissance:</strong> René Descartes introduced "dualism," the idea that the mind and body are separate but interact.</li>
+                <li><strong>Birth of Modern Psychology (1879):</strong> Psychology became an independent science when <strong>Wilhelm Wundt</strong> established the first psychology laboratory in Leipzig, Germany, using experimental methods (Structuralism).</li>
+                <li><strong>Evolution:</strong> It quickly grew with William James in the US (Functionalism) and later expanded into schools like Psychoanalysis, Behaviorism, and Cognitive Psychology.</li>
+            </ul>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <div class="question-header">
+                <h3>Q. 2 Discuss psychology as a science. Explain application of psychology in science and engineering.</h3>
+                <span class="marks-badge">5 Marks</span>
+            </div>
+            
+            <h4>Psychology as a Science</h4>
+            <p>Psychology is a <strong>Behavioral Science</strong>. It is considered a science because it relies on:</p>
+            <ul>
+                <li><strong>Empirical Observation:</strong> It relies on actual experiments and objective observations, not just opinions.</li>
+                <li><strong>Systematic Approach:</strong> Data is collected logically to form theories.</li>
+                <li><strong>Measurement:</strong> It assigns numbers to concepts (e.g., using tests and apparatuses).</li>
+            </ul>
+
+            <h4>Applications in Science and Engineering</h4>
+            <ul>
+                <li><strong>Human Factors & Cognitive Engineering:</strong> Psychologists help design user-friendly interfaces, ergonomic workspaces, and decision-support systems to reduce human error and fatigue.</li>
+                <li><strong>Aerospace Engineering:</strong> Used to study pilot decision-making for better training and to design safe, psychologically comfortable spacecraft for astronauts.</li>
+                <li><strong>Biomedical Engineering:</strong> Designing intuitive medical devices to minimize user errors and improving rehabilitation technologies.</li>
+                <li><strong>Environmental Engineering:</strong> Promoting sustainable human behavior and designing eco-friendly systems.</li>
+            </ul>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <div class="question-header">
+                <h3>Q. 3 Explain PERMA and hierarchy of needs.</h3>
+                <span class="marks-badge">5 Marks</span>
+            </div>
+            
+            <h4>PERMA Model (Positive Psychology)</h4>
+            <p>Developed by Martin Seligman, the PERMA model outlines the five core elements of psychological well-being and happiness:</p>
+            <ul>
+                <li><strong>P - Positive Emotion:</strong> Experiencing joy, gratitude, and optimism.</li>
+                <li><strong>E - Engagement:</strong> Being fully absorbed and "in the flow" during activities.</li>
+                <li><strong>R - Relationships:</strong> Having deep, meaningful, and supportive connections with others.</li>
+                <li><strong>M - Meaning:</strong> Belonging to and serving something bigger than oneself.</li>
+                <li><strong>A - Accomplishment:</strong> Pursuing success, mastery, and achieving goals.</li>
+            </ul>
+
+            <h4>Hierarchy of Needs (Abraham Maslow)</h4>
+            <p>A motivational theory comprising a five-tier model of human needs, often depicted as a pyramid. Needs lower down must be satisfied before individuals can attend to higher needs:</p>
+            <ul>
+                <li><strong>1. Physiological:</strong> Basic survival needs (food, water, sleep).</li>
+                <li><strong>2. Safety:</strong> Security, health, and financial stability.</li>
+                <li><strong>3. Love and Belonging:</strong> Friendship, family, and intimacy.</li>
+                <li><strong>4. Esteem:</strong> Respect, status, and recognition.</li>
+                <li><strong>5. Self-Actualization:</strong> Reaching one's full potential and personal growth.</li>
+            </ul>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <div class="question-header">
+                <h3>Q. 4 Elaborate any two of the following subfields of psychology along with their applications.</h3>
+                <span class="marks-badge">5 Marks</span>
+            </div>
+            <div class="note-box"><em>Note: All three are provided below for your study reference. In the exam, you only need to write two.</em></div>
+            
+            <h4>i) Clinical Psychology</h4>
+            <ul>
+                <li><strong>Elaboration:</strong> The largest subfield, focused on the assessment, diagnosis, and treatment of mental, emotional, and behavioral disorders (e.g., depression, schizophrenia).</li>
+                <li><strong>Applications:</strong> Working in hospitals and private clinics to provide psychotherapy, counseling, and psychological testing for patients.</li>
+            </ul>
+
+            <h4>ii) Educational Psychology</h4>
+            <ul>
+                <li><strong>Elaboration:</strong> Focuses on how humans learn in educational settings, the effectiveness of educational interventions, and the psychology of teaching.</li>
+                <li><strong>Applications:</strong> Designing better school curriculums, developing new teaching methods, and assessing students with learning disabilities in schools.</li>
+            </ul>
+
+            <h4>iii) Developmental Psychology</h4>
+            <ul>
+                <li><strong>Elaboration:</strong> Examines the physical, cognitive, social, and emotional changes that occur throughout a person's entire lifespan (from birth to old age).</li>
+                <li><strong>Applications:</strong> Used in childcare, parenting guidance, designing age-appropriate educational toys, and helping the elderly cope with aging (gerontology).</li>
+            </ul>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card">
+            <div class="question-header">
+                <h3>Q. 5 Explain any two of the following schools of psychology in detail.</h3>
+                <span class="marks-badge">5 Marks</span>
+            </div>
+            <div class="note-box"><em>Note: All three are provided below for your study reference. In the exam, you only need to write two.</em></div>
+
+            <h4>iv) Behaviourism</h4>
+            <ul>
+                <li><strong>Key Figures:</strong> John B. Watson, B.F. Skinner.</li>
+                <li><strong>Detail:</strong> This school argued that psychology must focus <em>only</em> on observable and measurable behavior, completely rejecting the study of the unobservable "mind." It posits that all behavior is learned through interaction with the environment (Conditioning). Complex behaviors are just responses to environmental rewards and punishments.</li>
+            </ul>
+
+            <h4>v) Functionalism</h4>
+            <ul>
+                <li><strong>Key Figures:</strong> William James, John Dewey.</li>
+                <li><strong>Detail:</strong> Influenced heavily by Charles Darwin's theory of evolution. Instead of breaking down the structure of the mind, functionalists focused on <em>what the mind does</em>. They studied the purpose and function of behavior, specifically how learning, memory, and motivation help humans and animals adapt to survive in changing environments.</li>
+            </ul>
+
+            <h4>vi) Cognitive School of Psychology</h4>
+            <ul>
+                <li><strong>Key Figures:</strong> Ulric Neisser, Jerome Bruner.</li>
+                <li><strong>Detail:</strong> Emerged in the 1950s as a reaction against Behaviorism. This school focuses entirely on internal mental processes. It often compares the human mind to a computer, studying how people input, process, store, and retrieve information. Key areas include memory, perception, language, and problem-solving.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>

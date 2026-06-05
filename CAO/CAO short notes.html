@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAO Syllabus Notes</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .note-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .note-card:hover { box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); transform: translateY(-4px); }
+        .diagram-bg { background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 24px 24px; background-color: #f8fafc; }
+        .exam-badge { display: inline-flex; align-items: center; background-color: #ef4444; color: white; font-size: 0.65rem; font-weight: bold; padding: 0.1rem 0.4rem; border-radius: 0.25rem; margin-left: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
+        .exam-focus { margin-top: 0.75rem; padding: 0.5rem 0.75rem; background-color: #fff1f2; border-left: 3px solid #e11d48; border-radius: 0 0.375rem 0.375rem 0; font-size: 0.75rem; color: #881337; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-indigo-200">
+
+    <!-- Header & Nav (Scrollable) -->
+    <header class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white shadow-2xl relative z-50 border-b border-indigo-500/30">
+        <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]"></div>
+        <div class="max-w-7xl mx-auto px-6 py-12 flex justify-between items-center relative z-10">
+            <div class="max-w-4xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-xs font-bold mb-4 tracking-wider uppercase">
+                    B.Tech Syllabus Aligned
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-100 to-indigo-300">
+                    Computer Architecture & Organization
+                </h1>
+                <p class="text-slate-300 mt-4 text-base md:text-lg font-medium leading-relaxed max-w-2xl">
+                    A comprehensive, exam-focused study guide directly mapping to the 4-Unit syllabus featuring advanced architectural diagrams and exam tips.
+                </p>
+            </div>
+            
+            <!-- Hamburger Button -->
+            <button id="menu-btn" class="focus:outline-none block hover:bg-white/10 p-3 rounded-xl transition backdrop-blur-md border border-transparent hover:border-white/20">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden absolute w-full bg-slate-900/95 backdrop-blur-xl border-t border-indigo-500/30 shadow-2xl z-40">
+            <nav class="flex flex-col p-4 space-y-2 text-sm font-medium max-w-7xl mx-auto">
+                <a href="#unit1" class="menu-link px-6 py-3 hover:bg-indigo-600/30 rounded-lg transition border border-transparent hover:border-indigo-500/30 text-indigo-100 hover:text-white">UNIT I: Basic Blocks & ISA</a>
+                <a href="#unit2" class="menu-link px-6 py-3 hover:bg-indigo-600/30 rounded-lg transition border border-transparent hover:border-indigo-500/30 text-indigo-100 hover:text-white">UNIT II: Data Rep & Arithmetic</a>
+                <a href="#unit3" class="menu-link px-6 py-3 hover:bg-indigo-600/30 rounded-lg transition border border-transparent hover:border-indigo-500/30 text-indigo-100 hover:text-white">UNIT III: Memory Organization</a>
+                <a href="#unit4" class="menu-link px-6 py-3 hover:bg-indigo-600/30 rounded-lg transition border border-transparent hover:border-indigo-500/30 text-indigo-100 hover:text-white">UNIT IV: I/O & Peripheral Devices</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12 space-y-20">
+
+        <!-- ================= UNIT I ================= -->
+        <section id="unit1" class="scroll-mt-12">
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-200 pb-4">
+                <div class="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-2xl shadow-md shadow-indigo-200">I</div>
+                <div>
+                    <h2 class="text-3xl font-extrabold text-slate-800">Basic Blocks & ISA</h2>
+                    <p class="text-slate-500 font-medium">CPU Subsystems, Execution Cycles & CPU Case Studies</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                
+                <!-- Basic Blocks -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden xl:col-span-2">
+                    <div class="bg-indigo-50 p-6 border-b border-indigo-100">
+                        <h3 class="font-bold text-xl text-slate-800">Basic Functional Blocks of a Computer <span class="exam-badge">Exam Imp</span></h3>
+                        <p class="text-sm text-slate-600 mt-1">Based on the Von Neumann Architecture: Shared memory for data and instructions.</p>
+                        <div class="exam-focus">
+                            <strong>🎯 Exam Focus:</strong> Frequently asked as a direct 9-10 mark question: "Explain the basic functional blocks of a computer system, including CPU, Memory, I/O, Subsystems, and Control Unit." Be sure to draw the diagram below.
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+                        <div class="lg:col-span-3 diagram-bg p-6 rounded-2xl border border-slate-200 shadow-inner flex justify-center items-center">
+                            <!-- Premium System SVG Diagram -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" class="w-full max-w-lg h-auto drop-shadow-md">
+                                <defs>
+                                    <marker id="arr-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4f46e5"/></marker>
+                                    <marker id="arr-blue-rev" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4f46e5"/></marker>
+                                    <linearGradient id="gradCPU" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eef2ff"/><stop offset="100%" stop-color="#c7d2fe"/></linearGradient>
+                                    <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.1"/></filter>
+                                </defs>
+                                
+                                <!-- Main CPU Container -->
+                                <rect x="180" y="20" width="240" height="150" rx="12" fill="url(#gradCPU)" stroke="#6366f1" stroke-width="2" filter="url(#shadow)"/>
+                                <text x="300" y="45" text-anchor="middle" font-weight="900" fill="#312e81" font-size="16" letter-spacing="1">Central Processing Unit</text>
+                                
+                                <!-- CPU Internal Components -->
+                                <rect x="200" y="60" width="90" height="40" rx="6" fill="#fff" stroke="#818cf8" stroke-width="2"/>
+                                <text x="245" y="80" text-anchor="middle" font-weight="bold" fill="#3730a3" font-size="12">Control</text>
+                                <text x="245" y="92" text-anchor="middle" font-weight="bold" fill="#3730a3" font-size="12">Unit</text>
+                                
+                                <rect x="310" y="60" width="90" height="40" rx="6" fill="#fff" stroke="#818cf8" stroke-width="2"/>
+                                <text x="355" y="85" text-anchor="middle" font-weight="bold" fill="#3730a3" font-size="14">ALU</text>
+
+                                <rect x="200" y="115" width="200" height="35" rx="6" fill="#fff" stroke="#818cf8" stroke-width="2"/>
+                                <text x="300" y="137" text-anchor="middle" font-weight="bold" fill="#3730a3" font-size="12">Registers (PC, IR, MAR, MDR)</text>
+
+                                <!-- Memory -->
+                                <rect x="200" y="240" width="200" height="60" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
+                                <text x="300" y="265" text-anchor="middle" font-weight="bold" fill="#065f46" font-size="14">Memory Subsystem</text>
+                                <text x="300" y="285" text-anchor="middle" fill="#047857" font-size="11">Instructions &amp; Data</text>
+                                
+                                <!-- I/O -->
+                                <rect x="20" y="70" width="100" height="60" rx="12" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+                                <text x="70" y="105" text-anchor="middle" font-weight="bold" fill="#92400e" font-size="14">Input</text>
+
+                                <rect x="480" y="70" width="100" height="60" rx="12" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+                                <text x="530" y="105" text-anchor="middle" font-weight="bold" fill="#92400e" font-size="14">Output</text>
+
+                                <!-- Buses/Arrows -->
+                                <!-- System Bus -->
+                                <path d="M300 170 L300 240" stroke="#4f46e5" stroke-width="4" marker-end="url(#arr-blue)" marker-start="url(#arr-blue-rev)"/>
+                                <rect x="310" y="195" width="85" height="20" rx="4" fill="#fff" stroke="#e2e8f0"/>
+                                <text x="352" y="209" text-anchor="middle" fill="#4f46e5" font-size="10" font-weight="bold">System Bus</text>
+
+                                <path d="M120 100 L180 100" stroke="#4f46e5" stroke-width="4" marker-end="url(#arr-blue)"/>
+                                <path d="M420 100 L480 100" stroke="#4f46e5" stroke-width="4" marker-end="url(#arr-blue)"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                                <h4 class="font-bold text-indigo-800 mb-1">1. CPU (ALU, Registers, CU)</h4>
+                                <p class="text-sm text-slate-700"><strong>ALU</strong> computes arithmetic/logic. <strong>Control Unit (CU)</strong> coordinates components by fetching and decoding instructions. <strong>Registers</strong> are ultra-fast local storage (PC, IR, MAR, MDR).</p>
+                            </div>
+                            <div class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-100">
+                                <h4 class="font-bold text-emerald-800 mb-1">2. Memory Subsystem</h4>
+                                <p class="text-sm text-slate-700">Stores active programs and data. The CPU fetches instructions directly from here over the System Bus.</p>
+                            </div>
+                            <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-100">
+                                <h4 class="font-bold text-amber-800 mb-1">3. I/O Subsystems</h4>
+                                <p class="text-sm text-slate-700">Interfaces the digital computer with the external world (keyboards, monitors, network cards).</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ISA & Execution Cycle -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        Instruction Set & Execution <span class="exam-badge">Exam Imp</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-2 border-l-2 border-indigo-300 pl-3">The sequence of operations a CPU performs to execute a single machine instruction. The ISA dictates the registers, cycle, and addressing.</p>
+                    <div class="exam-focus mb-4">
+                        <strong>🎯 Exam Focus:</strong> You may be asked to "Discuss the concept of an instruction set in a CPU" or "Explain the different components of ISA including registers, instruction execution cycle, and addressing modes."
+                    </div>
+                    
+                    <div class="diagram-bg p-6 rounded-xl border border-slate-200 flex flex-col items-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" class="w-full max-w-[250px] h-auto drop-shadow-sm">
+                            <defs>
+                                <marker id="arr-cycle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker>
+                            </defs>
+                            <rect x="50" y="10" width="200" height="40" rx="8" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+                            <text x="150" y="35" text-anchor="middle" font-weight="bold" fill="#312e81" font-size="14">1. FETCH</text>
+                            
+                            <rect x="200" y="80" width="90" height="40" rx="8" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+                            <text x="245" y="105" text-anchor="middle" font-weight="bold" fill="#581c87" font-size="14">2. DECODE</text>
+                            
+                            <rect x="50" y="150" width="200" height="40" rx="8" fill="#dcfce7" stroke="#10b981" stroke-width="2"/>
+                            <text x="150" y="175" text-anchor="middle" font-weight="bold" fill="#064e3b" font-size="14">3. EXECUTE</text>
+                            
+                            <rect x="10" y="80" width="90" height="40" rx="8" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+                            <text x="55" y="105" text-anchor="middle" font-weight="bold" fill="#7c2d12" font-size="14">4. STORE</text>
+
+                            <!-- Flow Arrows -->
+                            <path d="M250 30 Q280 30 280 80" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arr-cycle)"/>
+                            <path d="M245 120 Q245 150 200 150" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arr-cycle)"/>
+                            <path d="M100 150 Q55 150 55 120" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arr-cycle)"/>
+                            <path d="M55 80 Q55 30 100 30" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arr-cycle)"/>
+                        </svg>
+                    </div>
+
+                    <div class="bg-slate-800 text-white p-4 rounded-lg shadow-inner font-mono text-sm">
+                        <div class="text-slate-400 text-xs uppercase mb-2 border-b border-slate-600 pb-1">RTL (Register Transfer Language) - Fetch Phase</div>
+                        <div class="flex items-center gap-2"><span class="text-pink-400">T0:</span> <span>MAR &larr; PC</span> <span class="text-slate-400 text-xs ml-auto">// Send PC to Addr Bus</span></div>
+                        <div class="flex items-center gap-2"><span class="text-pink-400">T1:</span> <span>MDR &larr; Mem[MAR], PC &larr; PC + 1</span> <span class="text-slate-400 text-xs ml-auto">// Read Mem, Inc PC</span></div>
+                        <div class="flex items-center gap-2"><span class="text-pink-400">T2:</span> <span>IR &larr; MDR</span> <span class="text-slate-400 text-xs ml-auto">// Load Instruction Reg</span></div>
+                    </div>
+                </article>
+
+                <!-- Control Unit & Instruction Formats -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="font-bold text-lg text-slate-800 mb-2 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span> Control Unit & Instruction Formats <span class="exam-badge">Exam Imp</span>
+                    </h3>
+                    <div class="space-y-4 text-sm text-slate-600 mt-4">
+                        <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                            <h4 class="font-bold text-indigo-800 mb-1">Control Unit (CU)</h4>
+                            <p class="text-xs">Directs the operation of the processor by generating timing and control signals. It can be implemented as <strong>Hardwired</strong> (fast, fixed logic gates, typical in RISC) or <strong>Microprogrammed</strong> (flexible, uses a ROM to store micro-instructions, typical in CISC).</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <h4 class="font-bold text-slate-800 mb-1">Instruction Formats</h4>
+                            <p class="text-xs mb-2">Classified by the number of operands explicitly specified in the instruction:</p>
+                            <ul class="list-disc pl-5 space-y-2 text-xs">
+                                <li><strong>3-Address:</strong> <code>ADD R1, R2, R3</code> (R1 &larr; R2 + R3). Needs large instruction word, but prevents overwriting source data. (RISC)</li>
+                                <li><strong>2-Address:</strong> <code>ADD R1, R2</code> (R1 &larr; R1 + R2). One operand acts as both source and destination. (x86)</li>
+                                <li><strong>1-Address:</strong> <code>ADD X</code> (ACC &larr; ACC + X). Uses a single implicit Accumulator (ACC) register.</li>
+                                <li><strong>0-Address:</strong> <code>ADD</code>. Uses a Stack (pops top two elements, adds them, pushes result back).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Case Study & Addressing Modes -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm xl:col-span-2">
+                    <h3 class="font-bold text-lg text-slate-800 mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                        Addressing Modes & CPU Case Study <span class="exam-badge">Exam Imp</span>
+                    </h3>
+                    <div class="exam-focus mb-4">
+                        <strong>🎯 Exam Focus:</strong> A guaranteed long-answer question. You will be asked to "Define and explain different addressing modes used in a CPU" and discuss the "significance of each mode." Write the table below in detail.
+                    </div>
+                    
+                    <div class="overflow-x-auto rounded-xl border border-slate-200 mb-6">
+                        <table class="w-full text-left text-sm border-collapse">
+                            <thead class="bg-slate-100 text-slate-700">
+                                <tr>
+                                    <th class="p-2 border-b border-slate-200">Mode</th>
+                                    <th class="p-2 border-b border-slate-200">Effective Address & Significance</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-600 text-xs">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-2 font-bold text-indigo-700">Immediate</td>
+                                    <td class="p-2"><strong>EA = Data in Inst.</strong> Fastest. Used for constants/loop inits.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-2 font-bold text-indigo-700">Direct</td>
+                                    <td class="p-2"><strong>EA = Inst. Address Field.</strong> Address is fixed. Used for globals.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-2 font-bold text-indigo-700">Indirect</td>
+                                    <td class="p-2"><strong>EA = Mem[Address].</strong> Address holds a pointer. High flexibility.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-2 font-bold text-indigo-700">Register</td>
+                                    <td class="p-2"><strong>Operand = Reg[ID].</strong> Extremely fast. Local variables.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-2 font-bold text-indigo-700">Reg Indirect</td>
+                                    <td class="p-2"><strong>EA = Reg[ID].</strong> Register acts as pointer. Array traversal.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-2 font-bold text-indigo-700">Indexed</td>
+                                    <td class="p-2"><strong>EA = Base + Index.</strong> Array offsets (e.g., A[i]).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-slate-100">
+                        <div class="border border-slate-200 p-4 rounded-xl bg-slate-50">
+                            <h4 class="font-bold text-slate-800 text-sm mb-1">Case Study: CISC (Intel x86)</h4>
+                            <p class="text-xs text-slate-600">Complex instructions, variable length. Emphasizes hardware complexity. Can perform math operations directly on memory locations (e.g., <code>ADD [mem], R1</code>). Results in smaller code size but higher CPI.</p>
+                        </div>
+                        <div class="border border-slate-200 p-4 rounded-xl bg-slate-50">
+                            <h4 class="font-bold text-slate-800 text-sm mb-1">Case Study: RISC (ARM / MIPS)</h4>
+                            <p class="text-xs text-slate-600">Simple, fixed-length instructions. Emphasizes software/compiler complexity. Uses a strict <strong>Load/Store</strong> architecture (math only happens on registers). Ideal for deep pipelining to achieve CPI of 1.</p>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ================= UNIT II ================= -->
+        <section id="unit2" class="scroll-mt-12">
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-200 pb-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black text-2xl shadow-md shadow-emerald-200">II</div>
+                <div>
+                    <h2 class="text-3xl font-extrabold text-slate-800">Data Rep & Computer Arithmetic</h2>
+                    <p class="text-slate-500 font-medium">Integer/Floating Formats, Adders & Multiplication</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Data Rep -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden xl:col-span-2">
+                    <div class="bg-emerald-50/50 p-6 border-b border-emerald-100">
+                        <h3 class="font-bold text-xl text-slate-800">Data Representation <span class="exam-badge">Exam Imp</span></h3>
+                        <div class="exam-focus">
+                            <strong>🎯 Exam Focus:</strong> "Explain how characters are represented in computers using ASCII and Unicode" OR "Describe the difference between fixed-point and floating point representations."
+                        </div>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-600">
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-emerald-700 border-b border-emerald-100 pb-1">Character Encoding</h4>
+                            <p><strong>ASCII:</strong> 7/8-bit code for English characters. Very limited globally.</p>
+                            <p><strong>Unicode:</strong> Universal standard mapping every character globally (UTF-8/16). Solves ASCII limitations.</p>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-emerald-700 border-b border-emerald-100 pb-1">Integer Representation</h4>
+                            <p><strong>Sign-Mag &amp; 1's Comp:</strong> Flawed because they have two representations for zero (+0 and -0).</p>
+                            <p><strong>2's Complement:</strong> Flip bits + 1. Standard because it has one zero and subtraction uses standard addition circuits.</p>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-emerald-700 border-b border-emerald-100 pb-1">Fixed vs Floating Point</h4>
+                            <p><strong>Fixed Point:</strong> Radix point is locked. Fast, simple hardware, but limited dynamic range.</p>
+                            <p><strong>Floating Point:</strong> Radix floats. Offers massive dynamic range (IEEE 754 format) at the cost of precision and complexity.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Floating Point IEEE -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm xl:col-span-2">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2">Floating Point Arithmetic (IEEE 754 Standard) <span class="exam-badge">Exam Imp</span></h3>
+                    <p class="text-sm text-slate-600 mb-4">Standard method to represent a massive dynamic range of real numbers.</p>
+                    
+                    <div class="diagram-bg p-6 rounded-xl border border-slate-200 flex flex-col items-center mt-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100" class="w-full max-w-2xl h-auto drop-shadow-md">
+                            <defs>
+                                <linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fee2e2"/><stop offset="100%" stop-color="#fca5a5"/></linearGradient>
+                                <linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#dbeafe"/><stop offset="100%" stop-color="#93c5fd"/></linearGradient>
+                                <linearGradient id="gGreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#dcfce7"/><stop offset="100%" stop-color="#86efac"/></linearGradient>
+                            </defs>
+                            
+                            <!-- 32 bit structure -->
+                            <rect x="20" y="20" width="30" height="40" rx="4" fill="url(#gRed)" stroke="#ef4444" stroke-width="2"/>
+                            <rect x="55" y="20" width="140" height="40" rx="4" fill="url(#gBlue)" stroke="#3b82f6" stroke-width="2"/>
+                            <rect x="200" y="20" width="380" height="40" rx="4" fill="url(#gGreen)" stroke="#22c55e" stroke-width="2"/>
+                            
+                            <!-- Text Labels -->
+                            <text x="35" y="45" text-anchor="middle" fill="#1e293b" font-weight="bold" font-size="14">S</text>
+                            <text x="125" y="45" text-anchor="middle" fill="#1e293b" font-weight="bold" font-size="14">Exponent (8-bit)</text>
+                            <text x="390" y="45" text-anchor="middle" fill="#1e293b" font-weight="bold" font-size="14">Mantissa (23-bit)</text>
+                            
+                            <text x="25" y="15" text-anchor="middle" fill="#64748b" font-size="11">31</text>
+                            <text x="60" y="15" text-anchor="middle" fill="#64748b" font-size="11">30</text>
+                            <text x="190" y="15" text-anchor="middle" fill="#64748b" font-size="11">23</text>
+                            <text x="205" y="15" text-anchor="middle" fill="#64748b" font-size="11">22</text>
+                            <text x="575" y="15" text-anchor="middle" fill="#64748b" font-size="11">0</text>
+                            
+                            <text x="300" y="90" text-anchor="middle" fill="#1e293b" font-family="monospace" font-size="16" font-weight="bold">Value = (-1)&#x5E;S &times; 1.Mantissa &times; 2&#x5E;(Exponent - 127)</text>
+                        </svg>
+                    </div>
+                    <div class="mt-4 p-4 bg-emerald-50 rounded-xl border border-emerald-100 text-sm text-emerald-900">
+                        <strong>FP Addition/Subtraction Rules:</strong>
+                        <ol class="list-decimal pl-5 mt-1 space-y-1">
+                            <li><strong>Align Exponents:</strong> Shift the mantissa of the number with the smaller exponent to the right until exponents match.</li>
+                            <li><strong>Add/Subtract:</strong> Perform the operation on the aligned mantissas.</li>
+                            <li><strong>Normalize:</strong> Shift the result mantissa and adjust the exponent so the result is back in `1.XXXX` format.</li>
+                        </ol>
+                    </div>
+                </article>
+
+                <!-- Addition Circuits -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="font-bold text-xl text-slate-800 mb-4">Adder Architectures</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-slate-300 pl-4 py-1">
+                            <h4 class="font-bold text-emerald-700 text-sm">Ripple Carry Adder</h4>
+                            <p class="text-xs text-slate-600">Chain of Full Adders. <em>Flaw:</em> Very slow. MSB cannot compute until the carry bit "ripples" through all previous stages ($O(n)$ delay).</p>
+                        </div>
+                        <div class="border-l-4 border-emerald-400 pl-4 py-1">
+                            <h4 class="font-bold text-emerald-800 text-sm">Carry Look-Ahead Adder (CLA)</h4>
+                            <p class="text-xs text-slate-700">Calculates all carry bits in advance using Generate ($G = A \cdot B$) and Propagate ($P = A \oplus B$) logic. Vastly faster but requires complex hardware.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Division Tech -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2">Division Techniques <span class="exam-badge">Exam Imp</span></h3>
+                    <div class="exam-focus mb-4">
+                        <strong>🎯 Exam Focus:</strong> "Compare and contrast the non-restoring and restoring division techniques used in binary division."
+                    </div>
+                    <p class="text-xs text-slate-600 mb-2">Both use Shift-Left and Subtract. How they handle negative remainders differs:</p>
+                    <table class="w-full text-left text-xs border-collapse border border-slate-200 mt-2">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="p-2 border border-slate-200">Feature</th>
+                                <th class="p-2 border border-slate-200 text-emerald-800">Restoring</th>
+                                <th class="p-2 border border-slate-200 text-emerald-800">Non-Restoring</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-2 border font-bold">If Remainder < 0</td>
+                                <td class="p-2 border">Q=0. <strong>Restore</strong> (Add Divisor back).</td>
+                                <td class="p-2 border">Q=0. <strong>No Restore</strong>. Add divisor in next step.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border font-bold">Efficiency</td>
+                                <td class="p-2 border">Slower (Subtract + Add per bit)</td>
+                                <td class="p-2 border">Faster (1 op per bit cycle)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <!-- Multiplication Algorithms -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm xl:col-span-2">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2">Multiplication Algorithms <span class="exam-badge">Exam Imp</span></h3>
+                    <div class="exam-focus mb-4">
+                        <strong>🎯 Exam Focus:</strong> "Explain Booth's Algorithm..." OR "Discuss shift-and-add and carry save multipliers."
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-600 mb-6">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-emerald-700 mb-1">1. Shift-and-Add</h4>
+                            <p class="text-xs">The basic approach. Checks multiplier bits: if 1, add multiplicand to accumulator and shift; if 0, just shift. Slow for large numbers.</p>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 shadow-sm">
+                            <h4 class="font-bold text-emerald-800 mb-1">2. Booth's Multiplier</h4>
+                            <p class="text-xs">Optimizes signed math by substituting additions for strings of 1s (e.g., $01110 \rightarrow 2^4 - 2^1$). Uses $Q_0$ and $Q_{-1}$.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-emerald-700 mb-1">3. Carry Save Multiplier</h4>
+                            <p class="text-xs">Used for fast hardware multiplication. Uses a tree of Carry Save Adders (CSAs) to add partial products simultaneously without waiting for carry ripples.</p>
+                        </div>
+                    </div>
+
+                    <div class="diagram-container rounded-xl border border-slate-200 p-6 flex flex-col items-center bg-white mt-4">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Booth's Flowchart</h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" class="w-full max-w-lg h-auto drop-shadow-sm">
+                            <rect x="200" y="10" width="100" height="30" rx="6" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+                            <text x="250" y="30" text-anchor="middle" font-weight="bold" fill="#fff" font-size="12">Examine $Q_0, Q_{-1}$</text>
+                            
+                            <path d="M250 40 L250 60" stroke="#94a3b8" stroke-width="2"/>
+                            <!-- Branches -->
+                            <path d="M250 60 L100 60 L100 80" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-blue)"/>
+                            <path d="M250 60 L400 60 L400 80" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-blue)"/>
+                            <path d="M250 60 L250 130" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arr-blue)"/>
+                            
+                            <rect x="50" y="80" width="100" height="35" rx="4" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+                            <text x="100" y="95" text-anchor="middle" font-weight="bold" fill="#b91c1c" font-size="12">1 0</text>
+                            <text x="100" y="110" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="bold">$A \leftarrow A - M$</text>
+
+                            <rect x="350" y="80" width="100" height="35" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+                            <text x="400" y="95" text-anchor="middle" font-weight="bold" fill="#1d4ed8" font-size="12">0 1</text>
+                            <text x="400" y="110" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="bold">$A \leftarrow A + M$</text>
+
+                            <rect x="210" y="80" width="80" height="25" rx="4" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+                            <text x="250" y="97" text-anchor="middle" font-weight="bold" fill="#64748b" font-size="12">0 0 / 1 1</text>
+
+                            <!-- Converge -->
+                            <path d="M100 115 L100 160 L250 160" stroke="#94a3b8" stroke-width="2"/>
+                            <path d="M400 115 L400 160 L250 160" stroke="#94a3b8" stroke-width="2"/>
+                            <path d="M250 160 L250 170" stroke="#94a3b8" stroke-width="2" marker-end="url(#arr-blue)"/>
+
+                            <rect x="140" y="170" width="220" height="30" rx="6" fill="#dcfce7" stroke="#10b981" stroke-width="2"/>
+                            <text x="250" y="190" text-anchor="middle" font-weight="bold" fill="#065f46" font-size="12">Arith. Shift Right (A, Q, $Q_{-1}$)</text>
+                        </svg>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ================= UNIT III ================= -->
+        <section id="unit3" class="scroll-mt-12">
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-200 pb-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black text-2xl shadow-md shadow-amber-200">III</div>
+                <div>
+                    <h2 class="text-3xl font-extrabold text-slate-800">Memory Organization</h2>
+                    <p class="text-slate-500 font-medium">Hierarchy, Cache Mapping & Interleaving</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                
+                <!-- Hierarchy Pyramid -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col items-center">
+                    <h3 class="font-bold text-xl text-slate-800 mb-6 w-full text-left">Hierarchical Memory Concept</h3>
+                    
+                    <div class="diagram-bg p-6 w-full rounded-xl border border-slate-200 flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" class="w-full max-w-sm h-auto drop-shadow-lg">
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ef4444" /><stop offset="100%" stop-color="#f87171" /></linearGradient>
+                                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b" /><stop offset="100%" stop-color="#fbbf24" /></linearGradient>
+                                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#10b981" /><stop offset="100%" stop-color="#34d399" /></linearGradient>
+                                <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3b82f6" /><stop offset="100%" stop-color="#60a5fa" /></linearGradient>
+                                <filter id="shadowPyramid"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-opacity="0.2"/></filter>
+                            </defs>
+                            
+                            <g filter="url(#shadowPyramid)">
+                                <path d="M200 20 L160 80 L240 80 Z" fill="url(#grad1)" stroke="#fff" stroke-width="2" />
+                                <path d="M160 80 L110 140 L290 140 L240 80 Z" fill="url(#grad2)" stroke="#fff" stroke-width="2" />
+                                <path d="M110 140 L60 200 L340 200 L290 140 Z" fill="url(#grad3)" stroke="#fff" stroke-width="2" />
+                                <path d="M60 200 L10 270 L390 270 L340 200 Z" fill="url(#grad4)" stroke="#fff" stroke-width="2" />
+                            </g>
+                            
+                            <text x="200" y="65" text-anchor="middle" fill="#fff" font-weight="bold" font-size="12">Registers (~1 ns)</text>
+                            <text x="200" y="115" text-anchor="middle" fill="#fff" font-weight="bold" font-size="14">Cache Mem (~5 ns)</text>
+                            <text x="200" y="175" text-anchor="middle" fill="#fff" font-weight="bold" font-size="16">Main Memory (~50 ns)</text>
+                            <text x="200" y="245" text-anchor="middle" fill="#fff" font-weight="bold" font-size="16">Magnetic Disk (~5 ms)</text>
+                            
+                            <path d="M10 160 L10 40" stroke="#ef4444" stroke-width="3" marker-end="url(#arr-blue)" />
+                            <text x="15" y="110" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="bold" transform="rotate(-90 15 110)">Speed & Cost</text>
+                            
+                            <path d="M390 40 L390 160" stroke="#3b82f6" stroke-width="3" marker-end="url(#arr-blue)" />
+                            <text x="385" y="110" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="bold" transform="rotate(90 385 110)">Capacity</text>
+                        </svg>
+                    </div>
+                    <p class="text-sm text-slate-600 mt-6 text-center">Built upon <strong>Locality of Reference</strong> (Temporal & Spatial). Hardware leverages small fast memory to hide the latency of large slow memory.</p>
+                </article>
+
+                <!-- Cache Design & Mapping -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2">Cache Memory & Mapping <span class="exam-badge">Exam Imp</span></h3>
+                    <div class="exam-focus mb-4">
+                        <strong>🎯 Exam Focus:</strong> "Discuss different types of cache mapping techniques" OR "Discuss the relationship between cache size and block size."
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-amber-50 p-4 rounded-xl border border-amber-100">
+                            <h4 class="font-bold text-amber-800 mb-2">Cache Size vs Block Size</h4>
+                            <p class="text-xs text-slate-700">Larger cache = lower miss rate. Larger <strong>Block Size</strong> exploits Spatial Locality, but if too large, it reduces the total number of blocks the cache can hold, drastically increasing <em>Conflict Misses</em> and Miss Penalty time.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-amber-700 border-b border-amber-100 pb-1 mb-2">Mapping Functions</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600">
+                                <li><strong>Direct Mapped:</strong> Block $N$ maps to Line $(N \mod \text{CacheSize})$. Fast to check, but suffers from high conflict misses.</li>
+                                <li><strong>Fully Associative:</strong> Block goes anywhere. Zero conflicts, but needs expensive parallel Tag comparators.</li>
+                                <li><strong>Set-Associative:</strong> Cache is divided into Sets. Block maps to specific Set, but can occupy any line within it. Provides the best balance of speed and hit rate.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-amber-700 border-b border-amber-100 pb-1 mb-2">Write Policies</h4>
+                            <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
+                                <li><strong>Write-Through:</strong> Update Cache + Main Memory simultaneously. Keeps memory consistent but is very slow.</li>
+                                <li><strong>Write-Back:</strong> Update Cache only. Memory updated when block is evicted (using a Dirty Bit). Much faster.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Memory Interleaving -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm xl:col-span-2">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2">Memory Interleaving <span class="exam-badge">Exam Imp</span></h3>
+                    <div class="exam-focus mb-4">
+                        <strong>🎯 Exam Focus:</strong> "Explain the concept of memory interleaving. Discuss its significance in improving memory access speed."
+                    </div>
+                    <p class="text-sm text-slate-600 mb-6">Overcomes main memory latency by physically dividing memory into concurrent banks. CPU can issue multiple requests across banks simultaneously.</p>
+                    
+                    <div class="diagram-bg p-6 w-full rounded-xl border border-slate-200 flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" class="w-full max-w-2xl h-auto drop-shadow-sm">
+                            <rect x="260" y="10" width="80" height="40" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" />
+                            <text x="300" y="35" text-anchor="middle" font-weight="bold" fill="#1e293b">CPU</text>
+                            
+                            <path d="M50 80 L550 80" stroke="#94a3b8" stroke-width="6" />
+                            <path d="M300 50 L300 80" stroke="#94a3b8" stroke-width="4" />
+                            <text x="560" y="85" font-weight="bold" fill="#64748b" font-size="12">System Bus</text>
+                            
+                            <g transform="translate(60, 100)">
+                                <rect x="0" y="0" width="90" height="50" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" />
+                                <text x="45" y="20" text-anchor="middle" font-weight="bold" fill="#b45309">Bank 0</text>
+                                <text x="45" y="40" text-anchor="middle" font-family="monospace" fill="#64748b" font-size="10">Addr: 0, 4, 8</text>
+                                <path d="M45 -20 L45 0" stroke="#94a3b8" stroke-width="3" />
+                            </g>
+                            <g transform="translate(180, 100)">
+                                <rect x="0" y="0" width="90" height="50" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" />
+                                <text x="45" y="20" text-anchor="middle" font-weight="bold" fill="#b45309">Bank 1</text>
+                                <text x="45" y="40" text-anchor="middle" font-family="monospace" fill="#64748b" font-size="10">Addr: 1, 5, 9</text>
+                                <path d="M45 -20 L45 0" stroke="#94a3b8" stroke-width="3" />
+                            </g>
+                            <g transform="translate(300, 100)">
+                                <rect x="0" y="0" width="90" height="50" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" />
+                                <text x="45" y="20" text-anchor="middle" font-weight="bold" fill="#b45309">Bank 2</text>
+                                <text x="45" y="40" text-anchor="middle" font-family="monospace" fill="#64748b" font-size="10">Addr: 2, 6, A</text>
+                                <path d="M45 -20 L45 0" stroke="#94a3b8" stroke-width="3" />
+                            </g>
+                            <g transform="translate(420, 100)">
+                                <rect x="0" y="0" width="90" height="50" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" />
+                                <text x="45" y="20" text-anchor="middle" font-weight="bold" fill="#b45309">Bank 3</text>
+                                <text x="45" y="40" text-anchor="middle" font-family="monospace" fill="#64748b" font-size="10">Addr: 3, 7, B</text>
+                                <path d="M45 -20 L45 0" stroke="#94a3b8" stroke-width="3" />
+                            </g>
+                        </svg>
+                    </div>
+                </article>
+
+                <!-- Page Replacement Algorithms -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm xl:col-span-2">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span> Cache Replacement Algorithms <span class="exam-badge">Exam Imp</span>
+                    </h3>
+                    <div class="exam-focus mb-4">
+                        <strong>🎯 Exam Focus:</strong> "Explain the working of algorithms like LRU, FIFO, and Optimal Page replacement."
+                    </div>
+                    <p class="mb-4 text-sm text-slate-600">When Memory/Cache is full, algorithms decide which block/page to evict to make room for new data.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-600">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-amber-700 mb-2">FIFO (First-In-First-Out)</h4>
+                            <p class="text-xs">Evicts the oldest page. Easy to implement. <em>Flaw:</em> Suffers from <strong>Belady's Anomaly</strong> (increasing memory can cause MORE page faults).</p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 shadow-sm">
+                            <h4 class="font-bold text-amber-800 mb-2">LRU (Least Recently Used)</h4>
+                            <p class="text-xs">Evicts page unused for the longest time (past predicting future). High performance, but complex (requires hardware timers/tracking bits).</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-amber-700 mb-2">Optimal (OPT)</h4>
+                            <p class="text-xs">Evicts the page that won't be used for the longest time in the <strong>future</strong>. Impossible to build; used as a theoretical benchmark.</p>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ================= UNIT IV ================= -->
+        <section id="unit4" class="scroll-mt-12">
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-200 pb-4">
+                <div class="w-12 h-12 rounded-xl bg-rose-600 text-white flex items-center justify-center font-black text-2xl shadow-md shadow-rose-200">IV</div>
+                <div>
+                    <h2 class="text-3xl font-extrabold text-slate-800">Peripheral Devices & I/O</h2>
+                    <p class="text-slate-500 font-medium">DMA, Software Interrupts & Process Scheduling</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                
+                <!-- Peripheral Devices -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm xl:col-span-2">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-rose-500"></span> Peripheral Devices (Input/Output) <span class="exam-badge">Exam Imp</span>
+                    </h3>
+                    <div class="exam-focus mb-4">
+                        <strong>🎯 Exam Focus:</strong> "Describe different types of peripheral devices and their characteristics. Explain distinction between input and output providing examples."
+                    </div>
+                    <p class="text-sm text-slate-600 mb-4">External hardware components connected to a computer to expand its capabilities.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                        <div class="bg-rose-50/50 p-4 rounded-xl border border-rose-100">
+                            <h4 class="font-bold text-rose-800 mb-2">Input Devices</h4>
+                            <p class="text-xs text-slate-600 mb-2">Convert human actions or physical data into digital binary data.</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li><strong>Keyboard:</strong> Character input (Electro-mechanical).</li>
+                                <li><strong>Mouse:</strong> Spatial GUI control (Optical/Laser).</li>
+                                <li><strong>Microphone:</strong> Audio input (Analog-to-Digital Converter).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-rose-50/50 p-4 rounded-xl border border-rose-100">
+                            <h4 class="font-bold text-rose-800 mb-2">Output Devices</h4>
+                            <p class="text-xs text-slate-600 mb-2">Translate digital binary data back into human-understandable form.</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li><strong>Monitor:</strong> Visual display (LCD/OLED matrix).</li>
+                                <li><strong>Printer:</strong> Hard copy generation (Laser/Inkjet).</li>
+                                <li><strong>Speakers:</strong> Audio output (Digital-to-Analog Converter).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- I/O Transfers & DMA -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm xl:col-span-2">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2">I/O Transfers & DMA Subsystem <span class="exam-badge">Exam Imp</span></h3>
+                    <div class="exam-focus mb-6">
+                        <strong>🎯 Exam Focus:</strong> "Explain how DMA works for data transfer between peripherals and memory without CPU intervention."
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-slate-300 pl-4 py-1">
+                                <h4 class="font-bold text-slate-700">1. Program Controlled I/O</h4>
+                                <p class="text-xs text-slate-600 mt-1">CPU constantly polls the device. Wastes CPU cycles.</p>
+                            </div>
+                            <div class="border-l-4 border-amber-400 pl-4 py-1">
+                                <h4 class="font-bold text-amber-800">2. Interrupt-Driven I/O</h4>
+                                <p class="text-xs text-slate-600 mt-1">CPU does other work until I/O sends a hardware interrupt. Better, but CPU still moves data word-by-word.</p>
+                            </div>
+                            <div class="border-l-4 border-rose-500 pl-4 py-2 bg-rose-50/50 rounded-r-lg">
+                                <h4 class="font-bold text-rose-800">3. Direct Memory Access (DMA)</h4>
+                                <p class="text-xs text-slate-700 mt-1">DMAC chip takes control of System Bus and transfers blocks directly between I/O and Memory. <strong>CPU is bypassed.</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="diagram-bg p-6 rounded-xl border border-slate-200 flex justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 250" class="w-full max-w-sm h-auto drop-shadow-md">
+                                <path d="M30 80 L420 80" stroke="#94a3b8" stroke-width="6" />
+                                <text x="420" y="70" text-anchor="end" font-weight="bold" fill="#64748b" font-size="12">System Bus</text>
+
+                                <rect x="50" y="20" width="80" height="40" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" />
+                                <text x="90" y="45" text-anchor="middle" font-weight="bold" fill="#1e293b">CPU</text>
+                                <path d="M90 60 L90 80" stroke="#94a3b8" stroke-width="3" />
+                                
+                                <rect x="300" y="20" width="90" height="40" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="2" />
+                                <text x="345" y="45" text-anchor="middle" font-weight="bold" fill="#1e293b">Memory</text>
+                                <path d="M345 60 L345 80" stroke="#94a3b8" stroke-width="3" />
+                                
+                                <rect x="180" y="110" width="80" height="40" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="2" />
+                                <text x="220" y="135" text-anchor="middle" font-weight="bold" fill="#1e293b">DMAC</text>
+                                <path d="M220 80 L220 110" stroke="#94a3b8" stroke-width="3" />
+
+                                <rect x="180" y="190" width="80" height="40" rx="6" fill="#fff1f2" stroke="#e11d48" stroke-width="2" />
+                                <text x="220" y="215" text-anchor="middle" font-weight="bold" fill="#1e293b">I/O Disk</text>
+                                <path d="M220 150 L220 190" stroke="#94a3b8" stroke-width="3" />
+                                
+                                <path d="M345 80 L345 100 L220 100 L220 110" fill="none" stroke="#e11d48" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arr-blue)"/>
+                                <text x="280" y="115" text-anchor="middle" fill="#e11d48" font-size="10" font-weight="bold">Direct DMA Flow</text>
+                            </svg>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Software Interrupts & Privileges -->
+                <article class="note-card bg-white rounded-2xl border border-slate-200 p-6 shadow-sm xl:col-span-2">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-rose-500"></span> Software Interrupts, Exceptions & Process Transitions <span class="exam-badge">Exam Imp</span>
+                    </h3>
+                    <div class="exam-focus mb-4">
+                        <strong>🎯 Exam Focus:</strong> Guaranteed questions. "Explain concept of Software interrupts and exceptions with examples" OR "Explain how interrupts are used in process scheduling."
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-sm text-slate-600 mt-6">
+                        <div>
+                            <h4 class="font-bold text-rose-700 border-b border-rose-100 pb-1 mb-3">Exceptions (Traps)</h4>
+                            <p class="text-xs">Unplanned, synchronous errors caused by instructions (Divide by zero, Page fault). OS handles these to prevent system failure.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-rose-700 border-b border-rose-100 pb-1 mb-3">Software Interrupts</h4>
+                            <p class="text-xs">Intentional System Calls (e.g., File read). Safely transitions CPU from User Mode to Kernel Mode.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-rose-700 border-b border-rose-100 pb-1 mb-3">Privileged Instructions</h4>
+                            <p class="text-xs">Instructions only executable in OS Kernel Mode (e.g., halting CPU, managing memory). Protects system from malicious user code.</p>
+                        </div>
+                        
+                        <div class="md:col-span-2 lg:col-span-3 border-t border-slate-100 pt-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h4 class="font-bold text-rose-700 mb-2">Role of Interrupts in Process State Transitions</h4>
+                                <p class="text-xs">Multitasking OS uses a hardware clock generating a <strong>Timer Interrupt</strong> every few milliseconds. This forces the CPU to pause the running program and jump to the OS Scheduler. The OS performs a <strong>Context Switch</strong> (saves current state, loads next state), enabling concurrent processes.</p>
+                            </div>
+                            <div class="diagram-bg p-4 rounded-xl border border-slate-200 flex justify-center">
+                                <!-- State Transition SVG -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 200" class="w-full h-auto drop-shadow-sm max-w-sm">
+                                    <defs>
+                                        <marker id="arr-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker>
+                                        <marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/></marker>
+                                    </defs>
+                                    
+                                    <!-- States -->
+                                    <rect x="140" y="20" width="70" height="30" rx="15" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+                                    <text x="175" y="40" text-anchor="middle" font-weight="bold" fill="#1d4ed8" font-size="12">Ready</text>
+                                    
+                                    <rect x="250" y="85" width="80" height="30" rx="15" fill="#dcfce7" stroke="#10b981" stroke-width="2"/>
+                                    <text x="290" y="105" text-anchor="middle" font-weight="bold" fill="#065f46" font-size="12">Running</text>
+
+                                    <rect x="140" y="150" width="70" height="30" rx="15" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+                                    <text x="175" y="170" text-anchor="middle" font-weight="bold" fill="#b91c1c" font-size="12">Blocked</text>
+
+                                    <!-- Transitions -->
+                                    <path d="M210 35 Q260 35 270 85" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arr-gray)"/>
+                                    <text x="260" y="55" text-anchor="middle" fill="#64748b" font-size="9">Dispatch</text>
+
+                                    <path d="M290 85 Q250 20 210 25" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-red)"/>
+                                    <text x="250" y="15" text-anchor="middle" fill="#ef4444" font-weight="bold" font-size="10">Timer Interrupt</text>
+
+                                    <path d="M290 115 Q250 165 210 165" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arr-gray)"/>
+                                    <text x="265" y="155" text-anchor="middle" fill="#64748b" font-size="9">I/O Request</text>
+
+                                    <path d="M175 150 L175 50" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arr-red)"/>
+                                    <text x="135" y="105" text-anchor="middle" fill="#ef4444" font-weight="bold" font-size="10" transform="rotate(-90 135 105)">I/O Interrupt</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-xl font-bold text-white mb-2">Computer Architecture & Organization</h2>
+            <p class="font-medium text-slate-400">&copy; 2026 Complete Study Framework.</p>
+            <p class="mt-2 text-xs text-slate-500">Strictly mapped to the 4-Unit B.Tech Syllabus.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuLinks = document.querySelectorAll('.menu-link');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

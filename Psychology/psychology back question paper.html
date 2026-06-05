@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consciousness Studies - Back Paper</title>
+    <style>
+        :root {
+            --bg-color: #f3f4f6;
+            --paper-bg: #ffffff;
+            --text-color: #000000;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            font-size: 12pt;
+        }
+
+        .paper-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--paper-bg);
+            padding: 40px 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--text-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        header h2 {
+            font-size: 1.1rem;
+            margin: 0 0 5px 0;
+            font-weight: normal;
+        }
+
+        header h1 {
+            font-size: 1.4rem;
+            margin: 15px 0 10px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+
+        .exam-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* Instructions */
+        .instructions {
+            margin-bottom: 30px;
+        }
+
+        .instructions h3 {
+            text-align: center;
+            font-size: 1.1rem;
+            text-decoration: underline;
+            margin-bottom: 15px;
+        }
+
+        .instructions ol {
+            padding-left: 40px;
+            margin: 0;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        /* Questions */
+        .question-block {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .q-number {
+            width: 40px;
+            font-weight: bold;
+        }
+
+        .q-content {
+            flex: 1;
+        }
+
+        .sub-question {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .sub-text {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .marks {
+            font-weight: bold;
+            text-align: right;
+            min-width: 30px;
+        }
+
+        .or-divider {
+            text-align: center;
+            font-weight: bold;
+            margin: 20px 0;
+            letter-spacing: 2px;
+        }
+
+        .roman-list {
+            list-style-type: lower-roman;
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+
+        .roman-list li {
+            margin-bottom: 3px;
+        }
+
+        /* Floating Print Button */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: background-color 0.2s;
+            z-index: 1000;
+        }
+
+        .print-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Print Specific Styles */
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
+        @media print {
+            body {
+                background-color: var(--paper-bg);
+                padding: 0;
+            }
+            .paper-container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn" onclick="window.print()">🖨️ Print Question Paper</button>
+
+    <div class="paper-container">
+        
+        <header>
+            <h2>Faculty of Science & Technology</h2>
+            <p>Second Semester B.Tech. (Civil/EC/ET/EN/EE/Mech./C.S.E./CE/IT/CT/CSE(DS)/CSE(CS)/ CSE(AIML)/AI/AIML/AIDS/IOT/ROBOTICS AI/Cyber Security) (CBCS) (NEP) Examination</p>
+            <h1>(A) CONSCIOUSNESS STUDIES</h1>
+            <p>Refer IKS Basket</p>
+            
+            <div class="exam-meta">
+                <span>Time : Three Hours]</span>
+                <span>[Maximum Marks : 70</span>
+            </div>
+        </header>
+
+        <div class="instructions">
+            <h3>INSTRUCTIONS TO CANDIDATES</h3>
+            <ol>
+                <li>All questions carry marks as indicated.</li>
+                <li>Solve Question 1 <b>OR</b> Question No. 2.</li>
+                <li>Solve Question 3 <b>OR</b> Question No. 4.</li>
+                <li>Solve Question 5 <b>OR</b> Question No. 6.</li>
+                <li>Solve Question 7 <b>OR</b> Question No. 8.</li>
+                <li>Solve Question 9 <b>OR</b> Question No. 10.</li>
+            </ol>
+        </div>
+
+        <div class="questions-container">
+            
+            <!-- Unit 1 -->
+            <div class="question-block">
+                <div class="q-number">1.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) Define Psychology? Explain the subject matter of Psychology.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">(B) Explain the origin and historical background of Psychology.</div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="or-divider">OR</div>
+
+            <div class="question-block">
+                <div class="q-number">2.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) Discuss the two most important influential schools of psychology.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">(B) Explain the main subfields of psychology with their functions.</div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 2 -->
+            <div class="question-block" style="margin-top: 30px;">
+                <div class="q-number">3.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) What is perceptual organization? Discuss its principles.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">(B) What is extrasensory perception? Briefly explain the types of extrasensory perception.</div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="or-divider">OR</div>
+
+            <div class="question-block">
+                <div class="q-number">4.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) Explain the process of perception in detail.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">(B) Discuss the factors that influence perception.</div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 3 -->
+            <div class="question-block" style="margin-top: 30px;">
+                <div class="q-number">5.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) What is observational learning? Elaborate the conditions of observational learning in detail.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">(B) Highlight the role of nature in classical conditioning.</div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="or-divider">OR</div>
+
+            <div class="question-block">
+                <div class="q-number">6.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) Explain Pavlov's experiment on classical conditioning in detail.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">(B) Discuss the role of reinforcement and punishment in shaping behavior.</div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 4 -->
+            <div class="question-block" style="margin-top: 30px;">
+                <div class="q-number">7.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) Discuss the Working-Model Theory of memory with examples.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">(B) Explain the key aspects of Short-Term Memory in detail.</div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="or-divider">OR</div>
+
+            <div class="question-block">
+                <div class="q-number">8.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) Discuss the factors which are responsible for forgetting.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">(B) Explain the relationship between brain and memory.</div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 5 -->
+            <div class="question-block" style="margin-top: 30px;">
+                <div class="q-number">9.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) Explain the application of Psychology in Science and Engineering.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">
+                            (B) Write brief notes on any two senses:
+                            <ol class="roman-list">
+                                <li>Vision</li>
+                                <li>Hearing</li>
+                                <li>Taste</li>
+                                <li>Touch</li>
+                                <li>Smell</li>
+                            </ol>
+                        </div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="or-divider">OR</div>
+
+            <div class="question-block">
+                <div class="q-number">10.</div>
+                <div class="q-content">
+                    <div class="sub-question">
+                        <div class="sub-text">(A) What is learning? Briefly explain the characteristics of learning.</div>
+                        <div class="marks">7</div>
+                    </div>
+                    <div class="sub-question">
+                        <div class="sub-text">(B) Define memory. Discuss the importance of memory in personal and professional life.</div>
+                        <div class="marks">7</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

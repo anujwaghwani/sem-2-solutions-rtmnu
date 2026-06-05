@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python University Exam Solutions</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0f766e;
+            --accent: #e11d48;
+            --bg-color: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #334155;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+            --output-bg: #0f172a;
+            --output-text: #34d399; 
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 { margin: 0; font-size: 2.2rem; }
+        .subtitle { font-size: 1.1rem; opacity: 0.9; margin-top: 5px; }
+
+        .exam-section {
+            border-top: 4px solid var(--accent);
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        .exam-title {
+            color: var(--accent);
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .question-block {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        .q-header {
+            background: #f1f5f9;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        h2 { color: var(--primary); font-size: 1.3rem; margin-top: 20px; }
+        
+        p, li { font-size: 1rem; }
+        ul, ol { margin-bottom: 15px; padding-left: 20px; }
+
+        /* Code and Output Styling */
+        .code-container {
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #cbd5e1;
+        }
+
+        .code-container pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            margin: 0;
+            padding: 15px;
+            border-radius: 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .output-window {
+            background-color: var(--output-bg);
+            color: var(--output-text);
+            padding: 15px;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border-top: 2px solid #334155;
+        }
+
+        .output-header {
+            color: #94a3b8;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        .output-header::before {
+            content: "►";
+            margin-right: 6px;
+            color: #10b981;
+        }
+
+        code.inline {
+            background-color: #e2e8f0;
+            color: #b91c1c;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .mark-badge {
+            float: right;
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Python Programming</h1>
+        <div class="subtitle">Complete Solutions: End Semester Examination (70 Marks)</div>
+    </header>
+
+    <!-- QUESTION 1 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 1</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                1 (A) Explain the working of input() function and eval() function in brief alongwith an example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <h2>1. The <code>input()</code> Function</h2>
+            <p>The <code class="inline">input()</code> function is used to take user input from the keyboard. It halts the program until the user enters data. <strong>Crucially</strong>, it <em>always</em> reads and returns the input as a string (<code class="inline">str</code>), so type casting is needed for math.</p>
+            
+            <h2>2. The <code>eval()</code> Function</h2>
+            <p>The <code class="inline">eval()</code> function parses a string and executes it as a Python expression. When used with user input, it automatically detects and evaluates the string into its corresponding Python datatype (like an int, float, or list).</p>
+            
+            <div class="code-container">
+<pre><code># input() example
+age = input("Enter age: ") # User types 20
+print(type(age))           # Output is string
+
+# eval() example
+data = eval("5 * 4")
+print("Evaluated data:", data)
+print(type(data))          # Output is int</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    &lt;class 'str'&gt;<br>
+                    Evaluated data: 20<br>
+                    &lt;class 'int'&gt;
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                1 (B) What are Datatypes in Python? Explain each datatype alongwith an example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>Datatypes specify the type of value a variable holds. Python is dynamically typed.</p>
+            <table>
+                <tr><th>Category</th><th>Datatype</th><th>Description</th><th>Example</th></tr>
+                <tr>
+                    <td rowspan="3"><strong>Numeric</strong></td>
+                    <td><code class="inline">int</code></td>
+                    <td>Whole numbers</td>
+                    <td><code class="inline">age = 25</code></td>
+                </tr>
+                <tr>
+                    <td><code class="inline">float</code></td>
+                    <td>Decimal numbers</td>
+                    <td><code class="inline">pi = 3.14</code></td>
+                </tr>
+                <tr>
+                    <td>Complex</td>
+                    <td>Real & imaginary parts</td>
+                    <td><code class="inline">z = 2 + 3j</code></td>
+                </tr>
+                <tr>
+                    <td rowspan="3"><strong>Sequence</strong></td>
+                    <td><code class="inline">str</code></td>
+                    <td>Immutable characters</td>
+                    <td><code class="inline">name = "Bob"</code></td>
+                </tr>
+                <tr>
+                    <td><code class="inline">list</code></td>
+                    <td>Mutable collection</td>
+                    <td><code class="inline">nums = [1, 2]</code></td>
+                </tr>
+                <tr>
+                    <td><code class="inline">tuple</code></td>
+                    <td>Immutable collection</td>
+                    <td><code class="inline">pts = (10, 20)</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Mapping</strong></td>
+                    <td><code class="inline">dict</code></td>
+                    <td>Key-value pairs</td>
+                    <td><code class="inline">d = {"id": 1}</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Set</strong></td>
+                    <td><code class="inline">set</code></td>
+                    <td>Unique, unordered items</td>
+                    <td><code class="inline">s = {1, 2, 3}</code></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 2 (OR)</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                2 (A) Explain the importance of comments in Python Programming. Demonstrate with examples.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p><strong>Importance:</strong></p>
+            <ul>
+                <li><strong>Readability:</strong> Explains logic to other developers.</li>
+                <li><strong>Debugging:</strong> Allows developers to ignore blocks of code during testing.</li>
+                <li><strong>Documentation:</strong> Docstrings generate automatic manuals.</li>
+            </ul>
+            <div class="code-container">
+<pre><code>"""
+This is a multi-line comment (Docstring).
+It describes the module's overall purpose.
+"""
+
+# This is a single-line comment
+salary = 50000 
+tax = salary * 0.1  # This is an inline comment</code></pre>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                2 (B) Describe various types of tokens in Python. Explain each token type with an appropriate example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>Tokens are the smallest meaningful units in a Python program.</p>
+            <table>
+                <tr><th>Token Type</th><th>Description</th><th>Example</th></tr>
+                <tr>
+                    <td><strong>Keywords</strong></td>
+                    <td>Reserved words with special meaning.</td>
+                    <td><code class="inline">if</code>, <code class="inline">def</code>, <code class="inline">True</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Identifiers</strong></td>
+                    <td>Names created by the user for variables/functions.</td>
+                    <td><code class="inline">age</code>, <code class="inline">get_data()</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Literals</strong></td>
+                    <td>Raw, constant values assigned to variables.</td>
+                    <td><code class="inline">100</code>, <code class="inline">"Hello"</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Operators</strong></td>
+                    <td>Symbols used for computation or logic.</td>
+                    <td><code class="inline">+</code>, <code class="inline">==</code>, <code class="inline">and</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Punctuators</strong></td>
+                    <td>Symbols defining the code's syntax structure.</td>
+                    <td><code class="inline">()</code>, <code class="inline">:</code>, <code class="inline">,</code></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 3</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                3 (A) Explain various arithmetic operators available in Python. Elaborate alongwith an example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>Arithmetic operators perform mathematical operations on numeric values.</p>
+            <div class="code-container">
+<pre><code>a = 10
+b = 3
+
+print("Addition (+):", a + b)
+print("Subtraction (-):", a - b)
+print("Multiplication (*):", a * b)
+print("Division (/):", a / b)         # Always returns float
+print("Floor Division (//):", a // b) # Removes decimal
+print("Modulus (%):", a % b)          # Remainder
+print("Exponent (**):", a ** b)       # Power</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Addition (+): 13<br>
+                    Subtraction (-): 7<br>
+                    Multiplication (*): 30<br>
+                    Division (/): 3.3333333333333335<br>
+                    Floor Division (//): 3<br>
+                    Modulus (%): 1<br>
+                    Exponent (**): 1000
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                3 (B) Distinguish between break statement and continue statement alongwith an example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <table>
+                <tr><th>Feature</th><th><code>break</code></th><th><code>continue</code></th></tr>
+                <tr>
+                    <td><strong>Action</strong></td>
+                    <td>Terminates the entire loop immediately.</td>
+                    <td>Skips the rest of the current iteration.</td>
+                </tr>
+                <tr>
+                    <td><strong>Flow</strong></td>
+                    <td>Moves to the first line after the loop.</td>
+                    <td>Moves to the next iteration of the loop.</td>
+                </tr>
+            </table>
+            <div class="code-container">
+<pre><code>print("Break Example:")
+for i in range(1, 4):
+    if i == 2: break
+    print(i, end=" ") # Output: 1
+
+print("\nContinue Example:")
+for i in range(1, 4):
+    if i == 2: continue
+    print(i, end=" ") # Output: 1 3</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Break Example:<br>1<br>Continue Example:<br>1 3
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUESTION 4 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 4 (OR)</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                4 (A) Write a program in Python to check whether the given number is odd or even.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <div class="code-container">
+<pre><code># Check if a number is odd or even
+num = 14 # Simulating user input: int(input("Enter number: "))
+
+# Modulus operator returns the remainder of division by 2
+if num % 2 == 0:
+    print(f"{num} is an Even number.")
+else:
+    print(f"{num} is an Odd number.")</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    14 is an Even number.
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                4 (B) Describe various decision-making statements in Python. Design a Python program using nested if-else block.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <ul>
+                <li><strong><code class="inline">if</code>:</strong> Executes a block if the condition is True.</li>
+                <li><strong><code class="inline">if-else</code>:</strong> Provides an alternative block if the condition is False.</li>
+                <li><strong><code class="inline">elif</code>:</strong> Checks multiple conditions sequentially.</li>
+                <li><strong>Nested <code class="inline">if</code>:</strong> An <code class="inline">if</code> statement inside another to check multi-level logic.</li>
+            </ul>
+            <div class="code-container">
+<pre><code># Nested if-else Program
+num = 10
+
+if num >= 0:
+    if num == 0:
+        print("Number is Zero")
+    else:
+        print("Number is Positive")
+else:
+    print("Number is Negative")</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Number is Positive
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUESTION 5 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 5</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                5 (A) Explain syntax and basic structure of a function in Python. Write a program in Python to perform addition of two numbers using user-defined function.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>A function is a reusable block of code that performs a specific task. It is defined using the <code class="inline">def</code> keyword, followed by the function name, parentheses (which may contain parameters), and a colon. The code block is indented.</p>
+            <div class="code-container">
+<pre><code># Syntax structure: def function_name(parameters):
+
+def add_numbers(a, b):
+    """This function adds two numbers and returns the sum"""
+    total = a + b
+    return total
+
+# Calling the function
+result = add_numbers(15, 25)
+print("The sum is:", result)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    The sum is: 40
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                5 (B) Difference between local and global variables alongwith an example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <table>
+                <tr><th>Feature</th><th>Local Variable</th><th>Global Variable</th></tr>
+                <tr>
+                    <td><strong>Declaration</strong></td>
+                    <td>Declared inside a function.</td>
+                    <td>Declared outside any function.</td>
+                </tr>
+                <tr>
+                    <td><strong>Scope</strong></td>
+                    <td>Accessible only within that function.</td>
+                    <td>Accessible throughout the entire program.</td>
+                </tr>
+                <tr>
+                    <td><strong>Lifetime</strong></td>
+                    <td>Destroyed when the function ends.</td>
+                    <td>Remains in memory until the program ends.</td>
+                </tr>
+            </table>
+            <div class="code-container">
+<pre><code>global_var = 100  # Global variable
+
+def my_function():
+    local_var = 50  # Local variable
+    print("Inside function - Global:", global_var)
+    print("Inside function - Local:", local_var)
+
+my_function()
+print("Outside function - Global:", global_var)
+# print(local_var)  # This would cause a NameError</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Inside function - Global: 100<br>
+                    Inside function - Local: 50<br>
+                    Outside function - Global: 100
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUESTION 6 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 6 (OR)</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                6 (A) Describe the role of return statement in a Python function. Illustrate the working of return statement alongwith an example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>The <code class="inline">return</code> statement serves two primary roles in a function:</p>
+            <ol>
+                <li>It immediately <strong>terminates</strong> the execution of the function.</li>
+                <li>It <strong>passes a value</strong> (or multiple values as a tuple) back to the caller. If no expression is given, it returns <code class="inline">None</code>.</li>
+            </ol>
+            <div class="code-container">
+<pre><code>def square_number(num):
+    result = num * num
+    return result # Passes value back and exits
+    print("This will never print")
+
+output = square_number(6)
+print("Returned value:", output)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Returned value: 36
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                6 (B) Describe the syntax and usage of lambda functions in Python. Compare lambda functions with normal functions using examples.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>Lambda functions are small, anonymous (nameless) functions. They can take any number of arguments but can only have <strong>one expression</strong>.</p>
+            <p><strong>Syntax:</strong> <code class="inline">lambda arguments : expression</code></p>
+            
+            <table>
+                <tr><th>Feature</th><th>Normal Function (def)</th><th>Lambda Function</th></tr>
+                <tr><td>Name</td><td>Has a specific name</td><td>Anonymous</td></tr>
+                <tr><td>Length</td><td>Can be multiple lines</td><td>Strictly a single expression</td></tr>
+                <tr><td>Return</td><td>Requires <code class="inline">return</code> keyword</td><td>Returns expression result automatically</td></tr>
+            </table>
+            
+            <div class="code-container">
+<pre><code># Normal function
+def add_normal(x, y):
+    return x + y
+
+# Equivalent Lambda function
+add_lambda = lambda x, y: x + y
+
+print("Normal sum:", add_normal(5, 3))
+print("Lambda sum:", add_lambda(5, 3))</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Normal sum: 8<br>Lambda sum: 8
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUESTION 7 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 7</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                7 (A) Explain how tuples are created in Python. Illustrate different ways of creating a tuple with an example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>Tuples are immutable sequences. They are typically created by placing comma-separated values inside parentheses <code class="inline">()</code>, but there are multiple ways to define them:</p>
+            <div class="code-container">
+<pre><code># 1. Using Parentheses
+t1 = (1, 2, 3)
+
+# 2. Without Parentheses (Tuple Packing)
+t2 = 4, 5, 6
+
+# 3. Using the tuple() constructor
+t3 = tuple([7, 8, 9]) # Converts list to tuple
+
+# 4. Creating a single-element tuple (Comma is mandatory)
+t4 = (10,) 
+not_a_tuple = (10) # This is evaluated as an integer
+
+print(type(t1), t1)
+print(type(t4), t4)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    &lt;class 'tuple'&gt; (1, 2, 3)<br>
+                    &lt;class 'tuple'&gt; (10,)
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                7 (B) Write a program in Python that performs different operation on a tuple.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <div class="code-container">
+<pre><code>tup = (10, 20, 30, 40)
+
+# 1. Indexing & Slicing
+print("Element at index 1:", tup[1])
+print("Slicing [1:3]:", tup[1:3])
+
+# 2. Concatenation
+new_tup = tup + (50, 60)
+print("Concatenated:", new_tup)
+
+# 3. Repetition
+print("Repetition:", (1, 2) * 3)
+
+# 4. Membership Testing
+print("Is 20 in tuple?", 20 in tup)
+
+# 5. Length, Min, Max
+print(f"Len: {len(tup)}, Max: {max(tup)}")</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Element at index 1: 20<br>
+                    Slicing [1:3]: (20, 30)<br>
+                    Concatenated: (10, 20, 30, 40, 50, 60)<br>
+                    Repetition: (1, 2, 1, 2, 1, 2)<br>
+                    Is 20 in tuple? True<br>
+                    Len: 4, Max: 40
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUESTION 8 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 8 (OR)</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                8 (A) Explain the working of zip() functions in Python alongwith an example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>The <code class="inline">zip()</code> function takes two or more iterables (like lists, tuples, or strings) and pairs their elements together based on their index. It returns an iterator of tuples, where the i-th tuple contains the i-th element from each of the argument iterables. The pairing stops when the shortest iterable is exhausted.</p>
+            <div class="code-container">
+<pre><code>names = ["Alice", "Bob", "Charlie"]
+ages = [24, 30, 22]
+
+# Zipping two lists together
+paired_data = zip(names, ages)
+
+# Converting to a list to view the pairs
+result_list = list(paired_data)
+print("Zipped Result:", result_list)
+
+# Common usage in a loop
+for name, age in zip(names, ages):
+    print(f"{name} is {age} years old.")</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Zipped Result: [('Alice', 24), ('Bob', 30), ('Charlie', 22)]<br>
+                    Alice is 24 years old.<br>
+                    Bob is 30 years old.<br>
+                    Charlie is 22 years old.
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                8 (B) Describe "in" and "not in" operators in sets. Illustrate with an example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>These are <strong>Membership Operators</strong> used to check if a specific element exists within a collection. In Python Sets, these operators are highly optimized (using hash tables) and operate in O(1) constant time, making them much faster than using "in" on a list.</p>
+            <ul>
+                <li><code class="inline">in</code>: Returns True if the element exists in the set.</li>
+                <li><code class="inline">not in</code>: Returns True if the element does NOT exist in the set.</li>
+            </ul>
+            <div class="code-container">
+<pre><code>my_set = {"apple", "banana", "cherry"}
+
+# Using 'in'
+print("Is 'apple' in set?", "apple" in my_set)
+
+# Using 'not in'
+print("Is 'mango' not in set?", "mango" not in my_set)
+print("Is 'banana' not in set?", "banana" not in my_set)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Is 'apple' in set? True<br>
+                    Is 'mango' not in set? True<br>
+                    Is 'banana' not in set? False
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUESTION 9 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 9</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                9 (A) Construct a program in Python to write a text into a file.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>To write text, we use the <code class="inline">open()</code> function in write mode (<code class="inline">'w'</code>). If the file doesn't exist, it is created. If it does exist, it gets overwritten. We use the <code class="inline">with</code> statement to ensure the file closes automatically.</p>
+            <div class="code-container">
+<pre><code># Program to write text into a file
+file_name = "sample.txt"
+
+# Open file in write mode
+with open(file_name, 'w') as file:
+    file.write("Hello, this is the first line.\n")
+    file.write("Python File Handling is easy!")
+
+print(f"Data successfully written to {file_name}")</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Data successfully written to sample.txt
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                9 (B) Explain how numeric data can be written to a file in Python. Demonstrate with a program.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>The <code class="inline">write()</code> method strictly requires a <strong>string argument</strong>. Therefore, numeric data (like integers or floats) cannot be written directly. They must first be converted into strings using the <code class="inline">str()</code> function or string formatting before being passed to <code class="inline">write()</code>.</p>
+            <div class="code-container">
+<pre><code>scores = [85, 90, 78, 92]
+
+with open("scores.txt", "w") as file:
+    for score in scores:
+        # Convert numeric data to string before writing
+        file.write(str(score) + "\n")
+
+print("Numeric scores written as text.")</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Numeric scores written as text.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUESTION 10 -->
+    <div class="exam-section">
+        <h2 class="exam-title">Question 10 (OR)</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                10 (A) Design a program in Python to read integers line by line and calculate their sum.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <div class="code-container">
+<pre><code># Assuming 'numbers.txt' exists and contains numbers line by line
+# E.g., 10 \n 20 \n 30
+
+total_sum = 0
+
+try:
+    with open("numbers.txt", "r") as file:
+        for line in file:
+            # strip() removes \n, int() converts the string to an integer
+            num = int(line.strip()) 
+            total_sum += num
+            
+    print("The total sum of numbers is:", total_sum)
+except FileNotFoundError:
+    print("File not found! Please create 'numbers.txt'.")</code></pre>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                10 (B) Write a program in Python where new text is added without overwriting existing content.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>To add content without overwriting, the file must be opened in <strong>Append mode</strong> (<code class="inline">'a'</code>). In this mode, the file pointer is placed at the very end of the file, and any new data written is added there.</p>
+            <div class="code-container">
+<pre><code># Opening the file in append mode ('a')
+with open("sample.txt", "a") as file:
+    # Adding a new line of text at the end of the file
+    file.write("\nThis line is appended without overwriting.")
+
+print("New text successfully appended!")</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    New text successfully appended!
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

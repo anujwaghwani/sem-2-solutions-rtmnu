@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Examination Solution - MFCS</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax for rendering LaTeX equations -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                packages: {'[+]': ['ams']}
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        .math-container { overflow-x: auto; padding: 0.5rem 0; }
+        .data-table th, .data-table td { border: 1px solid #cbd5e1; padding: 0.5rem 1rem; text-align: center; }
+        .data-table th { background-color: #f8fafc; font-weight: 600; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen">
+
+    <header class="bg-indigo-700 text-white py-10 shadow-md">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-sm font-semibold tracking-widest uppercase text-indigo-200 mb-2">Faculty of Science & Technology</div>
+            <h1 class="text-2xl md:text-3xl font-bold mb-2">Mathematical Foundation of Computer Science</h1>
+            <p class="text-indigo-100 text-sm md:text-base">Complete University Examination Solution (Total: 70 Marks)</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+
+        <!-- Question 1 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 1</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q1 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Equivalence Relation</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Let $X = \{1, 2, 3, 4, 5, 6, 7\}$ and $R = \{(x, y) \mid x - y \text{ is divisible by } 3\}$. Show that $R$ is an equivalence relation.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>To show that $R$ is an equivalence relation, we must prove it is reflexive, symmetric, and transitive.</p>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">1. Reflexivity:</h4>
+                            <p>For any $x \in X$, consider $x - x = 0$.</p>
+                            <p>Since $0 = 0 \times 3$, $0$ is divisible by $3$.</p>
+                            <p>Therefore, $(x, x) \in R$ for all $x \in X$. Hence, $R$ is <strong>reflexive</strong>.</p>
+                        </div>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">2. Symmetry:</h4>
+                            <p>Let $(x, y) \in R$. This means $x - y$ is divisible by $3$.</p>
+                            <p>So, $x - y = 3k$ for some integer $k$.</p>
+                            <p>Multiplying by $-1$, we get $-(x - y) = -3k \implies y - x = 3(-k)$.</p>
+                            <p>Since $-k$ is an integer, $y - x$ is divisible by $3$.</p>
+                            <p>Therefore, $(y, x) \in R$. Hence, $R$ is <strong>symmetric</strong>.</p>
+                        </div>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">3. Transitivity:</h4>
+                            <p>Let $(x, y) \in R$ and $(y, z) \in R$.</p>
+                            <p>This implies $x - y = 3k$ and $y - z = 3m$ (where $k, m$ are integers).</p>
+                            <p>Adding the two equations: $(x - y) + (y - z) = 3k + 3m \implies x - z = 3(k + m)$</p>
+                            <p>Since $(k + m)$ is an integer, $x - z$ is divisible by $3$.</p>
+                            <p>Therefore, $(x, z) \in R$. Hence, $R$ is <strong>transitive</strong>.</p>
+                        </div>
+                        
+                        <p class="font-bold text-green-700 mt-4 bg-green-50 p-3 rounded text-center">Conclusion: Since $R$ is reflexive, symmetric, and transitive, it is an equivalence relation.</p>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q1 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Transitive Closure and Digraph</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Let $A = \{1, 2, 3, 4\}$ and $R = \{(1, 2), (2, 3), (3, 4)\}$ be a relation on $A$. Find the transitive closure of $R$ and draw its digraph.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p><strong>Finding the Transitive Closure ($R^*$):</strong></p>
+                        <p>The original relation is $R = \{(1, 2), (2, 3), (3, 4)\}$. We add paths of length 2 and 3:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>$(1, 2) \in R$ and $(2, 3) \in R \implies$ add <strong>$(1, 3)$</strong>.</li>
+                            <li>$(2, 3) \in R$ and $(3, 4) \in R \implies$ add <strong>$(2, 4)$</strong>.</li>
+                            <li>$(1, 3)$ and $(3, 4) \in R \implies$ add <strong>$(1, 4)$</strong>.</li>
+                        </ul>
+                        <div class="math-container text-center font-bold text-lg text-indigo-700 bg-indigo-50 py-3 rounded">
+                            Transitive Closure $R^* = \{(1, 2), (2, 3), (3, 4), (1, 3), (2, 4), (1, 4)\}$
+                        </div>
+                        
+                        <p class="mt-4 font-semibold">Digraph of Transitive Closure:</p>
+                        <div class="flex justify-center bg-white border rounded-xl p-4">
+                            <!-- SVG Digraph -->
+                            <svg width="400" height="150" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <marker id="arrow-blue" viewBox="0 0 10 10" refX="24" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6" />
+                                    </marker>
+                                    <marker id="arrow-red" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444" />
+                                    </marker>
+                                </defs>
+                                <!-- Original Edges -->
+                                <line x1="50" y1="75" x2="150" y2="75" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)" />
+                                <line x1="150" y1="75" x2="250" y2="75" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)" />
+                                <line x1="250" y1="75" x2="350" y2="75" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)" />
+                                <!-- Transitive Edges -->
+                                <path d="M 50 65 Q 150 10 250 65" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow-red)" />
+                                <path d="M 150 85 Q 250 140 350 85" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow-red)" />
+                                <path d="M 50 60 Q 200 -20 350 60" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4" marker-end="url(#arrow-red)" />
+                                <!-- Nodes -->
+                                <circle cx="50" cy="75" r="16" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
+                                <text x="50" y="80" text-anchor="middle" class="font-bold text-slate-800">1</text>
+                                <circle cx="150" cy="75" r="16" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
+                                <text x="150" y="80" text-anchor="middle" class="font-bold text-slate-800">2</text>
+                                <circle cx="250" cy="75" r="16" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
+                                <text x="250" y="80" text-anchor="middle" class="font-bold text-slate-800">3</text>
+                                <circle cx="350" cy="75" r="16" fill="#f8fafc" stroke="#1e293b" stroke-width="2"/>
+                                <text x="350" y="80" text-anchor="middle" class="font-bold text-slate-800">4</text>
+                            </svg>
+                        </div>
+                        <p class="text-xs text-center text-slate-500 italic mt-1">Solid blue lines = Original $R$. Dashed red lines = Transitive closure edges.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 2 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 2 (OR)</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q2 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Types of Functions</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> List all possible functions from $X = \{a, b, c\}$ to $Y = \{0, 1\}$. Indicate whether each is one-one, onto, or both.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Total number of functions from $X$ to $Y$ is $|Y|^{|X|} = 2^3 = 8$.</p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="data-table w-full text-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Function</th>
+                                        <th>Mapping $\{(x, f(x))\}$</th>
+                                        <th>One-One (Injective)?</th>
+                                        <th>Onto (Surjective)?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>$f_1$</td><td>$\{(a,0), (b,0), (c,0)\}$</td><td class="text-red-600">No</td><td class="text-red-600">No (only maps to 0)</td></tr>
+                                    <tr><td>$f_2$</td><td>$\{(a,0), (b,0), (c,1)\}$</td><td class="text-red-600">No</td><td class="text-green-600 font-bold">Yes</td></tr>
+                                    <tr><td>$f_3$</td><td>$\{(a,0), (b,1), (c,0)\}$</td><td class="text-red-600">No</td><td class="text-green-600 font-bold">Yes</td></tr>
+                                    <tr><td>$f_4$</td><td>$\{(a,0), (b,1), (c,1)\}$</td><td class="text-red-600">No</td><td class="text-green-600 font-bold">Yes</td></tr>
+                                    <tr><td>$f_5$</td><td>$\{(a,1), (b,0), (c,0)\}$</td><td class="text-red-600">No</td><td class="text-green-600 font-bold">Yes</td></tr>
+                                    <tr><td>$f_6$</td><td>$\{(a,1), (b,0), (c,1)\}$</td><td class="text-red-600">No</td><td class="text-green-600 font-bold">Yes</td></tr>
+                                    <tr><td>$f_7$</td><td>$\{(a,1), (b,1), (c,0)\}$</td><td class="text-red-600">No</td><td class="text-green-600 font-bold">Yes</td></tr>
+                                    <tr><td>$f_8$</td><td>$\{(a,1), (b,1), (c,1)\}$</td><td class="text-red-600">No</td><td class="text-red-600">No (only maps to 1)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-sm mt-2 text-slate-500"><em>Note:</em> None are one-one (Bijective is impossible) because Domain size (3) > Codomain size (2). By Pigeonhole Principle, at least two elements map to the same value.</p>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q2 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Characteristic Functions</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Prove that: (i) $f_{A \cap B} = f_A \cdot f_B$ and (ii) $f_{A \cup B} = f_A + f_B - f_A f_B$ (When $f$ is a characteristic function).
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>The characteristic function $f_A(x) = 1$ if $x \in A$, and $0$ if $x \notin A$.</p>
+
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">Proof of (i) $f_{A \cap B} = f_A \cdot f_B$:</h4>
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li><strong>Case 1 ($x \in A \cap B$):</strong> $x \in A$ and $x \in B$.
+                                    <br>LHS = 1. RHS = $1 \cdot 1 = 1$. (LHS = RHS)
+                                </li>
+                                <li><strong>Case 2 ($x \notin A \cap B$):</strong> $x \notin A$ or $x \notin B$.
+                                    <br>LHS = 0. RHS: Either $f_A(x) = 0$ or $f_B(x) = 0$, so product is 0. (LHS = RHS)
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">Proof of (ii) $f_{A \cup B} = f_A + f_B - f_A f_B$:</h4>
+                            <p>We consider all 4 possible cases for an element $x$:</p>
+                            <div class="overflow-x-auto mt-2">
+                                <table class="data-table w-full text-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Condition</th>
+                                            <th>$f_A(x)$</th>
+                                            <th>$f_B(x)$</th>
+                                            <th class="bg-indigo-50">LHS: $f_{A \cup B}(x)$</th>
+                                            <th class="bg-indigo-50">RHS: $f_A(x) + f_B(x) - f_A(x)f_B(x)$</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>$x \in A, x \in B$</td><td>1</td><td>1</td><td class="font-bold bg-indigo-50">1</td><td class="bg-indigo-50">$1 + 1 - (1)(1) =$ <strong>1</strong></td></tr>
+                                        <tr><td>$x \in A, x \notin B$</td><td>1</td><td>0</td><td class="font-bold bg-indigo-50">1</td><td class="bg-indigo-50">$1 + 0 - (1)(0) =$ <strong>1</strong></td></tr>
+                                        <tr><td>$x \notin A, x \in B$</td><td>0</td><td>1</td><td class="font-bold bg-indigo-50">1</td><td class="bg-indigo-50">$0 + 1 - (0)(1) =$ <strong>1</strong></td></tr>
+                                        <tr><td>$x \notin A, x \notin B$</td><td>0</td><td>0</td><td class="font-bold bg-indigo-50">0</td><td class="bg-indigo-50">$0 + 0 - (0)(0) =$ <strong>0</strong></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="mt-2 font-bold text-green-700 text-center">Since LHS = RHS for all cases, the theorem is proved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 3 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 3</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q3 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Fuzzy Sets</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Given $U = \{a, b, c, d\}$ and fuzzy sets $A$ and $B$:
+                        <br>$A = \{(a, 0.5), (b, 0.8), (c, 0.0), (d, 0.3)\}$
+                        <br>$B = \{(a, 0.2), (b, 1.0), (c, 0.1), (d, 0.7)\}$
+                        <br>Find (i) $A \cup B$, (ii) $A \cap B$ and show $(A \cup B)' = A' \cap B'$.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p><strong>(i) $A \cup B$ (Max operator):</strong></p>
+                        <p class="font-semibold bg-slate-100 p-2 inline-block rounded">$A \cup B = \{(a, \max(0.5,0.2)), (b, \max(0.8,1.0)), (c, \max(0.0,0.1)), (d, \max(0.3,0.7))\}$</p>
+                        <p class="font-bold text-indigo-700">$= \{(a, 0.5), (b, 1.0), (c, 0.1), (d, 0.7)\}$</p>
+                        
+                        <p class="mt-4"><strong>(ii) $A \cap B$ (Min operator):</strong></p>
+                        <p class="font-semibold bg-slate-100 p-2 inline-block rounded">$A \cap B = \{(a, \min(0.5,0.2)), (b, \min(0.8,1.0)), (c, \min(0.0,0.1)), (d, \min(0.3,0.7))\}$</p>
+                        <p class="font-bold text-indigo-700">$= \{(a, 0.2), (b, 0.8), (c, 0.0), (d, 0.3)\}$</p>
+
+                        <p class="mt-4"><strong>Showing $(A \cup B)' = A' \cap B'$ (De Morgan's Law):</strong></p>
+                        <p>LHS: $(A \cup B)'(x) = 1 - (A \cup B)(x)$</p>
+                        <p>$(A \cup B)' = \{(a, 1-0.5), (b, 1-1.0), (c, 1-0.1), (d, 1-0.7)\} = \mathbf{\{(a, 0.5), (b, 0.0), (c, 0.9), (d, 0.3)\}}$</p>
+
+                        <p class="mt-2">RHS: First find $A'$ and $B'$ ($1 - x$):</p>
+                        <p>$A' = \{(a, 0.5), (b, 0.2), (c, 1.0), (d, 0.7)\}$</p>
+                        <p>$B' = \{(a, 0.8), (b, 0.0), (c, 0.9), (d, 0.3)\}$</p>
+                        <p>Now $A' \cap B' = \min(A', B') = \mathbf{\{(a, 0.5), (b, 0.0), (c, 0.9), (d, 0.3)\}}$</p>
+                        <p class="mt-2 font-bold text-green-700">Since LHS = RHS, the property is shown.</p>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q3 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Set Algebra Proofs</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Prove: (i) $A - (B \cup C) = (A - B) \cap (A - C)$ and (ii) $A - (B \cap C) = (A - B) \cup (A - C)$.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Using the definition $X - Y = X \cap Y'$ and De Morgan's Laws for sets:</p>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">Proof of (i):</h4>
+                            <div class="math-container ml-4">
+                                \begin{align*}
+                                A - (B \cup C) &= A \cap (B \cup C)' \quad \text{(Def. of Difference)} \\
+                                &= A \cap (B' \cap C') \quad \text{(De Morgan's Law)} \\
+                                &= (A \cap A) \cap (B' \cap C') \quad \text{(Idempotent: } A = A \cap A \text{)} \\
+                                &= (A \cap B') \cap (A \cap C') \quad \text{(Commutative & Associative)} \\
+                                &= (A - B) \cap (A - C) \quad \text{(Def. of Difference)}
+                                \end{align*}
+                            </div>
+                        </div>
+
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">Proof of (ii):</h4>
+                            <div class="math-container ml-4">
+                                \begin{align*}
+                                A - (B \cap C) &= A \cap (B \cap C)' \quad \text{(Def. of Difference)} \\
+                                &= A \cap (B' \cup C') \quad \text{(De Morgan's Law)} \\
+                                &= (A \cap B') \cup (A \cap C') \quad \text{(Distributive Law)} \\
+                                &= (A - B) \cup (A - C) \quad \text{(Def. of Difference)}
+                                \end{align*}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 4 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 4 (OR)</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q4 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Mathematical Induction</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Show that $1^2 + 2^2 + 3^2 + ... + n^2 = \frac{n(n+1)(2n+1)}{6}, \quad n \ge 1$
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Let $P(n): 1^2 + 2^2 + ... + n^2 = \frac{n(n+1)(2n+1)}{6}$</p>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">Step 1: Base Case</h4>
+                            <p>For $n=1$: LHS $= 1^2 = 1$. RHS $= \frac{1(1+1)(2(1)+1)}{6} = \frac{1(2)(3)}{6} = 1$. $P(1)$ is true.</p>
+                        </div>
+
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">Step 2: Inductive Hypothesis</h4>
+                            <p>Assume $P(k)$ is true: $1^2 + 2^2 + ... + k^2 = \frac{k(k+1)(2k+1)}{6}$</p>
+                        </div>
+
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">Step 3: Inductive Step</h4>
+                            <p>Prove $P(k+1)$: LHS $= 1^2 + ... + k^2 + (k+1)^2$</p>
+                            <div class="math-container ml-4">
+                                \begin{align*}
+                                \text{LHS} &= \frac{k(k+1)(2k+1)}{6} + (k+1)^2 \quad \text{[Using Assumption]} \\
+                                &= \frac{k(k+1)(2k+1) + 6(k+1)^2}{6} \\
+                                &= \frac{(k+1)[k(2k+1) + 6(k+1)]}{6} \quad \text{[Factor out (k+1)]} \\
+                                &= \frac{(k+1)[2k^2 + 7k + 6]}{6} \\
+                                &= \frac{(k+1)(k+2)(2k+3)}{6} \quad \text{[Factor quadratic]} \\
+                                &= \frac{(k+1)((k+1)+1)(2(k+1)+1)}{6} = \text{RHS of } P(k+1)
+                                \end{align*}
+                            </div>
+                            <p class="font-bold text-green-700 mt-2">By induction, $P(n)$ is true for all $n \ge 1$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q4 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Fuzzy Relations Matrices</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Given fuzzy relation matrices:
+                        $$R = \begin{bmatrix} 0.5 & 0.1 \\ 0.2 & 0.9 \\ 0.8 & 0.6 \end{bmatrix}, \quad S = \begin{bmatrix} 0.6 & 0.5 \\ 0.4 & 0.8 \\ 0.7 & 0.9 \end{bmatrix}$$
+                        Find $R \cup S, R \cap S, \overline{R}, \overline{S}$.
+                    </div>
+                    <div class="space-y-6 text-slate-700">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Union -->
+                            <div>
+                                <h4 class="font-bold text-slate-800">1. Fuzzy Union $R \cup S$ (Max):</h4>
+                                <div class="math-container">
+                                    $$R \cup S = \begin{bmatrix} \max(0.5, 0.6) & \max(0.1, 0.5) \\ \dots & \dots \end{bmatrix} = \begin{bmatrix} \mathbf{0.6} & \mathbf{0.5} \\ \mathbf{0.4} & \mathbf{0.9} \\ \mathbf{0.8} & \mathbf{0.9} \end{bmatrix}$$
+                                </div>
+                            </div>
+
+                            <!-- Intersection -->
+                            <div>
+                                <h4 class="font-bold text-slate-800">2. Fuzzy Intersection $R \cap S$ (Min):</h4>
+                                <div class="math-container">
+                                    $$R \cap S = \begin{bmatrix} \min(0.5, 0.6) & \min(0.1, 0.5) \\ \dots & \dots \end{bmatrix} = \begin{bmatrix} \mathbf{0.5} & \mathbf{0.1} \\ \mathbf{0.2} & \mathbf{0.8} \\ \mathbf{0.7} & \mathbf{0.6} \end{bmatrix}$$
+                                </div>
+                            </div>
+
+                            <!-- Complement R -->
+                            <div>
+                                <h4 class="font-bold text-slate-800">3. Fuzzy Complement $\overline{R}$ (1 - R):</h4>
+                                <div class="math-container">
+                                    $$\overline{R} = \begin{bmatrix} 1 - 0.5 & 1 - 0.1 \\ \dots & \dots \end{bmatrix} = \begin{bmatrix} \mathbf{0.5} & \mathbf{0.9} \\ \mathbf{0.8} & \mathbf{0.1} \\ \mathbf{0.2} & \mathbf{0.4} \end{bmatrix}$$
+                                </div>
+                            </div>
+
+                            <!-- Complement S -->
+                            <div>
+                                <h4 class="font-bold text-slate-800">4. Fuzzy Complement $\overline{S}$ (1 - S):</h4>
+                                <div class="math-container">
+                                    $$\overline{S} = \begin{bmatrix} 1 - 0.6 & 1 - 0.5 \\ \dots & \dots \end{bmatrix} = \begin{bmatrix} \mathbf{0.4} & \mathbf{0.5} \\ \mathbf{0.6} & \mathbf{0.2} \\ \mathbf{0.3} & \mathbf{0.1} \end{bmatrix}$$
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 5 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 5</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q5 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Curve Fitting (Parabola $y = a + bx^2$)</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Fit a parabola $y = a + bx^2$ using the following data:
+                        <table class="data-table w-full max-w-lg mx-auto my-2">
+                            <tr><th>x</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                            <tr><th>y</th><td>1.8</td><td>5.4</td><td>8.9</td><td>14.1</td><td>19.8</td></tr>
+                        </table>
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Let $X = x^2$ and $Y = y$. The equation transforms to a linear form: $Y = a + bX$.</p>
+                        <p>The normal equations are:</p>
+                        <ul class="list-disc list-inside ml-4 font-semibold">
+                            <li>$\sum Y = na + b \sum X$</li>
+                            <li>$\sum XY = a \sum X + b \sum X^2$</li>
+                        </ul>
+
+                        <div class="overflow-x-auto mt-4">
+                            <table class="data-table w-full text-sm">
+                                <thead>
+                                    <tr><th>$x$</th><th>$y \ (Y)$</th><th>$X = x^2$</th><th>$X^2 = x^4$</th><th>$XY = x^2y$</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>1.8</td><td>1</td><td>1</td><td>1.8</td></tr>
+                                    <tr><td>2</td><td>5.4</td><td>4</td><td>16</td><td>21.6</td></tr>
+                                    <tr><td>3</td><td>8.9</td><td>9</td><td>81</td><td>80.1</td></tr>
+                                    <tr><td>4</td><td>14.1</td><td>16</td><td>256</td><td>225.6</td></tr>
+                                    <tr><td>5</td><td>19.8</td><td>25</td><td>625</td><td>495.0</td></tr>
+                                    <tr class="bg-slate-100 font-bold">
+                                        <td>$n=5$</td><td>$\sum Y = 50.0$</td><td>$\sum X = 55$</td><td>$\sum X^2 = 979$</td><td>$\sum XY = 824.1$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="mt-4">Substituting the values into the normal equations:</p>
+                        <div class="math-container text-center">
+                            \begin{align*}
+                            5a + 55b &= 50.0 \quad \implies a + 11b = 10.0 \quad \text{--- (1)} \\
+                            55a + 979b &= 824.1 \quad \text{--- (2)}
+                            \end{align*}
+                        </div>
+                        <p>Multiply Eq (1) by 55: $55a + 605b = 550.0$. Subtract this from Eq (2):</p>
+                        <div class="math-container text-center">
+                            $(979 - 605)b = 824.1 - 550.0 \implies 374b = 274.1 \implies \mathbf{b = 0.7329}$
+                        </div>
+                        <p>Substitute $b$ into Eq (1):</p>
+                        <div class="math-container text-center">
+                            $a = 10.0 - 11(0.7329) = 10.0 - 8.0619 \implies \mathbf{a = 1.9381}$
+                        </div>
+                        
+                        <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+                            <p class="font-bold text-lg text-indigo-900">Fitted Equation: $y = 1.938 + 0.733 x^2$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q5 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Coefficient of Correlation and Regression</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Find coefficient of correlation and equation of lines of regression:
+                        <table class="data-table w-full max-w-lg mx-auto my-2">
+                            <tr><th>x</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                            <tr><th>y</th><td>2</td><td>5</td><td>3</td><td>8</td><td>7</td></tr>
+                        </table>
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>First, find the means: $\bar{x} = \frac{15}{5} = 3$ and $\bar{y} = \frac{25}{5} = 5$.</p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="data-table w-full text-sm">
+                                <thead>
+                                    <tr><th>$x$</th><th>$y$</th><th>$dx = x-\bar{x}$</th><th>$dy = y-\bar{y}$</th><th>$dx^2$</th><th>$dy^2$</th><th>$dx \cdot dy$</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>2</td><td>-2</td><td>-3</td><td>4</td><td>9</td><td>6</td></tr>
+                                    <tr><td>2</td><td>5</td><td>-1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                                    <tr><td>3</td><td>3</td><td>0</td><td>-2</td><td>0</td><td>4</td><td>0</td></tr>
+                                    <tr><td>4</td><td>8</td><td>1</td><td>3</td><td>1</td><td>9</td><td>3</td></tr>
+                                    <tr><td>5</td><td>7</td><td>2</td><td>2</td><td>4</td><td>4</td><td>4</td></tr>
+                                    <tr class="bg-slate-100 font-bold">
+                                        <td>15</td><td>25</td><td>0</td><td>0</td>
+                                        <td>$\sum dx^2 = 10$</td><td>$\sum dy^2 = 26$</td><td>$\sum dx dy = 13$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="font-bold text-slate-800 mt-4">1. Coefficient of Correlation ($r$)</h4>
+                        <div class="math-container text-center bg-slate-50 p-3 rounded">
+                            $$r = \frac{\sum dx dy}{\sqrt{\sum dx^2 \cdot \sum dy^2}} = \frac{13}{\sqrt{10 \times 26}} = \frac{13}{\sqrt{260}} \approx \mathbf{0.806}$$
+                        </div>
+
+                        <h4 class="font-bold text-slate-800 mt-4">2. Regression Equations</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                            <div class="bg-blue-50 border border-blue-100 p-4 rounded-lg">
+                                <p class="font-semibold text-blue-900 mb-2">Line of y on x:</p>
+                                <p>$b_{yx} = \frac{\sum dx dy}{\sum dx^2} = \frac{13}{10} = 1.3$</p>
+                                <p class="mt-2">$y - \bar{y} = b_{yx}(x - \bar{x})$</p>
+                                <p>$y - 5 = 1.3(x - 3)$</p>
+                                <p>$y = 1.3x - 3.9 + 5$</p>
+                                <p class="font-bold text-indigo-700 mt-1">Equation: $y = 1.3x + 1.1$</p>
+                            </div>
+                            
+                            <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-lg">
+                                <p class="font-semibold text-indigo-900 mb-2">Line of x on y:</p>
+                                <p>$b_{xy} = \frac{\sum dx dy}{\sum dy^2} = \frac{13}{26} = 0.5$</p>
+                                <p class="mt-2">$x - \bar{x} = b_{xy}(y - \bar{y})$</p>
+                                <p>$x - 3 = 0.5(y - 5)$</p>
+                                <p>$x = 0.5y - 2.5 + 3$</p>
+                                <p class="font-bold text-indigo-700 mt-1">Equation: $x = 0.5y + 0.5$</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 6 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 6 (OR)</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q6 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Least Square Geometric Curve ($y = ax^b$)</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Fit a least square geometric curve $y = ax^b$ to the following data:
+                        <table class="data-table w-full max-w-lg mx-auto my-2">
+                            <tr><th>x</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                            <tr><th>y</th><td>0.5</td><td>2</td><td>4.5</td><td>8</td><td>12.5</td></tr>
+                        </table>
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Taking the logarithm (base 10) of both sides of $y = ax^b$:</p>
+                        <p class="text-center font-bold">$\log_{10} y = \log_{10} a + b \log_{10} x$</p>
+                        <p>Let $Y = \log_{10} y$, $A = \log_{10} a$, and $X = \log_{10} x$. The linear equation is $Y = A + bX$.</p>
+                        <p>Normal equations:</p>
+                        <ul class="list-disc list-inside ml-4 font-semibold">
+                            <li>$\sum Y = nA + b \sum X$</li>
+                            <li>$\sum XY = A \sum X + b \sum X^2$</li>
+                        </ul>
+
+                        <div class="overflow-x-auto mt-4">
+                            <table class="data-table w-full text-sm">
+                                <thead>
+                                    <tr><th>$x$</th><th>$y$</th><th>$X = \log_{10} x$</th><th>$Y = \log_{10} y$</th><th>$X^2$</th><th>$XY$</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>0.5</td><td>0.0000</td><td>-0.3010</td><td>0.0000</td><td>0.0000</td></tr>
+                                    <tr><td>2</td><td>2.0</td><td>0.3010</td><td>0.3010</td><td>0.0906</td><td>0.0906</td></tr>
+                                    <tr><td>3</td><td>4.5</td><td>0.4771</td><td>0.6532</td><td>0.2276</td><td>0.3116</td></tr>
+                                    <tr><td>4</td><td>8.0</td><td>0.6021</td><td>0.9031</td><td>0.3625</td><td>0.5437</td></tr>
+                                    <tr><td>5</td><td>12.5</td><td>0.6990</td><td>1.0969</td><td>0.4886</td><td>0.7667</td></tr>
+                                    <tr class="bg-slate-100 font-bold">
+                                        <td>$n=5$</td><td>-</td><td>$\sum X = 2.0792$</td><td>$\sum Y = 2.6532$</td><td>$\sum X^2 = 1.1693$</td><td>$\sum XY = 1.7126$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="mt-4">Substituting the sums into the normal equations:</p>
+                        <div class="math-container text-center">
+                            \begin{align*}
+                            5A + 2.0792b &= 2.6532 \quad \text{--- (1)} \\
+                            2.0792A + 1.1693b &= 1.7126 \quad \text{--- (2)}
+                            \end{align*}
+                        </div>
+                        <p>From (1), $A = \frac{2.6532 - 2.0792b}{5} = 0.5306 - 0.4158b$. Substitute into (2):</p>
+                        <div class="math-container text-center">
+                            $2.0792(0.5306 - 0.4158b) + 1.1693b = 1.7126$ \\
+                            $1.1033 - 0.8646b + 1.1693b = 1.7126$ \\
+                            $0.3047b = 0.6093 \implies \mathbf{b \approx 2}$
+                        </div>
+                        <p>Substitute $b = 2$ to find $A$:</p>
+                        <div class="math-container text-center">
+                            $A = 0.5306 - 0.4158(2) = 0.5306 - 0.8316 = -0.3010$ \\
+                            $a = 10^{A} = 10^{-0.3010} \implies \mathbf{a \approx 0.5}$
+                        </div>
+                        
+                        <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+                            <p class="font-bold text-lg text-indigo-900">Fitted Geometric Curve: $y = 0.5 x^2$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q6 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Rank Correlation Coefficient</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Obtain the rank correlation coefficient for the following data:
+                        <table class="data-table w-full max-w-lg mx-auto my-2 text-xs">
+                            <tr><th>x</th><td>68</td><td>64</td><td>75</td><td>50</td><td>64</td><td>80</td><td>75</td><td>40</td><td>55</td><td>64</td></tr>
+                            <tr><th>y</th><td>62</td><td>58</td><td>68</td><td>45</td><td>81</td><td>60</td><td>68</td><td>48</td><td>50</td><td>70</td></tr>
+                        </table>
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Assigning ranks (1 for highest). In case of ties, assign the average rank.</p>
+                        
+                        <div class="overflow-x-auto mt-4">
+                            <table class="data-table w-full text-sm">
+                                <thead>
+                                    <tr>
+                                        <th>$x$</th><th>Rank $R_x$</th>
+                                        <th>$y$</th><th>Rank $R_y$</th>
+                                        <th>$d = R_x - R_y$</th><th>$d^2$</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>68</td><td>4</td><td>62</td><td>5</td><td>-1</td><td>1</td></tr>
+                                    <tr><td>64</td><td>6</td><td>58</td><td>7</td><td>-1</td><td>1</td></tr>
+                                    <tr><td>75</td><td>2.5</td><td>68</td><td>3.5</td><td>-1</td><td>1</td></tr>
+                                    <tr><td>50</td><td>9</td><td>45</td><td>10</td><td>-1</td><td>1</td></tr>
+                                    <tr><td>64</td><td>6</td><td>81</td><td>1</td><td>5</td><td>25</td></tr>
+                                    <tr><td>80</td><td>1</td><td>60</td><td>6</td><td>-5</td><td>25</td></tr>
+                                    <tr><td>75</td><td>2.5</td><td>68</td><td>3.5</td><td>-1</td><td>1</td></tr>
+                                    <tr><td>40</td><td>10</td><td>48</td><td>9</td><td>1</td><td>1</td></tr>
+                                    <tr><td>55</td><td>8</td><td>50</td><td>8</td><td>0</td><td>0</td></tr>
+                                    <tr><td>64</td><td>6</td><td>70</td><td>2</td><td>4</td><td>16</td></tr>
+                                    <tr class="bg-slate-100 font-bold">
+                                        <td colspan="5" class="text-right">$\sum d^2 =$</td>
+                                        <td>72</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="font-bold text-slate-800 mt-6">Handling Tied Ranks (Correction Factor CF):</h4>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>In $x$, $75$ repeats 2 times ($m=2$), $64$ repeats 3 times ($m=3$).</li>
+                            <li>In $y$, $68$ repeats 2 times ($m=2$).</li>
+                        </ul>
+                        <div class="math-container">
+                            $$CF = \sum \frac{m(m^2-1)}{12} = \frac{2(4-1)}{12} + \frac{3(9-1)}{12} + \frac{2(4-1)}{12} = 0.5 + 2.0 + 0.5 = 3$$
+                        </div>
+
+                        <h4 class="font-bold text-slate-800 mt-4">Rank Correlation Coefficient ($\rho$):</h4>
+                        <div class="math-container">
+                            \begin{align*}
+                            \rho &= 1 - \frac{6(\sum d^2 + CF)}{n(n^2 - 1)} \\
+                            \rho &= 1 - \frac{6(72 + 3)}{10(100 - 1)} = 1 - \frac{6(75)}{990} \\
+                            \rho &= 1 - \frac{450}{990} = 1 - \frac{5}{11} \approx 0.545
+                            \end{align*}
+                        </div>
+                        <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+                            <p class="font-bold text-lg text-indigo-900">Rank Correlation Coefficient $\rho \approx 0.545$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 7 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 7</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q7 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Normal Subgroups Intersection</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Show that intersection of any two normal subgroups of a group G is a normal subgroup of G.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Let $H$ and $K$ be two normal subgroups of a group $G$. We must prove that $H \cap K$ is a normal subgroup of $G$. This requires proving two parts: (1) $H \cap K$ is a subgroup, and (2) $H \cap K$ is normal.</p>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">Part 1: $H \cap K$ is a Subgroup</h4>
+                            <ul class="list-disc pl-5 mt-2 space-y-2">
+                                <li>Since $H$ and $K$ are subgroups, the identity element $e \in H$ and $e \in K$. Therefore, $e \in H \cap K$, which means $H \cap K \neq \emptyset$.</li>
+                                <li>Let $x, y \in H \cap K$. This implies $x, y \in H$ and $x, y \in K$.</li>
+                                <li>Because $H$ is a subgroup, $xy^{-1} \in H$. Because $K$ is a subgroup, $xy^{-1} \in K$.</li>
+                                <li>Thus, $xy^{-1} \in H \cap K$. By the One-Step Subgroup Test, $H \cap K$ is a subgroup of $G$.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">Part 2: $H \cap K$ is Normal</h4>
+                            <ul class="list-disc pl-5 mt-2 space-y-2">
+                                <li>To prove normality, we must show that for any $g \in G$ and any $x \in H \cap K$, the element $gxg^{-1} \in H \cap K$.</li>
+                                <li>Let $g \in G$ and $x \in H \cap K$. This means $x \in H$ and $x \in K$.</li>
+                                <li>Since $H$ is normal in $G$ ($H \triangleleft G$) and $x \in H$, $gxg^{-1} \in H$.</li>
+                                <li>Since $K$ is normal in $G$ ($K \triangleleft G$) and $x \in K$, $gxg^{-1} \in K$.</li>
+                                <li>Therefore, $gxg^{-1} \in H \cap K$.</li>
+                            </ul>
+                        </div>
+                        
+                        <p class="mt-4 font-bold text-green-700 bg-green-50 p-3 rounded text-center">Conclusion: Since $H \cap K$ is a subgroup and satisfies the normality condition, $H \cap K$ is a normal subgroup of $G$.</p>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q7 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Monoid of Matrices</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Show that the set of matrices $A_\alpha = \begin{bmatrix} \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha \end{bmatrix}$, $\alpha \in \mathbb{R}$, form a monoid.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Let $S = \{A_\alpha \mid \alpha \in \mathbb{R}\}$. To show $S$ is a monoid under matrix multiplication, we must prove three properties: Closure, Associativity, and the existence of an Identity Element.</p>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">1. Closure Property:</h4>
+                            <p>Let $A_\alpha, A_\beta \in S$. Their product is:</p>
+                            <div class="math-container">
+                                \begin{align*}
+                                A_\alpha \cdot A_\beta &= \begin{bmatrix} \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha \end{bmatrix} \begin{bmatrix} \cos\beta & -\sin\beta \\ \sin\beta & \cos\beta \end{bmatrix} \\
+                                &= \begin{bmatrix} \cos\alpha\cos\beta - \sin\alpha\sin\beta & -\cos\alpha\sin\beta - \sin\alpha\cos\beta \\ \sin\alpha\cos\beta + \cos\alpha\sin\beta & -\sin\alpha\sin\beta + \cos\alpha\cos\beta \end{bmatrix} \\
+                                &= \begin{bmatrix} \cos(\alpha+\beta) & -\sin(\alpha+\beta) \\ \sin(\alpha+\beta) & \cos(\alpha+\beta) \end{bmatrix} \\
+                                &= A_{\alpha+\beta}
+                                \end{align*}
+                            </div>
+                            <p>Since $\alpha, \beta \in \mathbb{R}$, their sum $\alpha+\beta \in \mathbb{R}$. Thus, $A_{\alpha+\beta} \in S$. The set is closed under multiplication.</p>
+                        </div>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">2. Associativity:</h4>
+                            <p>Matrix multiplication is associative by default for all $n \times n$ matrices over real numbers. Therefore, $(A_\alpha \cdot A_\beta) \cdot A_\gamma = A_\alpha \cdot (A_\beta \cdot A_\gamma)$ holds true.</p>
+                        </div>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">3. Identity Element:</h4>
+                            <p>Let $\alpha = 0$. Since $0 \in \mathbb{R}$:</p>
+                            <div class="math-container">
+                                $$A_0 = \begin{bmatrix} \cos 0 & -\sin 0 \\ \sin 0 & \cos 0 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = I$$
+                            </div>
+                            <p>The identity matrix $I$ belongs to the set $S$, and for any $A_\alpha \in S$, $A_\alpha \cdot I = I \cdot A_\alpha = A_\alpha$.</p>
+                        </div>
+                        
+                        <p class="font-bold text-green-700 mt-4 bg-green-50 p-3 rounded text-center">Conclusion: Since the set satisfies closure, associativity, and possesses an identity element, it forms a Monoid.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 8 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 8 (OR)</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q8 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Subgroup Test</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> A non-empty subset $H$ of a group $G$ is a subgroup of $G$ iff: (i) $a, b \in H \Rightarrow a*b \in H$, (ii) $a \in H \Rightarrow a^{-1} \in H$.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>We need to prove the "if and only if" condition (Two-Step Subgroup Test).</p>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">Part 1 (Forward): If $H$ is a subgroup, then (i) and (ii) hold.</h4>
+                            <p>Suppose $H$ is a subgroup of $G$. By definition, a subgroup is itself a group under the operation inherited from $G$. Therefore, $H$ must be closed under the operation, so $a, b \in H \Rightarrow a*b \in H$ (Condition i holds). Furthermore, every element in a group must have an inverse within that group, so $a \in H \Rightarrow a^{-1} \in H$ (Condition ii holds).</p>
+                        </div>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">Part 2 (Backward): If (i) and (ii) hold, then $H$ is a subgroup.</h4>
+                            <p>Suppose $H$ is a non-empty subset of $G$ satisfying conditions (i) and (ii). To prove $H$ is a subgroup, we must show it satisfies all four group axioms:</p>
+                            <ul class="list-decimal pl-5 mt-2 space-y-2">
+                                <li><strong>Closure:</strong> Given directly by condition (i) that $a*b \in H$.</li>
+                                <li><strong>Associativity:</strong> The elements of $H$ are also elements of $G$. Since the operation $*$ is associative in $G$, it is automatically associative in $H$.</li>
+                                <li><strong>Identity:</strong> Since $H$ is non-empty, let $a \in H$. By condition (ii), $a^{-1} \in H$. By condition (i) (closure), $a*a^{-1} \in H$. Since $a*a^{-1} = e$ (the identity of G), we have $e \in H$.</li>
+                                <li><strong>Inverse:</strong> Given directly by condition (ii) that for every $a \in H$, its inverse $a^{-1} \in H$.</li>
+                            </ul>
+                        </div>
+                        <p class="font-bold text-green-700 mt-4 bg-green-50 p-3 rounded text-center">Conclusion: Since all group axioms are satisfied, $H \le G$. The theorem is proved.</p>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q8 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Homomorphism Properties</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> If $f$ is a homomorphism of $G$ into $G'$, then: (i) $f(e) = e'$ where $e'$ is the identity element of $G'$, (ii) $f(x^{-1}) = [f(x)]^{-1}$, $\forall x \in G$.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Given that $f: G \to G'$ is a homomorphism, the fundamental property is $f(xy) = f(x)f(y)$ for all $x, y \in G$.</p>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">Proof of (i) $f(e) = e'$:</h4>
+                            <p>Let $e$ be the identity in $G$. We know that for any element in $G$, $e \cdot e = e$.</p>
+                            <p>Apply the homomorphism $f$ to both sides:</p>
+                            <div class="math-container">
+                                \begin{align*}
+                                f(e \cdot e) &= f(e) \\
+                                f(e) \cdot f(e) &= f(e) \quad \text{[By homomorphism property]}
+                                \end{align*}
+                            </div>
+                            <p>In the group $G'$, $f(e)$ is an element. We can multiply both sides by its inverse $[f(e)]^{-1}$:</p>
+                            <div class="math-container">
+                                \begin{align*}
+                                f(e) \cdot f(e) \cdot [f(e)]^{-1} &= f(e) \cdot [f(e)]^{-1} \\
+                                f(e) \cdot e' &= e' \\
+                                \mathbf{f(e)} &\mathbf{= e'}
+                                \end{align*}
+                            </div>
+                        </div>
+
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">Proof of (ii) $f(x^{-1}) = [f(x)]^{-1}$:</h4>
+                            <p>For any $x \in G$, its inverse $x^{-1}$ satisfies $x \cdot x^{-1} = e$ and $x^{-1} \cdot x = e$.</p>
+                            <p>Applying the homomorphism $f$:</p>
+                            <div class="math-container">
+                                \begin{align*}
+                                f(x \cdot x^{-1}) &= f(e) \\
+                                f(x) \cdot f(x^{-1}) &= e' \quad \text{[Since } f(e) = e' \text{]}
+                                \end{align*}
+                            </div>
+                            <p>Similarly, $f(x^{-1} \cdot x) = f(x^{-1}) \cdot f(x) = e'$.</p>
+                            <p>This shows that $f(x^{-1})$ acts as the inverse for the element $f(x)$ in the group $G'$. By the uniqueness of inverses in a group:</p>
+                            <div class="math-container font-bold text-indigo-700">
+                                $$f(x^{-1}) = [f(x)]^{-1}$$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 9 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 9</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q9 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Combinations</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> A box contains 5 red and 6 white marbles. In how many ways can 6 marbles be selected so that there are atleast two marbles of each colour?
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>We must select a total of 6 marbles with the condition that we select $\ge 2$ Red and $\ge 2$ White. The possible combinations are:</p>
+                        
+                        <div class="overflow-x-auto mt-4">
+                            <table class="data-table w-full text-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Case</th>
+                                        <th>Selection</th>
+                                        <th>Number of Ways $\binom{n}{r}$</th>
+                                        <th>Calculation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-semibold">Case 1</td>
+                                        <td>2 Red AND 4 White</td>
+                                        <td>$\binom{5}{2} \times \binom{6}{4}$</td>
+                                        <td>$10 \times 15 = 150$</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold">Case 2</td>
+                                        <td>3 Red AND 3 White</td>
+                                        <td>$\binom{5}{3} \times \binom{6}{3}$</td>
+                                        <td>$10 \times 20 = 200$</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold">Case 3</td>
+                                        <td>4 Red AND 2 White</td>
+                                        <td>$\binom{5}{4} \times \binom{6}{2}$</td>
+                                        <td>$5 \times 15 = 75$</td>
+                                    </tr>
+                                    <tr class="bg-indigo-50 font-bold text-indigo-900">
+                                        <td colspan="3" class="text-right pr-4">Total Number of Ways =</td>
+                                        <td>150 + 200 + 75 = 425</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+                            <p class="font-bold text-lg text-indigo-900">Total Ways = 425</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q9 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Generating Functions</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Find the closed form of generating function for the following sequences:
+                        (i) 3, -3, 3, -3, 3, -3, ...
+                        (ii) 1, 0, -1, 0, 1, 0, -1, 0, ...
+                        (iii) 0, 0, 1, 1, 1, ...
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>We use the standard infinite geometric series identity: $\frac{1}{1-x} = 1 + x + x^2 + x^3 + \dots$</p>
+                        
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4">
+                            <h4 class="font-bold text-slate-800">(i) Sequence: 3, -3, 3, -3, 3, -3, ...</h4>
+                            <div class="math-container">
+                                \begin{align*}
+                                G(x) &= 3 - 3x + 3x^2 - 3x^3 + \dots \\
+                                &= 3(1 - x + x^2 - x^3 + \dots) \\
+                                &= 3 \left( \frac{1}{1 - (-x)} \right) = \mathbf{\frac{3}{1+x}}
+                                \end{align*}
+                            </div>
+                        </div>
+
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">(ii) Sequence: 1, 0, -1, 0, 1, 0, -1, 0, ...</h4>
+                            <div class="math-container">
+                                \begin{align*}
+                                G(x) &= 1 + 0x - x^2 + 0x^3 + x^4 + 0x^5 - x^6 + \dots \\
+                                &= 1 - x^2 + x^4 - x^6 + \dots
+                                \end{align*}
+                            </div>
+                            <p>Substitute $u = x^2$:</p>
+                            <div class="math-container">
+                                $$G(x) = 1 - u + u^2 - u^3 + \dots = \frac{1}{1+u} = \mathbf{\frac{1}{1+x^2}}$$
+                            </div>
+                        </div>
+
+                        <div class="ml-4 border-l-2 border-indigo-300 pl-4 mt-4">
+                            <h4 class="font-bold text-slate-800">(iii) Sequence: 0, 0, 1, 1, 1, ...</h4>
+                            <div class="math-container">
+                                \begin{align*}
+                                G(x) &= 0 + 0x + 1x^2 + 1x^3 + 1x^4 + \dots \\
+                                &= x^2 (1 + x + x^2 + x^3 + \dots) \\
+                                &= \mathbf{\frac{x^2}{1-x}}
+                                \end{align*}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 10 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Question 10 (OR)</h2>
+                <span class="bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">14 Marks</span>
+            </div>
+            
+            <div class="p-6 space-y-8">
+                <!-- Q10 (a) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(a) Recurrence Relation</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Solve the recurrence relation $a_{n+2} - 5a_{n+1} + 6a_n = 0$, $a_0 = 1$, $a_1 = -1$.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>The given relation is a linear homogeneous recurrence relation with constant coefficients.</p>
+                        <p>The characteristic equation is:</p>
+                        <div class="math-container font-bold text-center text-indigo-800 bg-indigo-50 py-2 rounded">
+                            $r^2 - 5r + 6 = 0$
+                        </div>
+                        <p>Solving for the roots:</p>
+                        <div class="math-container">
+                            \begin{align*}
+                            (r - 2)(r - 3) &= 0 \\
+                            r_1 = 2, \quad r_2 &= 3
+                            \end{align*}
+                        </div>
+                        <p>The general solution is of the form $a_n = A(r_1)^n + B(r_2)^n$:</p>
+                        <div class="math-container font-bold text-center">
+                            $a_n = A(2)^n + B(3)^n$
+                        </div>
+                        <p>Apply the initial conditions to find constants $A$ and $B$:</p>
+                        <div class="math-container ml-4">
+                            \begin{align*}
+                            n=0: \quad a_0 &= A(2)^0 + B(3)^0 = A + B = 1 \quad \implies B = 1 - A \quad \text{--- (1)} \\
+                            n=1: \quad a_1 &= A(2)^1 + B(3)^1 = 2A + 3B = -1 \quad \text{--- (2)}
+                            \end{align*}
+                        </div>
+                        <p>Substitute (1) into (2):</p>
+                        <div class="math-container ml-4">
+                            \begin{align*}
+                            2A + 3(1 - A) &= -1 \\
+                            2A + 3 - 3A &= -1 \\
+                            -A &= -4 \implies \mathbf{A = 4}
+                            \end{align*}
+                        </div>
+                        <p>Substitute $A=4$ back to find $B$: $B = 1 - 4 \implies \mathbf{B = -3}$</p>
+                        
+                        <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+                            <p class="font-bold text-lg text-indigo-900">Final Solution: $a_n = 4(2^n) - 3(3^n)$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- Q10 (b) -->
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-semibold text-indigo-900">(b) Solving using Generating Functions</h3>
+                        <span class="text-sm font-bold text-slate-500">[7 M]</span>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg mb-4 text-sm text-slate-700 border border-slate-100">
+                        <strong>Problem:</strong> Solve using Generating function $a_n = 3a_{n-1} + 2, \quad a_0 = 1$.
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p>Let $G(x) = \sum_{n=0}^{\infty} a_n x^n$ be the generating function for the sequence. Multiply the recurrence relation by $x^n$ and sum from $n=1$ to $\infty$:</p>
+                        <div class="math-container">
+                            $$\sum_{n=1}^{\infty} a_n x^n = 3 \sum_{n=1}^{\infty} a_{n-1} x^n + 2 \sum_{n=1}^{\infty} x^n$$
+                        </div>
+                        <p>Express each sum in terms of $G(x)$:</p>
+                        <div class="math-container ml-4">
+                            \begin{align*}
+                            (G(x) - a_0) &= 3x \sum_{n=1}^{\infty} a_{n-1} x^{n-1} + 2 \left( \frac{x}{1-x} \right) \\
+                            G(x) - 1 &= 3x \cdot G(x) + \frac{2x}{1-x} \quad \text{[Since } a_0 = 1 \text{]}
+                            \end{align*}
+                        </div>
+                        <p>Solve for $G(x)$:</p>
+                        <div class="math-container ml-4">
+                            \begin{align*}
+                            G(x)(1 - 3x) &= 1 + \frac{2x}{1-x} = \frac{1 - x + 2x}{1-x} = \frac{1+x}{1-x} \\
+                            G(x) &= \frac{1+x}{(1-x)(1-3x)}
+                            \end{align*}
+                        </div>
+                        <p>Use Partial Fractions to decompose $G(x)$:</p>
+                        <div class="math-container ml-4">
+                            \begin{align*}
+                            \frac{1+x}{(1-x)(1-3x)} &= \frac{A}{1-x} + \frac{B}{1-3x} \\
+                            1+x &= A(1-3x) + B(1-x)
+                            \end{align*}
+                        </div>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Let $x = 1$: $\implies 1+1 = A(1-3) \implies 2 = -2A \implies \mathbf{A = -1}$</li>
+                            <li>Let $x = 1/3$: $\implies 1+(1/3) = B(1-(1/3)) \implies 4/3 = B(2/3) \implies \mathbf{B = 2}$</li>
+                        </ul>
+                        <p>Substitute back into $G(x)$ and expand:</p>
+                        <div class="math-container ml-4">
+                            \begin{align*}
+                            G(x) &= \frac{-1}{1-x} + \frac{2}{1-3x} \\
+                            G(x) &= -1 \sum_{n=0}^{\infty} x^n + 2 \sum_{n=0}^{\infty} (3x)^n \\
+                            G(x) &= \sum_{n=0}^{\infty} [2(3^n) - 1] x^n
+                            \end{align*}
+                        </div>
+                        <p>By comparing coefficients of $x^n$, we get the final sequence:</p>
+                        <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-center">
+                            <p class="font-bold text-lg text-indigo-900">Final Solution: $a_n = 2(3^n) - 1$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-8 text-center mt-8">
+        <p class="text-sm">Mathematical Foundation of Computer Science - Complete Paper Solution Generated</p>
+    </footer>
+
+</body>
+</html>

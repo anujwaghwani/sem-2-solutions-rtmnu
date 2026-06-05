@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Class Test Solutions</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #0f766e;
+            --accent: #e11d48;
+            --bg-color: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #334155;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+            --output-bg: #0f172a;
+            --output-text: #34d399; /* Terminal green */
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 { margin: 0; font-size: 2.2rem; }
+        .subtitle { font-size: 1.1rem; opacity: 0.9; margin-top: 5px; }
+
+        .exam-section {
+            border-top: 4px solid var(--accent);
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        .exam-title {
+            color: var(--accent);
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .question-block {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        .q-header {
+            background: #f1f5f9;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        h2 { color: var(--primary); font-size: 1.3rem; margin-top: 20px; }
+        
+        p, li { font-size: 1rem; }
+        ul, ol { margin-bottom: 15px; padding-left: 20px; }
+
+        /* Code and Output Styling */
+        .code-container {
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #cbd5e1;
+        }
+
+        .code-container pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            margin: 0;
+            padding: 15px;
+            border-radius: 0;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .output-window {
+            background-color: var(--output-bg);
+            color: var(--output-text);
+            padding: 15px;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border-top: 2px solid #334155;
+        }
+
+        .output-header {
+            color: #94a3b8;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        .output-header::before {
+            content: "►";
+            margin-right: 6px;
+            color: #10b981;
+        }
+
+        code.inline {
+            background-color: #e2e8f0;
+            color: #b91c1c;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .mark-badge {
+            float: right;
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Python Programming</h1>
+        <div class="subtitle">Class Test I & II Solutions (Even Sem 2024-2025)</div>
+    </header>
+
+    <!-- ==============================================
+         CLASS TEST - I
+         ============================================== -->
+    <div class="exam-section">
+        <h2 class="exam-title">Class Test - I (Date: 25/3/2025)</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q1 (a) Describe Membership and Identity operators in python with appropriate example.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            
+            <h2>1. Identity Operators</h2>
+            <p>Identity operators compare the memory locations of two objects to check if they are exactly the same object, not just if they have the same value.</p>
+            <table>
+                <tr><th>Operator</th><th>Description</th><th>Example</th></tr>
+                <tr>
+                    <td><code class="inline">is</code></td>
+                    <td>Returns True if both variables point to the same object.</td>
+                    <td><code class="inline">x is y</code></td>
+                </tr>
+                <tr>
+                    <td><code class="inline">is not</code></td>
+                    <td>Returns True if both variables point to different objects.</td>
+                    <td><code class="inline">x is not y</code></td>
+                </tr>
+            </table>
+
+            <h2>2. Membership Operators</h2>
+            <p>Membership operators are used to test if a sequence (string, list, tuple, set, dictionary) contains a specific value or item.</p>
+            <table>
+                <tr><th>Operator</th><th>Description</th><th>Example</th></tr>
+                <tr>
+                    <td><code class="inline">in</code></td>
+                    <td>Returns True if a specified value is present in the object.</td>
+                    <td><code class="inline">x in y</code></td>
+                </tr>
+                <tr>
+                    <td><code class="inline">not in</code></td>
+                    <td>Returns True if a specified value is NOT present in the object.</td>
+                    <td><code class="inline">x not in y</code></td>
+                </tr>
+            </table>
+
+            <div class="code-container">
+<pre><code># --- Identity Example ---
+a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+
+print(a is c)      # Same object in memory
+print(a is b)      # Different objects, even though values match
+print(a == b)      # Values match
+
+# --- Membership Example ---
+fruits = ["apple", "banana"]
+print("apple" in fruits)
+print("mango" not in fruits)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    True<br>False<br>True<br>True<br>True
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q1 (b) List features of Python.
+                <span class="mark-badge">[3 Marks]</span>
+            </div>
+            <ul>
+                <li><strong>Simple & Easy to Learn:</strong> Clean, English-like syntax.</li>
+                <li><strong>Interpreted:</strong> Code is executed line-by-line, aiding in easy debugging.</li>
+                <li><strong>Dynamically Typed:</strong> Variables don't require explicit data type declarations.</li>
+                <li><strong>Platform Independent:</strong> Write once, run anywhere (Windows, Mac, Linux).</li>
+                <li><strong>Extensive Standard Library:</strong> "Batteries included" with massive built-in modules.</li>
+            </ul>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q1 (c) [OR] WAP to print the Fibonacci sequence.
+                <span class="mark-badge">[3 Marks]</span>
+            </div>
+            <div class="code-container">
+<pre><code># Python program to print Fibonacci sequence up to n terms
+n = 7 # Assume user input is 7
+
+a, b = 0, 1
+print("Fibonacci Sequence:")
+for _ in range(n):
+    print(a, end=" ")
+    a, b = b, a + b  # Update values</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Fibonacci Sequence:<br>
+                    0 1 1 2 3 5 8
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q2 (a) Explain different loops available in python with suitable examples.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p>Python provides two primary looping constructs to execute a block of statements repeatedly.</p>
+            
+            <h2>1. The <code>for</code> Loop</h2>
+            <p>Used for iterating over a sequence (such as a list, tuple, dictionary, set, string) or a range of numbers. It automatically handles the iteration and stops when the sequence is exhausted.</p>
+            <div class="code-container">
+<pre><code># Example: for loop using range
+for i in range(1, 4):
+    print("Iteration:", i)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Iteration: 1<br>Iteration: 2<br>Iteration: 3
+                </div>
+            </div>
+
+            <h2>2. The <code>while</code> Loop</h2>
+            <p>Executes a set of statements continuously as long as a specified boolean condition is True. The condition must eventually become False, or it will result in an infinite loop.</p>
+            <div class="code-container">
+<pre><code># Example: while loop
+count = 1
+while count <= 3:
+    print("Count is:", count)
+    count += 1  # Increment counter to avoid infinite loop</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Count is: 1<br>Count is: 2<br>Count is: 3
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q2 (b) WAP using eval() to create a calculator.
+                <span class="mark-badge">[3 Marks]</span>
+            </div>
+            <div class="code-container">
+<pre><code># Simple Calculator using eval()
+expression = "5 * 4 + 2" # Simulating input: input("Enter a mathematical expression: ")
+
+try:
+    result = eval(expression)
+    print("Expression:", expression)
+    print("Result:", result)
+except Exception as e:
+    print("Invalid Expression")</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Expression: 5 * 4 + 2<br>Result: 22
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q2 (c) [OR] WAP to print all prime number between a specified interval.
+                <span class="mark-badge">[3 Marks]</span>
+            </div>
+            <div class="code-container">
+<pre><code>lower = 10 # Simulating user input
+upper = 20 # Simulating user input
+
+print(f"Prime numbers between {lower} and {upper}:")
+for num in range(lower, upper + 1):
+    if num > 1: # Primes are greater than 1
+        for i in range(2, int(num**0.5) + 1):
+            if (num % i) == 0:
+                break # Divisible, not prime
+        else:
+            print(num, end=" ")</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Prime numbers between 10 and 20:<br>
+                    11 13 17 19 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==============================================
+         CLASS TEST - II
+         ============================================== -->
+    <div class="exam-section">
+        <h2 class="exam-title">Class Test - II (Date: 22/4/2025)</h2>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q1 (a) What are Lists? Explain append(), extend(), pop() methods of list with suitable examples of each.
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <p><strong>Lists</strong> are ordered, mutable (changeable) collections of items enclosed in square brackets <code class="inline">[]</code>. They can hold items of heterogeneous data types.</p>
+            
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><strong>append(item)</strong></td>
+                    <td>Adds a single element to the very end of the list. It increases the length of the list by exactly one.</td>
+                    <td>
+                        <code class="inline">L = [1, 2]</code><br>
+                        <code class="inline">L.append(3) # L becomes [1, 2, 3]</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>extend(iterable)</strong></td>
+                    <td>Adds all elements of an iterable (like another list, tuple, or string) to the end of the current list.</td>
+                    <td>
+                        <code class="inline">L = [1, 2]</code><br>
+                        <code class="inline">L.extend([3, 4]) # L becomes [1, 2, 3, 4]</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>pop(index)</strong></td>
+                    <td>Removes and returns the element at the specified index. If no index is provided, it removes and returns the <em>last</em> item.</td>
+                    <td>
+                        <code class="inline">L = [10, 20, 30]</code><br>
+                        <code class="inline">L.pop(1) # Returns 20, L becomes [10, 30]</code>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q1 (b) Write a python program to count uppercase and lowercase In given string "Python is FUN "
+                <span class="mark-badge">[3 Marks]</span>
+            </div>
+            <div class="code-container">
+<pre><code>text = "Python is FUN "
+upper_count = 0
+lower_count = 0
+
+for char in text:
+    if char.isupper():
+        upper_count += 1
+    elif char.islower():
+        lower_count += 1
+
+print("Uppercase count:", upper_count)
+print("Lowercase count:", lower_count)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Uppercase count: 5<br>Lowercase count: 7
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q1 (c) [OR] What is String Slicing? Find the output of below program.
+                <span class="mark-badge">[3 Marks]</span>
+            </div>
+            <p><strong>String Slicing</strong> is a technique to extract a specific substring from a string by specifying a start index, stop index, and step size using the syntax <code class="inline">string[start:stop:step]</code>.</p>
+            
+            <h3>Output Tracing:</h3>
+            <div class="code-container">
+<pre><code># a)
+name = "PYTHONISFUN"
+print("a)", name[2:5])
+# Explanation: Index 2 is 'T', 3 is 'H', 4 is 'O' (5 is exclusive).
+
+# b)
+my_list = [1, 2, 3, 4, 5, 6, 7, 8]
+print("b)", my_list[-6:-1:2])
+# Explanation: -6 index is '3'. -1 index is '8' (exclusive). 
+# Range values: 3, 4, 5, 6, 7. Step is 2.</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    a) THO<br>b) [3, 5, 7]
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q2 (a) Define Tuples. Demonstrate How to change tuple values?
+                <span class="mark-badge">[7 Marks]</span>
+            </div>
+            <h2>Definition</h2>
+            <p>A <strong>Tuple</strong> is a sequence data type in Python, similar to a list, but it is <strong>immutable</strong>. Once a tuple is created, its elements cannot be added, removed, or modified. They are enclosed in parentheses <code class="inline">()</code>.</p>
+            
+            <h2>How to change tuple values</h2>
+            <p>Because tuples are immutable, you cannot directly assign a new value to an index (e.g., <code class="inline">t[0] = 5</code> will raise an error). To alter a tuple, you must perform a <strong>workaround</strong>:</p>
+            <ol>
+                <li>Convert the tuple into a list.</li>
+                <li>Modify the desired values in the list.</li>
+                <li>Convert the list back into a tuple.</li>
+            </ol>
+
+            <div class="code-container">
+<pre><code># Original Tuple
+my_tuple = ("Apple", "Banana", "Cherry")
+print("Original:", my_tuple)
+
+# 1. Convert to List
+temp_list = list(my_tuple)
+
+# 2. Modify the List
+temp_list[1] = "Blueberry"  # Changing 'Banana' to 'Blueberry'
+temp_list.append("Orange")  # Adding a new item
+
+# 3. Convert back to Tuple
+my_tuple = tuple(temp_list)
+
+print("Modified:", my_tuple)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Original: ('Apple', 'Banana', 'Cherry')<br>
+                    Modified: ('Apple', 'Blueberry', 'Cherry', 'Orange')
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q2 (b) WAP for implementing the programming language details using set operations.
+                <span class="mark-badge">[3 Marks]</span>
+            </div>
+            <div class="code-container">
+<pre><code># Defining sets of programming languages known by two people
+dev1 = {"Python", "Java", "C++"}
+dev2 = {"Java", "JavaScript", "Python"}
+
+# Union (All languages combined)
+print("All languages:", dev1 | dev2)
+
+# Intersection (Common languages)
+print("Common languages:", dev1 & dev2)
+
+# Difference (Languages Dev1 knows but Dev2 doesn't)
+print("Only Dev1 knows:", dev1 - dev2)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    All languages: {'Java', 'C++', 'Python', 'JavaScript'}<br>
+                    Common languages: {'Java', 'Python'}<br>
+                    Only Dev1 knows: {'C++'}
+                </div>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="q-header">
+                Q2 (c) [OR] WAP to create a set of automobile component by using set methods add 2 items in same set then remove any 1 item.
+                <span class="mark-badge">[3 Marks]</span>
+            </div>
+            <div class="code-container">
+<pre><code># Create initial set
+auto_parts = {"Engine", "Steering"}
+print("Initial Set:", auto_parts)
+
+# Add 2 items
+auto_parts.add("Brakes")
+auto_parts.add("Gearbox")
+print("After adding:", auto_parts)
+
+# Remove 1 item
+auto_parts.remove("Steering") # discard() can also be used
+print("After removing:", auto_parts)</code></pre>
+                <div class="output-window">
+                    <div class="output-header">Terminal Output</div>
+                    Initial Set: {'Steering', 'Engine'}<br>
+                    After adding: {'Gearbox', 'Steering', 'Brakes', 'Engine'}<br>
+                    After removing: {'Gearbox', 'Brakes', 'Engine'}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

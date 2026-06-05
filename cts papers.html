@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Tech Second Semester - Class Tests</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .paper-font { font-family: 'Merriweather', serif; }
+        
+        @media print {
+            .no-print { display: none !important; }
+            .print-full-width { width: 100% !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important;}
+            body { background-color: white; }
+            .paper-container { display: block !important; page-break-after: always; margin-bottom: 0 !important; box-shadow: none !important;}
+            .page-break-inside-avoid { break-inside: avoid; }
+        }
+
+        .marks { float: right; font-weight: bold; background: #f3f4f6; padding: 2px 8px; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.85rem;}
+        @media print { .marks { background: transparent; } }
+        
+        .or-divider { text-align: center; font-weight: bold; margin: 1.5rem 0; letter-spacing: 2px; }
+        .nav-link { transition: all 0.2s; }
+        .nav-link:hover { color: #2563eb; transform: translateX(4px); display: inline-block; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation / Table of Contents (Hidden on Print) -->
+    <div class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-gray-900">Class Test Archive</h1>
+                <p class="text-xs text-gray-500">GCOE Nagpur • B.Tech II Sem</p>
+            </div>
+            <div class="relative group">
+                <button class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md font-medium text-sm transition-colors">
+                    <i data-lucide="list" class="w-4 h-4"></i> Jump to Paper
+                </button>
+                <div class="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-2 z-50 h-96 overflow-y-auto">
+                    <div class="text-xs font-bold text-gray-400 uppercase mb-2 px-2">March 2025</div>
+                    <a href="#physics-ct1" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">Physics - Class Test 1 <span class="text-xs text-gray-400 float-right">24/03</span></a>
+                    <a href="#python-ct1" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">Python - Class Test 1 <span class="text-xs text-gray-400 float-right">25/03</span></a>
+                    <a href="#cao-ct1" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">CAO - Class Test 1 <span class="text-xs text-gray-400 float-right">25/03</span></a>
+                    
+                    <div class="text-xs font-bold text-gray-400 uppercase mt-4 mb-2 px-2">April 2025</div>
+                    <a href="#physics-ct2" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">Physics - Class Test 2 <span class="text-xs text-gray-400 float-right">21/04</span></a>
+                    <a href="#python-ct2" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">Python - Class Test 2 <span class="text-xs text-gray-400 float-right">22/04</span></a>
+                    <a href="#cao-ct2" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">CAO - Class Test 2 <span class="text-xs text-gray-400 float-right">22/04</span></a>
+                    <a href="#iks-ct2" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">IKS (Consciousness) - CT 2 <span class="text-xs text-gray-400 float-right">23/04</span></a>
+                    
+                    <div class="text-xs font-bold text-gray-400 uppercase mt-4 mb-2 px-2">May 2025</div>
+                    <a href="#physics-ct3" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">Physics - Class Test 3 <span class="text-xs text-gray-400 float-right">02/05</span></a>
+
+                    <div class="text-xs font-bold text-gray-400 uppercase mt-4 mb-2 px-2">Undated Papers</div>
+                    <a href="#math-ct1" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">Mathematics - Class Test 1</a>
+                    <a href="#math-ct2" class="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-md">Mathematics - Class Test 2</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 relative print-full-width">
+        
+        <!-- Print Button -->
+        <button onclick="window.print()" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-20 no-print" title="Print Papers">
+            <i data-lucide="printer"></i>
+        </button>
+
+        <!-- ============================================== -->
+        <!-- 1. PHYSICS CT-1 (24/03/2025)                   -->
+        <!-- ============================================== -->
+        <div id="physics-ct1" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1 uppercase font-semibold">Department of Science & Humanities</p>
+                <p class="text-sm mt-1">B.Tech CSE SEM-2 (2024-2025)</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - 1</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: Essentials of Physics</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Date: 24/03/2025</span>
+                    <span>Time: 3.00 - 4.00 PM</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Q1 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-lg">1.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(A) Give the classification of solids based on the energy band diagrams.</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(B) Give reason for Zener breakdown in heavily doped pn-junction diode. State two technological applications of Zener diode.</p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(C) Draw well-labelled energy band diagrams of an intrinsic semiconductor at absolute 0 and 300K.</p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="or-divider text-sm text-gray-500">OR</div>
+                        <div class="flex justify-between">
+                            <p>(D) Find the conductivity of intrinsic germanium having intrinsic carrier density 2.5 &times; 10<sup>19</sup>/m<sup>3</sup>. <br><span class="text-sm italic">(Given 0.39 and 0.19 m<sup>2</sup>/Vs are mobilities of e and hole respectively).</span></p>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 my-6"></div>
+
+                <!-- Q2 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-lg">2.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(A) Explain the construction and working of Light Emitting Diode, and give an account of its two technological applications.</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(B) Give the formation of the barrier potential V<sub>0</sub> in a p-n junction diode by using drift and diffusion currents.</p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(C) Illustrate the energy band diagram of an n-type semiconductor at absolute 0 and 300K.</p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="or-divider text-sm text-gray-500">OR</div>
+                        <div class="flex justify-between">
+                            <p>(D) An N-type semiconductor has a resistivity of 20 &times; 10<sup>-2</sup> &Omega;&middot;m. The mobility of the electrons through a separate experiment was found to be 100 &times; 10<sup>-4</sup> m<sup>2</sup>/V&middot;sec. Find the number of electrons per m<sup>3</sup>.</p>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 2. PYTHON CT-1 (25/03/2025)                    -->
+        <!-- ============================================== -->
+        <div id="python-ct1" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1 uppercase font-semibold">Department of Computer Science & Engineering</p>
+                <p class="text-sm mt-1">B.Tech II Sem (Even Sem) - 2024-2025</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - I</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: Python Programming</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Date: 25/03/2025</span>
+                    <span>Time: 1.00 Hr</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="mb-6 pl-4 border-l-4 border-gray-300">
+                <h4 class="font-bold mb-1">Note:</h4>
+                <p class="text-sm">Solve Q.1 Compulsory, 1(b) or 1(c)<br>Solve Q.2 Compulsory, 2(b) or 2(c)</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Q1 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-lg">1.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(a) Describe Membership and Identity operators in python with appropriate example</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(b) List features of Python</p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="or-divider text-sm text-gray-500">OR</div>
+                        <div class="flex justify-between">
+                            <p>(c) WAP to print the Fibonacci sequence</p>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 my-6"></div>
+
+                <!-- Q2 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-lg">2.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(a) Explain different loops available in python with suitable examples</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(b) WAP using <code class="bg-gray-100 px-1 rounded text-sm">eval()</code> to create a calculator</p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="or-divider text-sm text-gray-500">OR</div>
+                        <div class="flex justify-between">
+                            <p>(c) WAP to print all prime number between a specified interval</p>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 3. CAO CT-1 (25/03/2025)                       -->
+        <!-- ============================================== -->
+        <div id="cao-ct1" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1 uppercase font-semibold">Department of Computer Science & Engineering</p>
+                <p class="text-sm mt-1">B.Tech II Semester</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - I (Even Semester)</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: Computer Architecture and Organization</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Date: 25/03/2025</span>
+                    <span>Time: 1.00 Hr</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Q1 -->
+                <div>
+                    <h4 class="font-bold underline mb-4">Q. N. 1 Solve the following:</h4>
+                    <div class="space-y-4 pl-4">
+                        <div class="flex justify-between">
+                            <p>(A) Explain various addressing modes with example.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(B) Explain different functional units of a Computer System.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(C) Explain the connections between the memory and the processor.</p>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 my-6"></div>
+
+                <!-- Q2 -->
+                <div>
+                    <h4 class="font-bold underline mb-4">Q. N. 2 Solve any two questions:</h4>
+                    <div class="space-y-4 pl-4">
+                        <div class="flex justify-between">
+                            <p>(A) Explain the single-bus structure with diagram.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(B) Explain different instruction formats.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class="flex-1">
+                                <p>(C) Solve the following:</p>
+                                <ol class="list-[lower-roman] list-inside ml-6 mt-2 space-y-1">
+                                    <li>(-2) + (-7)</li>
+                                    <li>(+6) + (+2)</li>
+                                    <li>(-5) - (+3)</li>
+                                    <li>(-3) - (-6)</li>
+                                    <li>(+7) - (-4)</li>
+                                </ol>
+                            </div>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 4. PHYSICS CT-2 (21/04/2025)                   -->
+        <!-- ============================================== -->
+        <div id="physics-ct2" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1 uppercase font-semibold">Department of Science & Humanities</p>
+                <p class="text-sm mt-1">B.Tech CSE SEM-2 (2024-2025)</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - 2</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: Essentials of Physics</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Date: 21/04/2025</span>
+                    <span>Time: 3.00 - 4.00 PM</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Q1 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-lg">1.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(A) With the help of well-labelled diagrams, describe the Davison-Germer experiment.</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-2">(B) Solve any two:</p>
+                            <div class="pl-4 space-y-3">
+                                <div class="flex justify-between">
+                                    <p>(i) Define Planck's Hypothesis and Heisenberg's Uncertainty Principle</p>
+                                    <span class="marks">3</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>(ii) Show that the energies of an electron confined to move in a one-dimensional infinite potential well are quantized.</p>
+                                    <span class="marks">3</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>(iii) Find the wavelength of matter wave associated with an electron having energy equal to 1 MeV. <br><span class="text-sm italic">(m<sub>e</sub> = 9.1 &times; 10<sup>-31</sup> kg, e = 1.6 &times; 10<sup>-19</sup> C)</span></p>
+                                    <span class="marks">3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 my-6"></div>
+
+                <!-- Q2 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-lg">2.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(A) With the help of a well-labelled diagram, derive an expression for the Acceptance Angle &theta;, and Numerical Aperture (N.A.) of an optical fibre.</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-2">(B) Solve any two:</p>
+                            <div class="pl-4 space-y-3">
+                                <div class="flex justify-between">
+                                    <p>(i) Differentiate between mono-mode and multi-mode step index fibre.</p>
+                                    <span class="marks">3</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>(ii) Calculate the refractive indices of core and cladding materials of an optical fibre from the following data: Numerical Aperture (N.A.) = 0.22 and Fractional R.I. Change &Delta; = 0.012.</p>
+                                    <span class="marks">3</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>(iii) Define: Acceptance Angle and Graded Index Fibre</p>
+                                    <span class="marks">3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 5. PYTHON CT-2 (22/04/2025)                    -->
+        <!-- ============================================== -->
+        <div id="python-ct2" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1 uppercase font-semibold">Department of Computer Science & Engineering</p>
+                <p class="text-sm mt-1">B.Tech II Sem (Even Sem) - 2024-2025</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - II</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: Python Programming</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Date: 22/04/2025</span>
+                    <span>Time: 1.00 Hr</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="mb-6 pl-4 border-l-4 border-gray-300">
+                <h4 class="font-bold mb-1">Note:</h4>
+                <p class="text-sm">Solve Q.1 Compulsory, 1(b) or 1(c)<br>Solve Q.2 Compulsory, 2(b) or 2(c)</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Q1 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-lg">1.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(a) What are Lists? Explain <code class="bg-gray-100 px-1 rounded text-sm">append()</code>, <code class="bg-gray-100 px-1 rounded text-sm">extend()</code>, <code class="bg-gray-100 px-1 rounded text-sm">pop()</code> methods of list with suitable examples of each.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(b) Write a python program to count uppercase and lowercase in given string <br><code>"Python is FUN "</code></p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="or-divider text-sm text-gray-500">OR</div>
+                        <div class="flex justify-between">
+                            <div class="flex-1">
+                                <p>(c) What is String Slicing? Find the output of below program:</p>
+                                <pre class="bg-gray-50 p-2 border border-gray-200 mt-2 text-sm">a) name = "PYTHONISFUN"
+   print (name[2:5])
+b) list = [1,2,3,4,5,6,7,8]
+   print (list[-6:-1:2])</pre>
+                            </div>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 my-6"></div>
+
+                <!-- Q2 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-lg">2.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(a) Define Tuples. Demonstrate How to change tuple values?</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(b) WAP for implementing the programming language details using set operations.</p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="or-divider text-sm text-gray-500">OR</div>
+                        <div class="flex justify-between">
+                            <p>(c) WAP to create a set of automobile component by using set methods add 2 items in same set then remove any 1 item.</p>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 6. CAO CT-2 (22/04/2025)                       -->
+        <!-- ============================================== -->
+        <div id="cao-ct2" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1 uppercase font-semibold">Department of Computer Science & Engineering</p>
+                <p class="text-sm mt-1">B.Tech II Semester</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - II (Even Semester)</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: Computer Architecture and Organization</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Date: 22/04/2025</span>
+                    <span>Time: 1.00 Hr</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Q1 -->
+                <div>
+                    <h4 class="font-bold underline mb-4">Q. N. 1 Solve the following:</h4>
+                    <div class="space-y-4 pl-4">
+                        <div class="flex justify-between">
+                            <p>(A) Write the algorithm for Restoring Integer Division. Solve the following using the same: 12/5.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(B) Solve the following by using Booth's Algorithm: (-13) * (-9).</p>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 my-6"></div>
+
+                <!-- Q2 -->
+                <div>
+                    <h4 class="font-bold underline mb-4">Q. N. 2 Solve any two questions:</h4>
+                    <div class="space-y-4 pl-4">
+                        <div class="flex justify-between">
+                            <p>(A) Write the algorithm for Non-Restoring Integer Division. Solve the following using the same: 13/7.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(B) Assume the size of cache as 4 and the page stream is as follows: 2, 3, 2, 1, 5, 2, 4, 5, 3, 2, 5, 2. Show the entries in cache using following page replacement algorithms:<br> (a) Least Recently Used <br>(b) FIFO <br>(c) Optimal.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(C) Explain Memory Hierarchy in detail.</p>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 7. IKS CONSCIOUSNESS CT-2 (23/04/2025)         -->
+        <!-- ============================================== -->
+        <div id="iks-ct2" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1">B.Tech. Second Semester (CSE & ETC, ME) (2024-25)</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - II</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: (IKS) Consciousness Studies</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Date: 23/04/2025</span>
+                    <span>Time: 1 Hour</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="mb-6 pl-4 border-l-4 border-gray-300">
+                <h4 class="font-bold mb-1">Instruction:</h4>
+                <p class="text-sm">Answer any <strong>Four</strong> of the following questions.</p>
+            </div>
+
+            <div class="space-y-6 pl-2">
+                <div class="flex justify-between border-b border-gray-100 pb-4">
+                    <p><span class="font-bold mr-2">Q.1</span> What is Gestalt theory of perception? Describe Gestalt principles of organization.</p>
+                    <span class="marks">5</span>
+                </div>
+                <div class="flex justify-between border-b border-gray-100 pb-4">
+                    <p><span class="font-bold mr-2">Q.2</span> What are the cognitive processes? Elaborate the types of cognitive processes.</p>
+                    <span class="marks">5</span>
+                </div>
+                <div class="flex justify-between border-b border-gray-100 pb-4">
+                    <p><span class="font-bold mr-2">Q.3</span> Explain classical conditioning with the help of Ivan Pavlov's experiment.</p>
+                    <span class="marks">5</span>
+                </div>
+                <div class="flex justify-between border-b border-gray-100 pb-4">
+                    <p><span class="font-bold mr-2">Q.4</span> What is extrasensory perception? Briefly explain the types of extrasensory perception.</p>
+                    <span class="marks">5</span>
+                </div>
+                <div class="flex justify-between">
+                    <p><span class="font-bold mr-2">Q.5</span> Explain sensation and functions of senses in detail.</p>
+                    <span class="marks">5</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 8. PHYSICS CT-3 (02/05/2025)                   -->
+        <!-- ============================================== -->
+        <div id="physics-ct3" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1 uppercase font-semibold">Department of Science & Humanities</p>
+                <p class="text-sm mt-1">B.Tech CSE SEM-2 (2024-2025)</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - 3</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: Essentials of Physics</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Date: 02/05/2025</span>
+                    <span>Time: 3.00 - 4.00 PM</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Q1 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-lg">1.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(A) With the help of a well-labelled diagram, describe the motion of an electron in transverse electric field. What is Lorentz force?</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-2">(B) Solve any two:</p>
+                            <div class="pl-4 space-y-3">
+                                <div class="flex justify-between">
+                                    <p>(i) Show that electron describes a helical path when projected at an angle to uniform magnetic field. Determine the expression for radius and pitch of the helical path.</p>
+                                    <span class="marks">3</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>(ii) State and explain Bethe's law of electron refraction. Compare it with Snell's law.</p>
+                                    <span class="marks">3</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>(iii) A proton accelerated by a potential difference of 200V, pass un-deviated through a velocity selector having magnetic field of induction 0.02T. Determine the velocity and value of electric field present in the velocity selector. <br><span class="text-sm italic">(m<sub>p</sub> = 1.67 &times; 10<sup>-27</sup> kg, e = 1.6 &times; 10<sup>-19</sup> C)</span></p>
+                                    <span class="marks">3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 my-6"></div>
+
+                <!-- Q2 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-lg">2.</span>
+                    <div class="flex-1 space-y-4">
+                        <div class="flex justify-between">
+                            <p>(A) What are the nano-materials? Give their classification.</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div>
+                            <p class="font-bold mb-2">(B) Solve any two:</p>
+                            <div class="pl-4 space-y-3">
+                                <div class="flex justify-between">
+                                    <p>(i) Describe the top-down and bottom-up techniques for preparation of nanomaterials. Give at least one example each.</p>
+                                    <span class="marks">3</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>(ii) Explain in brief any three properties of nanomaterials that are significantly different from the bulk.</p>
+                                    <span class="marks">3</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>(iii) What is Graphene? Give its properties and applications.</p>
+                                    <span class="marks">3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 9. MATH CT-1 (Undated)                         -->
+        <!-- ============================================== -->
+        <div id="math-ct1" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1 uppercase font-semibold">Department of Mathematics</p>
+                <p class="text-sm mt-1">B.Tech First Year, Sem-II (CSE) (2024-25)</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - 1</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: Mathematical Foundation of Computer Science</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Code: BCB2T05</span>
+                    <span>Time: 1 Hour</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Q1 -->
+                <div>
+                    <h4 class="font-bold underline mb-4">Q.1) Attempt all the questions:</h4>
+                    <div class="space-y-4 pl-4">
+                        <div class="flex justify-between">
+                            <div class="flex-1">
+                                <p>(A) Let A={1,2,3}, B={a,b,c,d} and let R and S be relations from A to B with relation matrices given by:</p>
+                                <p class="my-2 font-mono ml-4">
+                                    M<sub>R</sub> = <br>[1 1 1 0]<br>[0 0 0 0]<br>[1 1 0 1]
+                                    <br><br>
+                                    M<sub>S</sub> = <br>[0 1 0 0]<br>[1 0 0 1]<br>[0 1 1 0]
+                                </p>
+                                <p>Find:<br>
+                                (i) M<sub>R<sup>-1</sup></sub> and M<sub>S<sup>-1</sup></sub><br>
+                                (ii) M<sub>(R &cap; S) &compfn; R<sup>-1</sup></sub> = M<sub>(R &compfn; R<sup>-1</sup>)</sub> &cap; M<sub>(S &compfn; R<sup>-1</sup>)</sub><br>
+                                (iii) M<sub>R<sup>-1</sup> &cup; S<sup>-1</sup></sub></p>
+                            </div>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class="flex-1">
+                                <p>(B) Fit a curve y = ae<sup>bx</sup> to the following data:</p>
+                                <table class="my-3 border-collapse border border-gray-800 text-center w-full max-w-sm">
+                                    <tr><td class="border border-gray-800 p-1 font-bold bg-gray-100">x</td><td class="border border-gray-800 p-1">1</td><td class="border border-gray-800 p-1">2</td><td class="border border-gray-800 p-1">3</td><td class="border border-gray-800 p-1">4</td><td class="border border-gray-800 p-1">5</td><td class="border border-gray-800 p-1">6</td></tr>
+                                    <tr><td class="border border-gray-800 p-1 font-bold bg-gray-100">y</td><td class="border border-gray-800 p-1">1.6</td><td class="border border-gray-800 p-1">4.5</td><td class="border border-gray-800 p-1">13.8</td><td class="border border-gray-800 p-1">40.2</td><td class="border border-gray-800 p-1">125</td><td class="border border-gray-800 p-1">300</td></tr>
+                                </table>
+                            </div>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 my-6"></div>
+
+                <!-- Q2 -->
+                <div>
+                    <h4 class="font-bold underline mb-4">Q.2) Attempt any two questions:</h4>
+                    <div class="space-y-6 pl-4">
+                        <div class="flex justify-between">
+                            <p>(A) List all possible functions from the set X={a,b,c} to the set Y={0,1}. Indicate in each case whether the function is one-one or onto or both.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class="flex-1">
+                                <p>(B) Find the coefficient of correlation and equation of regression lines for the following data:</p>
+                                <table class="my-3 border-collapse border border-gray-800 text-center w-full max-w-sm">
+                                    <tr><td class="border border-gray-800 p-1 font-bold bg-gray-100">x</td><td class="border border-gray-800 p-1">1</td><td class="border border-gray-800 p-1">2</td><td class="border border-gray-800 p-1">3</td><td class="border border-gray-800 p-1">4</td><td class="border border-gray-800 p-1">5</td></tr>
+                                    <tr><td class="border border-gray-800 p-1 font-bold bg-gray-100">y</td><td class="border border-gray-800 p-1">2</td><td class="border border-gray-800 p-1">5</td><td class="border border-gray-800 p-1">3</td><td class="border border-gray-800 p-1">8</td><td class="border border-gray-800 p-1">7</td></tr>
+                                </table>
+                            </div>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between page-break-inside-avoid">
+                            <div class="flex-1">
+                                <p>(C) Obtain the rank correlation coefficient for the given data:</p>
+                                <table class="my-3 border-collapse border border-gray-800 text-center w-full text-sm">
+                                    <tr><td class="border border-gray-800 p-1 font-bold bg-gray-100">x</td><td class="border border-gray-800 p-1">68</td><td class="border border-gray-800 p-1">64</td><td class="border border-gray-800 p-1">75</td><td class="border border-gray-800 p-1">50</td><td class="border border-gray-800 p-1">64</td><td class="border border-gray-800 p-1">80</td><td class="border border-gray-800 p-1">75</td><td class="border border-gray-800 p-1">40</td><td class="border border-gray-800 p-1">55</td><td class="border border-gray-800 p-1">64</td></tr>
+                                    <tr><td class="border border-gray-800 p-1 font-bold bg-gray-100">y</td><td class="border border-gray-800 p-1">62</td><td class="border border-gray-800 p-1">58</td><td class="border border-gray-800 p-1">68</td><td class="border border-gray-800 p-1">45</td><td class="border border-gray-800 p-1">81</td><td class="border border-gray-800 p-1">60</td><td class="border border-gray-800 p-1">68</td><td class="border border-gray-800 p-1">48</td><td class="border border-gray-800 p-1">50</td><td class="border border-gray-800 p-1">70</td></tr>
+                                </table>
+                            </div>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 10. MATH CT-2 (Undated)                        -->
+        <!-- ============================================== -->
+        <div id="math-ct2" class="paper-container mb-12 max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-md border border-gray-200 rounded-sm paper-font">
+            <div class="text-center border-b-2 border-black pb-6 mb-8">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Government College of Engineering, Nagpur</h3>
+                <p class="text-sm mt-1 uppercase font-semibold">Department of Mathematics</p>
+                <p class="text-sm mt-1">B.Tech First Year, Semester-II (NEP) (CSE) (2024-25)</p>
+                <h1 class="text-2xl font-extrabold mt-4 tracking-wide uppercase">CLASS TEST - II</h1>
+                <h2 class="text-lg font-bold mt-2">Subject: Mathematical Foundation of Computer Science</h2>
+                <div class="flex justify-between font-bold mt-6 text-sm bg-gray-50 p-2 rounded border border-gray-200">
+                    <span>Code: BCB2T05</span>
+                    <span>Time: 1 Hour</span>
+                    <span>Max Marks: 20</span>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Q1 -->
+                <div>
+                    <h4 class="font-bold underline mb-4">Q.1) Attempt all the questions:</h4>
+                    <div class="space-y-4 pl-4">
+                        <div class="flex justify-between">
+                            <p>(A) By principal of mathematical induction, show that: <br><br> 1<sup>2</sup> + 2<sup>2</sup> + 3<sup>2</sup> + ... + n<sup>2</sup> = n(n+1)(2n+1) / 6, for n &ge; 1.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(B) If Fuzzy sets are A = { 0.3/30 + 0.7/60 + 1/100 } and <br>B = { 0.2/20 + 0.4/40 + 0.6/60 }, C = { 0.3/50 + 0.6/100 }<br> then find the relation R = A &times; B and S = B &times; C</p>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 my-6"></div>
+
+                <!-- Q2 -->
+                <div>
+                    <h4 class="font-bold underline mb-4">Q.2) Attempt any two questions:</h4>
+                    <div class="space-y-4 pl-4">
+                        <div class="flex justify-between">
+                            <div class="flex-1">
+                                <p>(A) Define the following terms:</p>
+                                <ol class="list-[lower-roman] list-inside ml-6 mt-2 space-y-1">
+                                    <li>Equality of two fuzzy sets</li>
+                                    <li>Union of two fuzzy sets</li>
+                                    <li>Difference of two fuzzy sets</li>
+                                    <li>Algebraic sum of two fuzzy sets</li>
+                                    <li>Algebraic product of two fuzzy sets</li>
+                                </ol>
+                            </div>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(B) Prove that A &cap; (B &cup; C) = (A &cap; B) &cup; (A &cap; C) for any two non empty sets A and B.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p>(C) Define Pigeon-hole principle. Show that if 9 books are to be kept in 4 shelves, there must be atleast one shelf which contains atleast 3 books.</p>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="mt-12 text-center text-sm text-gray-500 pb-8 no-print font-medium">
+            <p>End of Class Test Archive.</p>
+            <p class="mt-2 text-xs">Based on provided PDF Scans • Formatted for digital access.</p>
+        </div>
+
+    </main>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Exam Q&A Bank - Comprehensive</title>
+    <style>
+        :root {
+            --primary: #1e3a8a; 
+            --secondary: #047857; 
+            --accent: #e0f2fe; 
+            --highlight: #f59e0b; 
+            --text-dark: #1f2937;
+            --text-light: #4b5563;
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #bfdbfe;
+        }
+
+        /* Hamburger Icon */
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: var(--highlight);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background: #d97706;
+            transform: scale(1.05);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hamburger Animation */
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Background Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Side Navigation Drawer */
+        nav {
+            background: white;
+            padding: 80px 20px 20px 20px;
+            position: fixed;
+            top: 0;
+            right: -300px;
+            height: 100vh;
+            width: 280px;
+            z-index: 1000;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        nav.open {
+            right: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 12px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
+            background-color: var(--bg-body);
+        }
+
+        nav a:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .qa-header {
+            background-color: var(--highlight);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin: 20px 0 30px 0;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-top: 5px solid var(--primary);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+            margin-top: 0;
+            font-size: 1.4rem;
+            line-height: 1.4;
+        }
+
+        .card h3 {
+            color: var(--secondary);
+            margin-top: 30px;
+            font-size: 1.25rem;
+            border-left: 4px solid var(--secondary);
+            padding-left: 10px;
+        }
+
+        .card h4 {
+            color: var(--text-dark);
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.15rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: var(--primary);
+        }
+
+        .info-box {
+            background: var(--accent);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary);
+            margin: 25px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        /* Sketch Styles for Q4(a) */
+        .sketch-box {
+            background: #fdfdfd;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .sketch-row { display: flex; gap: 10px; }
+        .shape-circle { width: 30px; height: 30px; border-radius: 50%; background-color: var(--secondary); }
+        .shape-square { width: 30px; height: 30px; background-color: var(--highlight); }
+        .prox-group { display: flex; gap: 8px; }
+        .prox-container { display: flex; gap: 40px; }
+
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Hamburger Button -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Side Navigation -->
+    <nav id="nav-menu">
+        <a href="#q1">Q1. Psych Definition & Subfields</a>
+        <a href="#q2">Q2. Methods & Schools of Psych</a>
+        <a href="#q3">Q3. Cognitive Processes & Perception</a>
+        <a href="#q4">Q4. Perceptual Organization</a>
+        <a href="#q5">Q5. Learning & Pavlov</a>
+        <a href="#q6">Q6. Skinner & Role of Nature</a>
+        <a href="#q7">Q7. Memory & STM Aspects</a>
+        <a href="#q8">Q8. Sensory & Explicit Memory</a>
+        <a href="#q9">Q9. Engg Applications & Senses</a>
+        <a href="#q10">Q10. Learning Apps & Forgetting</a>
+    </nav>
+
+    <header>
+        <h1>Consciousness Studies & IKS</h1>
+        <p>70-Mark University Paper: Complete Answer Key</p>
+    </header>
+
+    <div class="container">
+
+        <h1 class="qa-header">Detailed University Exam Solutions</h1>
+
+        <!-- QUESTION 1 -->
+        <div id="q1" class="card">
+            <h2>Q1. (a) Define Psychology. What is the subject matter of psychology? <br>(b) Briefly elaborate the various subfields of psychology.</h2>
+            
+            <h3>(a) Definition and Subject Matter of Psychology</h3>
+            <p><strong>Definition:</strong> The word "Psychology" is derived from two Greek words: <em>"Psyche,"</em> meaning mind, soul, or breath, and <em>"Logos,"</em> meaning knowledge or study. While early philosophers defined it as the study of the soul or mind, modern psychology demands measurable evidence. Today, Psychology is formally defined as the <strong>scientific study of human and animal behavior and mental processes</strong>. It systematically uses observation, measurement, and experimentation to understand how biological, psychological, and environmental factors influence how we think, act, and feel.</p>
+            
+            <p><strong>Subject Matter of Psychology:</strong> The subject matter is exceptionally diverse, acting as a hub that connects biological and social sciences. The main areas of study include:</p>
+            <div class="grid-2">
+                <ul>
+                    <li><strong>Behavior:</strong> Overt, observable actions like walking, communicating, and problem-solving, as well as covert bodily reactions.</li>
+                    <li><strong>Mental Processes:</strong> Internal, covert cognitive activities such as thinking, reasoning, memory, and perception.</li>
+                    <li><strong>Emotions:</strong> Affective states (e.g., joy, anger, fear) and how they profoundly impact decision-making, health, and relationships.</li>
+                    <li><strong>Personality:</strong> The stable, characteristic patterns of thinking, feeling, and behaving that make each individual completely unique.</li>
+                    <li><strong>Development:</strong> The physical, emotional, and cognitive growth and changes spanning from birth through old age.</li>
+                </ul>
+                <ul>
+                    <li><strong>Social Behavior:</strong> How individuals are influenced by others, encompassing group dynamics, conformity, prejudice, and leadership.</li>
+                    <li><strong>Mental Health & Disorders:</strong> Understanding, diagnosing, and providing therapy for psychological conditions like anxiety, depression, and schizophrenia.</li>
+                    <li><strong>Learning & Memory:</strong> How humans acquire new information and skills, and how data is encoded, stored, and retrieved.</li>
+                    <li><strong>Motivation:</strong> The biological and psychological forces that drive goal-oriented actions.</li>
+                    <li><strong>Biological Bases:</strong> How brain structures, neurotransmitters, and genetics dictate behavior and emotional responses.</li>
+                </ul>
+            </div>
+
+            <h3>(b) Various Subfields of Psychology</h3>
+            <p>Psychology has branched into numerous specialized subfields to comprehensively cover the vast subject matter of human life. The major subfields include:</p>
+            <ul>
+                <li><strong>Clinical Psychology:</strong> The largest subfield, focused entirely on the assessment, diagnosis, treatment, and prevention of mental, emotional, and behavioral disorders. Clinical psychologists use therapies to treat conditions ranging from daily stress to severe schizophrenia.</li>
+                <li><strong>Cognitive Psychology:</strong> Explores internal mental processes. It studies how the human mind acquires, processes, stores, and retrieves information, extensively covering topics like language acquisition, memory, attention span, and complex problem-solving.</li>
+                <li><strong>Developmental Psychology:</strong> The scientific study of how and why human beings change over the course of their entire lifespan. It includes child psychology, adolescent identity formation, adult development, and gerontology (the psychology of aging).</li>
+                <li><strong>Social Psychology:</strong> Investigates how individuals' thoughts, feelings, and behaviors are influenced by the actual, imagined, or implied presence of others. Key topics include group dynamics, peer pressure, prejudice, and interpersonal attraction.</li>
+                <li><strong>Industrial-Organizational (I/O) Psychology:</strong> Applies psychological theories to the workplace to enhance employee productivity, ensure fair hiring practices, improve occupational safety, and foster positive organizational cultures.</li>
+                <li><strong>Neuropsychology (Biological Psychology):</strong> Analyzes the intricate biological relationship between the brain, the nervous system, hormones, genetics, and behavior.</li>
+            </ul>
+        </div>
+
+        <!-- QUESTION 2 -->
+        <div id="q2" class="card">
+            <h2>Q2. (a) Explain any two methods of psychology with its advantages and limitations. <br>(b) Discuss any two schools of psychology in detail.</h2>
+            
+            <h3>(a) Methods of Psychology</h3>
+            
+            <h4>1. The Experimental Method</h4>
+            <p>The experimental method is the gold standard of scientific psychological research. It involves manipulating one variable (the Independent Variable) in a strictly controlled environment to observe its direct effect on another variable (the Dependent Variable), while neutralizing all other extraneous factors. Participants are typically divided into an experimental group (receiving the treatment) and a control group (receiving no treatment).</p>
+            <ul>
+                <li><strong>Advantages:</strong> It is the <em>only</em> research method that allows scientists to establish definitive, undeniable cause-and-effect relationships. The strict control over variables ensures high accuracy, and the standardized procedures mean the experiment can be easily replicated to verify findings.</li>
+                <li><strong>Limitations:</strong> The highly artificial and sterile setting of a laboratory may cause participants to behave unnaturally, resulting in low ecological validity. Furthermore, ethical constraints prevent researchers from experimentally inducing trauma, severe stress, or disease in human subjects.</li>
+            </ul>
+
+            <h4>2. The Observational Method</h4>
+            <p>This method involves carefully watching, recording, and analyzing behavior systematically as it occurs. In <em>Naturalistic Observation</em>, the researcher observes subjects in their natural habitat without any interference. In <em>Controlled Observation</em>, behavior is observed in a slightly structured environment (like a clinic observation room with a two-way mirror).</p>
+            <ul>
+                <li><strong>Advantages:</strong> It provides genuine, authentic data because subjects are in their natural environment and acting spontaneously (high ecological validity). It is an excellent exploratory tool for generating new hypotheses.</li>
+                <li><strong>Limitations:</strong> Observation cannot establish cause-and-effect relationships; it only describes <em>what</em> is happening, not <em>why</em>. The presence of a visible observer might alter the subject's behavior (the Hawthorne effect). It is also highly susceptible to observer bias, where the researcher's preconceptions skew the data collection.</li>
+            </ul>
+
+            <h3>(b) Two Schools of Psychology in Detail</h3>
+
+            <h4>1. Psychoanalysis</h4>
+            <p>Founded by the famous Austrian psychiatrist Sigmund Freud, Psychoanalysis was a revolutionary approach that shifted focus away from conscious thought. Freud proposed that human behavior is profoundly driven by the <strong>unconscious mind</strong>—a hidden repository of primal urges, unfulfilled desires, repressed traumatic memories, and unresolved childhood conflicts.</p>
+            <p>Freud theorized a tripartite model of the psyche: the <em>Id</em> (primitive, operating on the pleasure principle), the <em>Superego</em> (the moral conscience internalized from society), and the <em>Ego</em> (the rational mediator operating on reality). When conflicts overwhelm the Ego, the mind deploys unconscious "defense mechanisms" (like denial or projection) to cope with anxiety. Psychoanalysts use methods like dream interpretation, free association, and analyzing "Freudian slips" to bring these hidden conflicts into conscious awareness to heal mental distress.</p>
+
+            <h4>2. Behaviourism</h4>
+            <p>Pioneered by John B. Watson and later perfected by B.F. Skinner, Behaviorism emerged in the early 20th century as a direct rebellion against the subjective, unscientific methods of introspection and psychoanalysis. Behaviorists argued that for psychology to be a true, rigorous science, it must discard the unobservable "mind" and focus exclusively on <strong>observable, measurable behavior</strong>.</p>
+            <p>Behaviorists posited that humans are born as "blank slates" (Tabula Rasa) and that all complex human behavior is entirely learned through interaction with the environment. They focused on <em>Conditioning</em> as the sole mechanism of behavior. This includes Classical Conditioning (learning involuntary responses through association) and Operant Conditioning (learning voluntary behaviors through rewards and punishments). Behaviorism brought immense scientific rigor to psychology and laid the foundation for modern behavioral therapy.</p>
+        </div>
+
+        <!-- QUESTION 3 -->
+        <div id="q3" class="card">
+            <h2>Q3. (a) What are the cognitive processes? Elaborate the types of cognitive processes. <br>(b) Explain the process of perception in detail.</h2>
+            
+            <h3>(a) Cognitive Processes and Their Types</h3>
+            <p><strong>Cognitive processes</strong> are the complex internal mental activities that our brains perform to acquire, process, store, and utilize information. If the brain is considered the physical hardware, cognitive processes represent the software running on it. These processes are essential for professional success, continuous learning, and navigating everyday life. The major types include:</p>
+            <ul>
+                <li><strong>Sensation and Perception:</strong> Sensation is the passive intake of raw data through our sensory organs. Perception is the brain's cognitive process of organizing and interpreting this data to recognize objects, people, and complex situations.</li>
+                <li><strong>Attention:</strong> The critical ability to selectively focus mental resources on specific information while actively tuning out and ignoring surrounding distractions. Without attention, deeper processing and learning cannot occur.</li>
+                <li><strong>Memory:</strong> The cognitive system responsible for encoding, storing, and retrieving past experiences, facts, and skills. It ranges from brief short-term memory to lifelong long-term memory.</li>
+                <li><strong>Language Processing:</strong> The advanced ability to understand, interpret, construct, and produce speech or written words, enabling complex human communication.</li>
+                <li><strong>Problem-Solving & Decision Making:</strong> Problem-solving is the systematic process of finding solutions to new or difficult challenges. Decision-making is the process of evaluating options and choosing the best course of action based on logic and reasoning.</li>
+                <li><strong>Thinking & Reasoning:</strong> Analyzing information, forming new concepts, drawing logical conclusions, and innovating.</li>
+                <li><strong>Metacognition:</strong> Often defined as "thinking about thinking." It is the ability to reflect on one's own cognitive processes and learning strategies, leading to heightened self-awareness and improved performance.</li>
+            </ul>
+
+            <h3>(b) The Process of Perception in Detail</h3>
+            <p>Perception is the active psychological process of making sense of the raw sensory data we receive from the environment. It is how we construct our conscious reality. The process of perception unfolds continuously in three distinct steps:</p>
+            <ol>
+                <li><strong>Selection (Attention):</strong> At any given moment, our sensory organs are bombarded by an overwhelming amount of environmental stimuli (sights, sounds, smells). Because the brain has limited processing capacity, it engages in <em>selective attention</em>. It filters out irrelevant background noise and selects only the most crucial details to focus on. Selection is driven by external factors (e.g., a loud siren, bright colors) and internal factors (e.g., our current needs, motives, and emotional state).</li>
+                <li><strong>Organization:</strong> The selected sensory signals do not remain as chaotic fragments; the brain rapidly and automatically organizes them into cohesive, structured patterns. This step relies heavily on Gestalt principles, where the brain groups information based on similarity, physical proximity, continuity, and closure to form whole, recognizable objects (like seeing a face instead of isolated eyes, a nose, and a mouth).</li>
+                <li><strong>Interpretation:</strong> After organizing the pattern, the brain must assign it <em>meaning</em>. Interpretation is highly subjective and explains why different people perceive the exact same situation differently. The brain interprets patterns by cross-referencing them against our past experiences, acquired knowledge, cultural background, and our expectations (perceptual set). For instance, an ambiguous wave from a distance might be interpreted as a friendly greeting or a warning to stay away, depending on the context and the perceiver's past experiences.</li>
+            </ol>
+        </div>
+
+        <!-- QUESTION 4 -->
+        <div id="q4" class="card">
+            <h2>Q4. (a) Illustrate any two principles of perceptual organization with neat sketches. <br>(b) List the factors affecting the perceptual organization.</h2>
+            
+            <h3>(a) Principles of Perceptual Organization (Gestalt Principles)</h3>
+            <p>Gestalt psychologists discovered that our brains naturally and automatically organize sensory information into meaningful "wholes" rather than perceiving them as separate, disjointed parts. Below are two key principles illustrated:</p>
+
+            <h4>1. Principle of Similarity</h4>
+            <p>This principle dictates that our brain naturally groups elements together that share visually similar characteristics, such as color, shape, or size. In the sketch below, rather than perceiving 6 completely independent objects, our brain immediately organizes them into one horizontal row of circles and one horizontal row of squares.</p>
+            
+            <div class="sketch-box">
+                <div class="sketch-row">
+                    <div class="shape-circle"></div>
+                    <div class="shape-circle"></div>
+                    <div class="shape-circle"></div>
+                </div>
+                <div class="sketch-row">
+                    <div class="shape-square"></div>
+                    <div class="shape-square"></div>
+                    <div class="shape-square"></div>
+                </div>
+            </div>
+
+            <h4>2. Principle of Proximity (Nearness)</h4>
+            <p>This principle states that objects situated physically close to one another are perceived as belonging to the same group or unit. In the sketch below, we do not perceive 6 isolated dots spread across space. Instead, because of the tight spacing, our brain effortlessly organizes them into 3 distinct, separate pairs.</p>
+
+            <div class="sketch-box">
+                <div class="prox-container">
+                    <div class="prox-group">
+                        <div class="shape-circle"></div>
+                        <div class="shape-circle"></div>
+                    </div>
+                    <div class="prox-group">
+                        <div class="shape-circle"></div>
+                        <div class="shape-circle"></div>
+                    </div>
+                    <div class="prox-group">
+                        <div class="shape-circle"></div>
+                        <div class="shape-circle"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>(b) Factors Affecting Perceptual Organization</h3>
+            <p>The way we perceive, group, and organize information is not identical for everyone. It is heavily modulated by a combination of internal and external factors:</p>
+            <ul>
+                <li><strong>Past Experiences and Knowledge:</strong> What we have encountered and learned previously fundamentally dictates how we interpret new or ambiguous stimuli.</li>
+                <li><strong>Expectations (Perceptual Set):</strong> If we strongly anticipate seeing or hearing a specific thing, our brain will actively construct our perception to align with that expectation (e.g., waiting for a friend and mistaking a stranger for them).</li>
+                <li><strong>Needs and Motivation:</strong> Our current physiological or psychological drives alter perception. For example, a starving person is significantly more likely to notice food advertisements than a fully fed person.</li>
+                <li><strong>Emotions and Mood:</strong> Strong emotions distort perception. Intense fear can cause a person to organize the visual shape of a harmless shadow into a threatening figure. A positive mood makes neutral faces appear friendly.</li>
+                <li><strong>Cultural Background:</strong> Different cultures organize and interpret colors, symbols, gestures, and social cues in drastically different ways.</li>
+                <li><strong>External Stimulus Factors:</strong> The physical characteristics of the stimulus itself—such as <em>intensity</em> (brightness/loudness), <em>size</em>, <em>contrast</em>, and <em>movement</em>—naturally command attention and force specific perceptual grouping.</li>
+            </ul>
+        </div>
+
+        <!-- QUESTION 5 -->
+        <div id="q5" class="card">
+            <h2>Q5. (a) What is learning? Elaborate the conditions of observation learning. <br>(b) Explain Pavlov's experiment on classical conditioning in detail.</h2>
+            
+            <h3>(a) Definition of Learning and Observational Learning</h3>
+            <p><strong>Learning</strong> is formally defined in psychology as a relatively permanent change in an organism's behavior, knowledge, or capability that occurs as a direct result of experience, practice, or observation. It explicitly excludes transient changes caused by illness, fatigue, drugs, or natural biological maturation.</p>
+            
+            <p><strong>Conditions of Observational Learning:</strong> Pioneered by psychologist Albert Bandura (Social Learning Theory), observational learning posits that individuals can acquire new, complex behaviors simply by watching a "model" perform them, without needing direct reinforcement. For this learning to effectively manifest as behavior, four sequential cognitive conditions must be met:</p>
+            <ol>
+                <li><strong>Attention:</strong> The learner must actively pay close, deliberate attention to the model's behavior and the resulting consequences. If distracted, the behavior cannot be cognitively processed. Models who are attractive, authoritative, or relatable command the most attention.</li>
+                <li><strong>Retention:</strong> The learner must possess the memory capacity to store a mental representation of the observed behavior. Without cognitive retention, the learner cannot replicate the action once the model departs.</li>
+                <li><strong>Reproduction:</strong> The learner must possess the necessary physical and mental capabilities to translate the stored memory into actual physical action. (e.g., You can memorize an Olympic gymnastics routine, but lack the physical ability to reproduce it).</li>
+                <li><strong>Motivation:</strong> The learner must have a strong desire or incentive to perform the behavior. This is typically fueled by <em>vicarious reinforcement</em>—seeing the model receive a reward for their actions. If the model was severely punished, motivation to reproduce the action drops to zero.</li>
+            </ol>
+
+            <h3>(b) Pavlov's Experiment on Classical Conditioning</h3>
+            <p>Ivan Pavlov, a Nobel Prize-winning Russian physiologist, accidentally discovered the principles of <strong>Classical Conditioning</strong> while studying canine digestion. Classical conditioning is an associative learning process where an organism learns to connect a neutral environmental stimulus with a naturally occurring biological stimulus.</p>
+            <p><strong>Detailed Breakdown of the Experiment:</strong></p>
+            <ul>
+                <li><strong>Before Conditioning:</strong> Pavlov observed that dogs naturally salivated when presented with meat powder. The food is the <em>Unconditioned Stimulus (UCS)</em> because it naturally, automatically, and unpreventably triggers a response. The resulting salivation is the <em>Unconditioned Response (UCR)</em>. Pavlov then introduced a ringing bell. The bell produced no salivation; it was merely a <em>Neutral Stimulus (NS)</em>.</li>
+                <li><strong>During Conditioning (The Acquisition Phase):</strong> Over consecutive trials, Pavlov rigorously paired the two stimuli. He rang the bell immediately before presenting the meat powder. The dogs salivated at the food. Over time, the dogs' brains began to forge a powerful neural association between the sound of the bell and the imminent arrival of food.</li>
+                <li><strong>After Conditioning:</strong> Eventually, Pavlov rang the bell without presenting any food at all. The dogs began to salivate profusely solely at the sound of the bell. Through learning, the bell had transformed from a neutral stimulus into a <em>Conditioned Stimulus (CS)</em>. The salivation triggered by the bell became a <em>Conditioned Response (CR)</em>. The dogs had successfully learned a new, involuntary reflex.</li>
+            </ul>
+        </div>
+
+        <!-- QUESTION 6 -->
+        <div id="q6" class="card">
+            <h2>Q6. (a) Explain B.F. Skinner's experiment of reinforcement and punishment. <br>(b) Explain the role of nature in classical conditioning.</h2>
+            
+            <h3>(a) B.F. Skinner's Experiment on Reinforcement and Punishment</h3>
+            <p>B.F. Skinner, a radical behaviorist, developed the theory of <strong>Operant Conditioning</strong>. While classical conditioning deals with involuntary reflexes, operant conditioning explains how <em>voluntary</em> behavior is acquired. Skinner proposed that voluntary behavior is shaped, maintained, or extinguished entirely by the consequences that immediately follow it.</p>
+            <p><strong>The Skinner Box Experiment:</strong> To rigorously test his theories, Skinner designed an apparatus called the "Operant Conditioning Chamber" (or Skinner Box). It contained a lever, a food dispenser, and an electrified floor grid. When a hungry rat was placed inside, it would explore randomly until it accidentally pressed the lever. Immediately, a food pellet dropped into the box. The rat rapidly learned the association: the voluntary action of pressing the lever reliably resulted in a highly positive consequence (food). Consequently, the frequency of lever-pressing behavior skyrocketed.</p>
+            <p>From countless experiments, Skinner defined four primary mechanisms of behavioral control. In operant conditioning, "Positive" strictly means adding a stimulus, while "Negative" strictly means removing a stimulus:</p>
+            <div class="grid-2">
+                <div>
+                    <h4>Reinforcement (Always Increases Behavior)</h4>
+                    <ul>
+                        <li><strong>Positive Reinforcement:</strong> <em>Adding</em> a desirable or pleasant stimulus immediately after a behavior to encourage it to happen again. (e.g., The rat gets food for pressing the lever; an employee receives a massive bonus for hard work).</li>
+                        <li><strong>Negative Reinforcement:</strong> <em>Removing</em> an undesirable, painful, or annoying stimulus to encourage a behavior. (e.g., The rat presses the lever to turn off the painful electrified floor grid; putting on a seatbelt to stop a car's annoying alarm).</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Punishment (Always Decreases Behavior)</h4>
+                    <ul>
+                        <li><strong>Positive Punishment:</strong> <em>Adding</em> an undesirable or painful stimulus after a behavior to stop it from occurring again. (e.g., Delivering an electric shock when the rat presses the lever; a police officer giving a driver a speeding ticket).</li>
+                        <li><strong>Negative Punishment:</strong> <em>Removing</em> a desirable or pleasant stimulus to extinguish a behavior. (e.g., Removing the rat's food supply; confiscating a teenager's smartphone for breaking curfew rules).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>(b) The Role of Nature in Classical Conditioning</h3>
+            <p>In the framework of classical conditioning, the "role of nature" refers to the deep biological, innate, and unlearned reflexes that an organism is genetically born with. Classical conditioning is not magic; it cannot create entirely new behaviors out of thin air. Instead, it relies completely on exploiting these pre-existing, natural biological mechanisms.</p>
+            <p>The <strong>Unconditioned Stimulus (UCS)</strong> and the <strong>Unconditioned Response (UCR)</strong> represent pure "nature." For instance, a dog naturally salivating at the smell of meat, a human instantly pulling their hand away from a burning hot stove, or an eye automatically blinking when a puff of air hits it are all unlearned, hardwired survival mechanisms provided by nature. Classical conditioning merely takes an artificial, neutral stimulus (like a bell, a light, or a specific word) and pairs it with these potent natural reflexes. Over time, the brain learns to substitute the neutral stimulus for the natural one. Thus, nature provides the essential, biological reflex foundation upon which all classical conditioning associations are built. Furthermore, concepts like "biological preparedness" dictate that nature makes it much easier to condition humans to fear natural threats (like snakes or heights) than artificial objects (like flowers or doors).</p>
+        </div>
+
+        <!-- QUESTION 7 -->
+        <div id="q7" class="card">
+            <h2>Q7. (a) What is memory? Explain the three processes of memory in detail. <br>(b) Briefly describe the three key aspects of short-term memory.</h2>
+            
+            <h3>(a) Definition and Three Processes of Memory</h3>
+            <p><strong>Memory</strong> is a highly complex, dynamic cognitive system that allows the human brain to encode, store, retain, and subsequently retrieve information and past experiences. It is the absolute cornerstone of learning, complex decision-making, and human identity. Without memory, we would be incapable of acquiring language, recognizing loved ones, or developing a continuous sense of self across time. Memory operates somewhat similarly to a computer's information processing system, functioning through three distinct but heavily interconnected stages:</p>
+            <ol>
+                <li><strong>Encoding (Data Entry):</strong> This is the crucial, initial step where raw sensory information (visual sights, auditory sounds, complex meanings) is transformed into a neural code or format that the brain can process and accept into its storage system. Encoding is heavily dependent on attention. If you do not actively pay attention to information, it is never properly encoded and therefore cannot be remembered later.</li>
+                <li><strong>Storage (Saving the Data):</strong> Once properly encoded, the information must be retained and maintained over time. Storage is a dynamic biological process where memories are consolidated and reorganized within neural networks in the brain. Depending on the type of memory, information can be stored briefly (for a fraction of a second or a few minutes) or permanently (for an entire lifetime).</li>
+                <li><strong>Retrieval (Opening the File):</strong> This is the final, essential process of locating the stored neural information and bringing it back into conscious awareness so it can be utilized. Retrieval can be intentional and effortful (such as actively trying to recall a mathematical formula during an exam) or spontaneous and involuntary (such as a specific scent suddenly triggering a vivid, emotional childhood memory).</li>
+            </ol>
+
+            <h3>(b) Three Key Aspects of Short-Term Memory (STM)</h3>
+            <p>Short-Term Memory (often referred to as working memory) is the active, temporary part of the memory system that holds the information we are currently thinking about or consciously processing. Its three primary characteristics are:</p>
+            <ul>
+                <li><strong>Limited Capacity:</strong> Unlike long-term memory, STM can only hold a very small, restricted amount of information at one time. Renowned cognitive psychologist George Miller famously identified this strict capacity limit as the "Magic Number 7" (plus or minus 2 items). This limitation is the historical reason why telephone numbers were typically designed to be 7 digits long.</li>
+                <li><strong>Brief Duration:</strong> Information stored in STM decays exceptionally fast. Without active mental repetition or manipulation, data stored in STM will naturally fade and be permanently lost in approximately 15 to 30 seconds.</li>
+                <li><strong>Maintenance Rehearsal:</strong> Because of its highly brief duration, the primary mechanism to keep information alive in STM is through active maintenance rehearsal (e.g., repeating an OTP code out loud over and over until you type it in). If this active rehearsal loop is interrupted by a distraction, the information is instantly forgotten before it has a chance to consolidate into long-term memory.</li>
+            </ul>
+        </div>
+
+        <!-- QUESTION 8 -->
+        <div id="q8" class="card">
+            <h2>Q8. (a) What is sensory memory? Describe any two types of sensory memory in detail. <br>(b) Write a brief note on explicit memory.</h2>
+            
+            <h3>(a) Sensory Memory and Its Types</h3>
+            <p><strong>Sensory Memory</strong> is the very first, ultra-short-term stage of the human memory system. It acts as a rapid buffer or holding bin, briefly capturing an exact, perfect, high-resolution copy of raw sensory information just long enough for the brain to decide if it is important enough to warrant further attention. If the brain decides the information is not important, it is immediately discarded and forgotten. It operates largely outside of conscious control. The two primary, most heavily researched types of sensory memory are:</p>
+            <ul>
+                <li><strong>Iconic Memory (Visual Sensory Memory):</strong> This is an incredibly brief visual record of what you have just seen. It holds a perfect photographic image of the visual world, but it decays almost instantaneously, lasting for only a fraction of a second (typically about 0.25 to 0.5 seconds). It provides a smooth, continuous visual experience rather than a series of choppy frames. Iconic memory is the reason why moving a sparkler rapidly in the dark leaves a continuous visual "trail" of light in our eyes.</li>
+                <li><strong>Echoic Memory (Auditory Sensory Memory):</strong> This is a brief, precise audio record of what you have just heard. It lasts slightly longer than iconic memory, typically lingering for about 2 to 4 seconds. Echoic memory acts like a mental echo. It is absolutely crucial for speech comprehension; it allows you to hear, hold, and process the end of a spoken sentence while the beginning of the sentence is still echoing in your mind, allowing you to piece the meaning together.</li>
+            </ul>
+
+            <h3>(b) Brief Note on Explicit Memory</h3>
+            <p><strong>Explicit Memory</strong> (also technically known as Declarative Memory) is a primary category of long-term memory. It involves the conscious, intentional, and effortful recollection of factual information, previous experiences, and complex concepts. You have to actively "declare" or think about these memories to bring them into your conscious awareness. Explicit memory is further divided into two highly specialized sub-categories:</p>
+            <ul>
+                <li><strong>Episodic Memory:</strong> This is the autobiographical, chronological record of personal life events and experiences tied to specific times, places, and emotions. (e.g., Remembering exactly what happened at your 18th birthday party, your first day at college, or the emotional experience of your first job interview).</li>
+                <li><strong>Semantic Memory:</strong> This is the structured, encyclopedic record of general world knowledge, facts, rules, words, and concepts that are not tied to a specific personal timeline or emotional event. (e.g., Knowing that New Delhi is the capital of India, understanding the definition of a psychological term, or knowing that 2 + 2 = 4).</li>
+            </ul>
+        </div>
+
+        <!-- QUESTION 9 -->
+        <div id="q9" class="card">
+            <h2>Q9. (a) Explain the application of psychology in science and engineering. <br>(b) Write a brief note on any two senses.</h2>
+            
+            <h3>(a) Application of Psychology in Science and Engineering</h3>
+            <p>Modern psychology heavily intersects with hard sciences and technical engineering fields to create safer, more efficient systems that harmonize with human cognitive limitations, physical abilities, and psychological needs. Key applications include:</p>
+            <ul>
+                <li><strong>Human Factors & Cognitive Engineering:</strong> Psychologists collaborate intensely with hardware and software engineers to design intuitive, user-friendly interfaces. They apply principles of "Ergonomics" to design physical workspaces that significantly reduce worker fatigue and physical injury. Furthermore, by studying human attention spans, perceptual limits, and distraction, they design advanced decision-support systems that minimize catastrophic human errors in high-stakes environments like nuclear power plants or air traffic control.</li>
+                <li><strong>Aerospace Engineering:</strong> Psychologists study pilot behavior, visual perception illusions, and rapid decision-making under extreme stress to develop superior flight training simulators. They also deeply investigate "spaceflight psychology"—understanding the severe psychological toll of isolation, confinement, and altered sleep cycles on astronauts. This research helps aerospace engineers design safer, more comfortable spacecraft interiors for long-duration orbital missions.</li>
+                <li><strong>Biomedical Engineering:</strong> Psychologists assist in designing highly intuitive medical devices and surgical equipment that minimize the likelihood of user error by stressed doctors and nurses. They also play a major role in rehabilitation engineering, aiding in the development of assistive technologies, brain-computer interfaces, and advanced prosthetics that adapt seamlessly to the psychological and physical needs of patients with severe disabilities.</li>
+                <li><strong>Artificial Intelligence (AI):</strong> Psychologists work hand-in-hand with computer scientists to develop AI and Machine Learning models that process information logically, mimic human problem-solving safely, and remain transparent and free of embedded human cognitive biases.</li>
+            </ul>
+
+            <h3>(b) Brief Note on Two Senses (Vision and Hearing)</h3>
+            <p>Our senses provide critical information about the environment, initiating the process of perception. Two of the most heavily relied upon senses are:</p>
+            <ul>
+                <li><strong>Vision (Sense of Sight):</strong> Considered the most dominant human sense, vision is triggered by physical light waves (photons) entering the eye. The cornea and lens focus this light onto the <em>retina</em> at the back of the eye. Here, sensory transduction occurs: specialized photoreceptor cells known as rods (responsible for dim light and peripheral vision) and cones (responsible for sharp detail and color vision) convert the light energy into electrical neural signals. These signals are transmitted via the optic nerve to the visual cortex in the brain. Vision is crucial for spatial coordination, reading, pattern recognition, and non-verbal communication.</li>
+                <li><strong>Hearing (Auditory Perception):</strong> Hearing is triggered by mechanical sound waves traveling through the air. These waves enter the ear canal and vibrate the tympanic membrane (eardrum). These vibrations are amplified by three tiny bones in the middle ear and sent into the fluid-filled, snail-shaped <em>cochlea</em> in the inner ear. Tiny hair cells within the cochlea convert the mechanical vibrations into nerve impulses that the brain ultimately interprets as sound. Hearing is vital for speech communication, enjoying music, and acting as a 360-degree alarm system to alert us to unseen environmental dangers.</li>
+            </ul>
+        </div>
+
+        <!-- QUESTION 10 -->
+        <div id="q10" class="card">
+            <h2>Q10. (a) Discuss the application of learning principles in advertising and education by giving suitable examples. <br>(b) What is forgetting? Briefly explain the interference theory of forgetting.</h2>
+            
+            <h3>(a) Application of Learning Principles in Advertising and Education</h3>
+            <p>Core psychological learning principles—specifically Classical and Operant conditioning—are powerful, proven tools utilized daily to shape and direct human behavior in commercial and academic settings.</p>
+            <ul>
+                <li><strong>In Advertising (Using Classical Conditioning):</strong> Advertisers frequently leverage Pavlov's classical conditioning to make consumers subconsciously desire a product. They take a neutral product (e.g., a new brand of soda or a car) and pair it repeatedly with an Unconditioned Stimulus that naturally evokes strong positive emotions (e.g., a highly attractive celebrity, breathtaking scenery, humor, or a popular catchy song). Over time, the consumer's brain neurologically associates the positive feelings with the product. Eventually, simply seeing the soda logo (Conditioned Stimulus) triggers a positive emotional urge or happiness (Conditioned Response), heavily influencing purchasing decisions.</li>
+                <li><strong>In Education (Using Operant Conditioning):</strong> Teachers heavily rely on B.F. Skinner's operant conditioning to manage classroom behavior, shape habits, and encourage academic success. They use <em>Positive Reinforcement</em> (giving gold stars, high grades, certificates, or verbal praise) to significantly increase the likelihood of students studying hard and participating. Conversely, they may use <em>Positive Punishment</em> (giving detention or assigning extra homework) to decrease disruptive classroom behavior. They might also use <em>Negative Reinforcement</em>, such as exempting a student from a final exam if they maintain perfect attendance, thereby increasing the behavior of coming to class.</li>
+            </ul>
+
+            <h3>(b) Forgetting and the Interference Theory</h3>
+            <p><strong>Forgetting</strong> is defined in cognitive psychology as the apparent loss, modification, or inability to successfully retrieve previously encoded and stored information from short-term or long-term memory. Rather than being a failure of the brain, forgetting is an essential, highly adaptive process that prevents the brain from being overwhelmingly cluttered with useless, outdated data, allowing it to function efficiently and focus on current, vital information.</p>
+            <p>While some memories naturally decay over time, the <strong>Interference Theory</strong> proposes that we forget not because the memory is physically erased, but because <em>other</em> memories get in the way and aggressively block the retrieval pathway. The more similar the memories are, the stronger the interference will be. This interference occurs in two specific directions:</p>
+            <ul>
+                <li><strong>Proactive Interference (Forward-Acting):</strong> This occurs when <em>older</em>, previously learned memories strongly interfere with your ability to learn and successfully retrieve <em>newer</em> information. The old memories aggressively push forward and block the new ones. 
+                    <br><em>Example:</em> You change your email or bank account password. For the next two weeks, you keep accidentally typing in your OLD password when trying to log in, completely forgetting the NEW one. The deeply ingrained old memory is proactively interfering with the new data.
+                </li>
+                <br>
+                <li><strong>Retroactive Interference (Backward-Acting):</strong> This occurs when <em>newer</em>, recently learned memories interfere with your ability to retrieve <em>older</em>, previously solid information. The new learning reaches backward and disrupts the old storage.
+                    <br><em>Example:</em> You move to a new city and get a new phone number. After using the new phone number every day for six months, someone asks you what your old hometown phone number used to be. You find that the new number has completely overwritten or blocked the old one, and you can no longer remember it.
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Script to Handle Hamburger Menu -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const overlay = document.getElementById('overlay');
+        const navLinks = navMenu.querySelectorAll('a');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('open');
+            navMenu.classList.toggle('open');
+            
+            if (overlay.classList.contains('open')) {
+                overlay.classList.remove('open');
+            } else {
+                overlay.classList.add('open');
+            }
+        }
+
+        // Event Listeners
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+    </script>
+
+</body>
+</html>

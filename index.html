@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sem 2 Academic Hub — B.Tech CSE</title>
+    <meta name="description" content="Unified academic resource portal for B.Tech Semester 2 — Physics, CAO, MFCS, Python, Psychology & more.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #f0f2f5; --bg-card: #ffffff; --bg-nav: rgba(255,255,255,0.85);
+            --text: #1a1a2e; --text-sub: #64748b; --text-muted: #94a3b8;
+            --border: #e2e8f0; --shadow: 0 4px 24px rgba(0,0,0,0.06);
+            --accent-1: #6366f1; --accent-2: #8b5cf6; --accent-3: #ec4899;
+            --gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg); color: var(--text);
+            line-height: 1.6; min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+        }
+
+        /* === NAV === */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: var(--bg-nav); backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem; height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.25rem; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 0.25rem; }
+        .nav-links a {
+            padding: 0.5rem 0.9rem; border-radius: 8px; font-size: 0.82rem; font-weight: 600;
+            color: var(--text-sub); text-decoration: none; transition: all 0.2s;
+        }
+        .nav-links a:hover { background: #f1f5f9; color: var(--text); }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; transition: 0.3s; }
+        /* === SIDEBAR === */
+        .sidebar {
+            width: 260px; background: var(--bg-card); border-right: 1px solid var(--border);
+            height: calc(100vh - 64px); position: fixed; top: 64px; left: 0;
+            overflow-y: auto; padding: 1.5rem 1rem; z-index: 90;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sidebar::-webkit-scrollbar { width: 6px; }
+        .sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .main-wrapper { margin-left: 260px; transition: margin 0.3s; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        .sidebar-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; margin-bottom: 0.5rem; padding-left: 0.5rem; margin-top: 1rem; }
+        .sidebar-title:first-child { margin-top: 0; }
+        
+        .accordion-item { margin-bottom: 0.25rem; }
+        .accordion-btn {
+            width: 100%; text-align: left; background: none; border: none;
+            padding: 0.75rem 1rem; font-size: 0.9rem; font-weight: 600; color: var(--text);
+            border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; transition: background 0.2s;
+        }
+        .accordion-btn:hover { background: #f1f5f9; }
+        .accordion-btn.active { background: rgba(99,102,241,0.1); color: var(--accent-1); }
+        .chevron { transition: transform 0.3s; font-size: 0.8rem; }
+        .accordion-btn.active .chevron { transform: rotate(180deg); }
+        
+        .accordion-content {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+            padding-left: 0.5rem;
+        }
+        .accordion-content a {
+            display: block; padding: 0.5rem 1rem; font-size: 0.85rem; color: var(--text-sub);
+            text-decoration: none; border-radius: 6px; margin: 0.15rem 0; transition: all 0.2s;
+            border-left: 2px solid transparent; font-weight: 500;
+        }
+        .accordion-content a:hover { color: var(--accent-1); background: #f8fafc; border-left-color: var(--accent-1); }
+
+        @media (max-width: 900px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
+            .main-wrapper { margin-left: 0; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+        }
+
+        /* === HERO === */
+        .hero {
+            margin-top: 64px; padding: 5rem 2rem 3rem;
+            text-align: center; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #ede9fe 0%, #e0e7ff 30%, #fce7f3 70%, #fdf2f8 100%);
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(99,102,241,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(168,85,247,0.08) 0%, transparent 50%);
+            animation: heroPulse 8s ease-in-out infinite alternate;
+        }
+        @keyframes heroPulse { 0% { transform: scale(1) rotate(0deg); } 100% { transform: scale(1.05) rotate(2deg); } }
+        .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(99,102,241,0.1); color: var(--accent-1);
+            padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600;
+            margin-bottom: 1.5rem; border: 1px solid rgba(99,102,241,0.2);
+        }
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800; line-height: 1.15; margin-bottom: 1rem;
+            background: linear-gradient(135deg, #1e1b4b, #4338ca, #7c3aed);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 1.1rem; color: var(--text-sub); max-width: 520px; margin: 0 auto 2rem; }
+
+        /* === GRID === */
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700;
+            margin-bottom: 0.5rem; color: var(--text);
+        }
+        .section-sub { color: var(--text-sub); font-size: 0.95rem; margin-bottom: 2rem; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--bg-card); border-radius: 16px; padding: 1.75rem;
+            border: 1px solid var(--border); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer; text-decoration: none; color: inherit; display: flex; flex-direction: column;
+            position: relative; overflow: hidden;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: var(--card-accent, var(--gradient)); opacity: 0; transition: opacity 0.3s;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); border-color: transparent; }
+        .card:hover::before { opacity: 1; }
+
+        .card-icon {
+            width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; margin-bottom: 1rem;
+        }
+        .card-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem; margin-bottom: 0.4rem; }
+        .card-desc { font-size: 0.85rem; color: var(--text-sub); line-height: 1.5; flex: 1; }
+        .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+        .card-tag {
+            font-size: 0.7rem; font-weight: 600; padding: 0.25rem 0.6rem;
+            border-radius: 6px; background: #f1f5f9; color: var(--text-sub);
+        }
+        .card-arrow {
+            position: absolute; top: 1.5rem; right: 1.5rem; width: 32px; height: 32px;
+            border-radius: 8px; background: #f8fafc; display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); transition: all 0.3s; font-size: 1rem;
+        }
+        .card:hover .card-arrow { background: var(--accent-1); color: white; transform: translate(2px, -2px); }
+
+        /* Accent colors per card */
+        .card-physics { --card-accent: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .card-physics .card-icon { background: #eff6ff; color: #2563eb; }
+        .card-physics .card-tag { background: #eff6ff; color: #2563eb; }
+
+        .card-cao { --card-accent: linear-gradient(90deg, #f59e0b, #fbbf24); }
+        .card-cao .card-icon { background: #fffbeb; color: #d97706; }
+        .card-cao .card-tag { background: #fffbeb; color: #d97706; }
+
+        .card-mfcs { --card-accent: linear-gradient(90deg, #10b981, #34d399); }
+        .card-mfcs .card-icon { background: #ecfdf5; color: #059669; }
+        .card-mfcs .card-tag { background: #ecfdf5; color: #059669; }
+
+        .card-python { --card-accent: linear-gradient(90deg, #3b82f6, #06b6d4); }
+        .card-python .card-icon { background: #f0f9ff; color: #0284c7; }
+        .card-python .card-tag { background: #f0f9ff; color: #0284c7; }
+
+        .card-psych { --card-accent: linear-gradient(90deg, #ec4899, #f472b6); }
+        .card-psych .card-icon { background: #fdf2f8; color: #db2777; }
+        .card-psych .card-tag { background: #fdf2f8; color: #db2777; }
+
+        .card-papers { --card-accent: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+        .card-papers .card-icon { background: #f5f3ff; color: #7c3aed; }
+        .card-papers .card-tag { background: #f5f3ff; color: #7c3aed; }
+
+
+
+        .card-back { --card-accent: linear-gradient(90deg, #ef4444, #f87171); }
+        .card-back .card-icon { background: #fef2f2; color: #dc2626; }
+        .card-back .card-tag { background: #fef2f2; color: #dc2626; }
+
+        /* === QUICK LINKS === */
+        .quick-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem;
+        }
+        .quick-link {
+            display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1rem;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            text-decoration: none; color: var(--text); font-size: 0.85rem; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .quick-link:hover { border-color: var(--accent-1); background: #fafafe; transform: translateY(-1px); }
+        .quick-link span:first-child { font-size: 1.2rem; }
+
+        /* === FOOTER === */
+        footer {
+            text-align: center; padding: 2.5rem 2rem; color: var(--text-muted);
+            font-size: 0.82rem; border-top: 1px solid var(--border);
+        }
+        footer a { color: var(--accent-1); text-decoration: none; }
+
+        /* Smooth entrance */
+        .fade-up { opacity: 0; transform: translateY(20px); }
+        .fade-up.visible { animation: fadeUp 0.6s ease forwards; }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; } .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; } .delay-8 { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">Sem 2 Hub</div>
+        <div class="nav-links">
+            <a href="home.html#subjects" target="content-frame">Subjects</a>
+            <a href="home.html#papers" target="content-frame">Papers</a>
+            <a href="home.html#resources" target="content-frame">Resources</a>
+        </div>
+        <button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-title">Core Subjects</div>
+        
+        <!-- Physics -->
+        <div class="accordion-item">
+            <button class="accordion-btn" onclick="this.classList.toggle('active'); this.nextElementSibling.style.maxHeight = this.classList.contains('active') ? this.nextElementSibling.scrollHeight + 'px' : '0'">
+                Physics <span class="chevron">▼</span>
+            </button>
+            <div class="accordion-content">
+                <a href="Physics/physics.html" target="content-frame">Notes & Tutorials</a>
+                <a href="Physics/numericals.html" target="content-frame">Numericals</a>
+                <a href="sem 2 papers.html#paper-physics" target="content-frame">End-Sem Paper</a>
+                <a href="back papers.html#physics-back" target="content-frame">Back Paper</a>
+                <a href="Physics/physics back.html" target="content-frame">Back Solutions</a>
+                <a href="cts papers.html#paper-physics" target="content-frame">CT Papers</a>
+            </div>
+        </div>
+
+        <!-- CAO -->
+        <div class="accordion-item">
+            <button class="accordion-btn" onclick="this.classList.toggle('active'); this.nextElementSibling.style.maxHeight = this.classList.contains('active') ? this.nextElementSibling.scrollHeight + 'px' : '0'">
+                Computer Arch. <span class="chevron">▼</span>
+            </button>
+            <div class="accordion-content">
+                <a href="CAO/CAO short notes.html" target="content-frame">Short Notes</a>
+                <a href="CAO/CAO.html" target="content-frame">Exam Solutions</a>
+                <a href="sem 2 papers.html#paper-cao" target="content-frame">End-Sem Paper</a>
+                <a href="back papers.html#cao-back" target="content-frame">Back Paper</a>
+                <a href="CAO/CAO back.html" target="content-frame">Back Solutions</a>
+                <a href="cts papers.html#paper-cao" target="content-frame">CT Papers</a>
+            </div>
+        </div>
+
+        <!-- MFCS -->
+        <div class="accordion-item">
+            <button class="accordion-btn" onclick="this.classList.toggle('active'); this.nextElementSibling.style.maxHeight = this.classList.contains('active') ? this.nextElementSibling.scrollHeight + 'px' : '0'">
+                MFCS <span class="chevron">▼</span>
+            </button>
+            <div class="accordion-content">
+                <a href="MFCS/mfcs short notes.html" target="content-frame">Short Notes</a>
+                <a href="MFCS/MFCS.html" target="content-frame">Exam Solutions</a>
+                <a href="MFCS/mfcs ct.html" target="content-frame">CT Solutions</a>
+                <a href="sem 2 papers.html#paper-math" target="content-frame">End-Sem Paper</a>
+            </div>
+        </div>
+
+        <!-- Python -->
+        <div class="accordion-item">
+            <button class="accordion-btn" onclick="this.classList.toggle('active'); this.nextElementSibling.style.maxHeight = this.classList.contains('active') ? this.nextElementSibling.scrollHeight + 'px' : '0'">
+                Python <span class="chevron">▼</span>
+            </button>
+            <div class="accordion-content">
+                <a href="Python/python short notes.html" target="content-frame">Short Notes</a>
+                <a href="Python/python.html" target="content-frame">Exam Solutions</a>
+                <a href="Python/python ct.html" target="content-frame">CT Solutions</a>
+                <a href="sem 2 papers.html#paper-python" target="content-frame">End-Sem Paper</a>
+            </div>
+        </div>
+
+        <!-- Psychology -->
+        <div class="accordion-item">
+            <button class="accordion-btn" onclick="this.classList.toggle('active'); this.nextElementSibling.style.maxHeight = this.classList.contains('active') ? this.nextElementSibling.scrollHeight + 'px' : '0'">
+                Psychology <span class="chevron">▼</span>
+            </button>
+            <div class="accordion-content">
+                <a href="Psychology/psychology short notes.html" target="content-frame">Short Notes</a>
+                <a href="Psychology/pyschology.html" target="content-frame">Exam Solutions</a>
+                <a href="Psychology/psychology prediction.html" target="content-frame">Predictions</a>
+                <a href="sem 2 papers.html#paper-consciousness" target="content-frame">End-Sem Paper</a>
+                <a href="back papers.html#psychology-back" target="content-frame">Back Paper</a>
+                <a href="Psychology/psychology back papers.html" target="content-frame">Back Solutions</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+    <iframe name="content-frame" src="home.html" style="width: 100%; height: calc(100vh - 64px); border: none; display: block; margin-top: 64px;"></iframe>
+    </div>
+
+    <script>
+        // Close sidebar on mobile when a link is clicked
+        document.querySelectorAll('.accordion-content a').forEach(a => {
+            a.addEventListener('click', () => {
+                document.querySelector('.sidebar').classList.remove('open');
+            });
+        });
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { 
+                if (e.isIntersecting) { 
+                    e.target.classList.add('visible'); 
+                    observer.unobserve(e.target);
+                } 
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

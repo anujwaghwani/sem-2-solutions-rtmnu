@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>एक्वाटिक इंटरनेट ऑफ थिंग्स - डैशबोर्ड</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.6.1/justgage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-main: #121212;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary: #0284c7; /* Professional Blue */
+            --success: #10b981; /* Professional Green */
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        body.light-mode {
+            --bg-main: #f9fafb; /* Very light neutral gray */
+            --text-main: #121212; /* Dark grey */
+            --text-muted: #6b7280;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --primary: #0369a1; /* Slightly darker professional blue for light mode */
+        }
+        body.light-mode .chart-card {
+            background: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--glass-border);
+        }
+        body.light-mode .toast-notification {
+            background: rgba(255, 255, 255, 0.98);
+            color: #121212;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-main); color: var(--text-main); line-height: 1.5; }
+        .glass-effect { background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--radius-md); }
+        .dashboard-page { display: flex; height: 100vh; overflow: hidden; }
+        .app-layout { display: flex; flex-direction: column; width: 100%; height: 100%; }
+        .top-nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--glass-border); }
+        .nav-container { display: flex; justify-content: space-between; width: 100%; }
+        .logo-small { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.25rem; }
+        .user-profile { display: flex; align-items: center; gap: 1rem; }
+        .avatar img { width: 32px; height: 32px; border-radius: 50%; }
+        .icon-btn { background: transparent; border: none; color: var(--text-main); cursor: pointer; display: flex; align-items: center; padding: 0.25rem; }
+        .app-body { display: flex; flex: 1; overflow: hidden; }
+        .sidebar-nav { width: 250px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-right: 1px solid var(--glass-border); }
+        .nav-tab { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; background: transparent; border: none; color: var(--text-muted); font-size: 1rem; cursor: pointer; border-radius: var(--radius-sm); transition: all var(--transition-fast); text-align: left; }
+        .nav-tab:hover, .nav-tab.active { background: rgba(255, 255, 255, 0.1); color: var(--text-main); }
+        .badge { background: var(--danger); color: white; padding: 0.1rem 0.4rem; border-radius: 10px; font-size: 0.75rem; margin-left: auto; }
+        .dashboard-main { flex: 1; padding: 2rem; overflow-y: auto; }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .section-header { margin-bottom: 2rem; }
+        .section-header h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .section-header p { color: var(--text-muted); font-size: 0.9rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-card { padding: 1.5rem; display: flex; flex-direction: column; align-items: center; }
+        .primary-btn { background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: background var(--transition-fast); border: 1px solid rgba(255,255,255,0.1); }
+        .primary-btn:hover { background: #0369a1; }
+        .secondary-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-main); padding: 0.5rem 1.25rem; border-radius: var(--radius-sm); cursor: pointer; transition: background var(--transition-fast); }
+        .secondary-btn:hover { background: rgba(255,255,255,0.1); }
+        select option { background-color: var(--bg-main); color: var(--text-main); }
+        .gauge-card { padding: 0.5rem; }
+        .gauge-container { width: 100%; height: 150px; display: flex; justify-content: center; align-items: center; }
+        .gauge-container svg { max-width: 100%; max-height: 100%; filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3)); }
+        .parameter-name { font-size: 1.1rem; font-weight: 600; text-align: center; margin-bottom: 0.5rem; margin-top: -1rem; }
+        .range-indicator { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding-bottom: 0.5rem; background: rgba(0,0,0,0.1); border-radius: 20px; padding: 0.2rem 0.8rem; }
+        .range-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .range-dot.optimal { background: var(--success); }
+        .range-dot.warning { background: var(--warning); }
+        .range-dot.danger { background: var(--danger); }
+        .range-text { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+        .chart-card { background: #ffffff; color: #121212; padding: 1.5rem; border-radius: var(--radius-md); }
+        .chart-container { position: relative; height: 400px; width: 100%; }
+        .reports-list, .alerts-list { display: flex; flex-direction: column; gap: 1rem; }
+        .report-item, .alert-card { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; }
+        .alert-card { align-items: flex-start; gap: 1rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); position: relative; overflow: hidden; }
+        .alert-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+        .alert-card.warning::before { background: var(--warning); }
+        .alert-card.danger::before { background: var(--danger); }
+        .alert-card.info::before { background: var(--info); }
+        .alert-icon { display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; }
+        .alert-card.warning .alert-icon { background: rgba(234, 179, 8, 0.2); color: var(--warning); }
+        .alert-card.danger .alert-icon { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        .alert-card.info .alert-icon { background: rgba(59, 130, 246, 0.2); color: var(--info); }
+        .alert-content { flex: 1; }
+        .alert-content h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .alert-content p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .alert-content .time { font-size: 0.75rem; color: var(--text-muted); opacity: 0.7; }
+        .dismiss-btn { background: transparent; border: none; color: var(--text-muted); cursor: pointer; transition: color 0.2s ease; font-size: 0.875rem; padding: 0.25rem 0.5rem; border-radius: 4px; }
+        .dismiss-btn:hover { color: var(--danger); background: rgba(239, 68, 68, 0.1); text-decoration: none; }
+        .alert-card.dismissing { opacity: 0; transform: translateX(40px); max-height: 0; padding: 0; margin: 0; overflow: hidden; border: none; transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.4s ease 0.1s, padding 0.4s ease 0.1s, margin 0.4s ease 0.1s; }
+        .toast-notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-150%); background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(16px); border: 1px solid var(--danger); border-left: 4px solid var(--danger); box-shadow: 0 10px 40px rgba(239, 68, 68, 0.3); border-radius: var(--radius-sm); padding: 1rem 1.25rem; display: flex; align-items: flex-start; gap: 1rem; z-index: 9999; max-width: 90vw; width: 400px; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .toast-notification.visible { display: flex; }
+        .toast-notification.show { transform: translateX(-50%) translateY(0); }
+        .toast-notification.toast-success { border-color: var(--success); box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3); }
+        .toast-notification.toast-success .toast-icon { color: var(--success); }
+        .toast-notification.toast-success .toast-content h4 { color: var(--success); }
+        .toast-notification.toast-info { border-color: var(--info); box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3); }
+        .toast-notification.toast-info .toast-icon { color: var(--info); }
+        .toast-notification.toast-info .toast-content h4 { color: var(--info); }
+        .toast-icon { color: var(--danger); display: flex; align-items: center; justify-content: center; margin-top: 0.1rem; }
+        .toast-content { flex: 1; }
+        .toast-content h4 { font-size: 1rem; font-weight: 600; color: var(--danger); margin-bottom: 0.25rem; }
+        .toast-content p { font-size: 0.875rem; color: var(--text-main); line-height: 1.4; }
+        .toast-close { background: transparent; border: none; color: var(--text-muted); cursor: pointer; transition: color 0.2s ease; }
+        .toast-close:hover { color: var(--text-main); }
+        .animate-spin { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .hidden { display: none !important; }
+        .action-section { display: flex; justify-content: flex-end; width: 100%; margin-top: 1rem; }
+        .report-item.new-report { animation: slideInReport 0.4s ease forwards; }
+        @keyframes slideInReport { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .download-progress { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 0.5rem; vertical-align: middle; }
+        .logout-btn-styled { background: transparent; border: 1px solid var(--glass-border); color: var(--text-muted); padding: 0.35rem 0.75rem; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-family: 'Inter', sans-serif; transition: all 0.2s ease; display: flex; align-items: center; gap: 0.4rem; }
+        .logout-btn-styled:hover { color: var(--danger); border-color: var(--danger); background: rgba(239, 68, 68, 0.1); }
+    </style>
+</head>
+<body class="dashboard-page">
+    
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-notification hidden">
+        <div class="toast-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+        </div>
+        <div class="toast-content">
+            <h4 id="toastTitle">Alert</h4>
+            <p id="toastMessage">Message goes here</p>
+        </div>
+        <button id="closeToastBtn" class="toast-close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+
+    <div class="app-layout">
+        <!-- Top Navigation -->
+        <nav class="top-nav glass-effect">
+            <div class="nav-container">
+                <div class="logo-small">
+                    <div class="logo-icon-small">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-9 5 18 3-9h5"/></svg>
+                    </div>
+                    <span>एआईओटी डैशबोर्ड</span>
+                </div>
+                <div class="user-profile">
+                    <select id="langSelect" class="secondary-btn" style="padding: 0.25rem 0.5rem; margin-right: 0.5rem; cursor: pointer; max-width: 120px;">
+                        <option value="hi" selected>हिंदी (HI)</option>
+                        <option value="en">English (EN)</option>
+                        <option value="mr">मराठी (MR)</option>
+                    </select>
+                    <span class="greeting">नमस्ते, <strong id="displayUsername">किसान</strong></span>
+                    <button id="themeToggle" class="icon-btn" title="Toggle Theme" style="margin-right: 0.5rem;">
+                        <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+                    </button>
+                    <div class="avatar">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Farmer&backgroundColor=0284c7" alt="User Avatar" id="userAvatar">
+                    </div>
+                    <button id="logoutBtn" class="logout-btn-styled" title="Logout">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                        <span id="logoutText">लॉगआउट</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="app-body">
+            <!-- Sidebar / Bottom Navigation -->
+            <aside class="sidebar-nav glass-effect">
+                <button class="nav-tab active" data-target="realtime">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <span>रियल-टाइम डेटा</span>
+                </button>
+                <button class="nav-tab" data-target="historical">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path></svg>
+                    <span>ऐतिहासिक डेटा</span>
+                </button>
+                <button class="nav-tab" data-target="reports">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <span>अनुकूलित रिपोर्ट</span>
+                </button>
+                <button class="nav-tab" data-target="alerts">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    <span>अलर्ट</span>
+                    <span class="badge">3</span>
+                </button>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="dashboard-main">
+                
+                <!-- Real-Time Data View -->
+                <section id="realtime" class="tab-pane active fade-in">
+                    <header class="section-header">
+                        <h2>रियल-टाइम अवलोकन</h2>
+                        <p>अंतिम अपडेट: अभी-अभी</p>
+                    </header>
+
+                    <div class="stats-grid">
+                        <!-- Dissolved Oxygen -->
+                        <div class="stat-card glass-effect gauge-card">
+                            <div id="gauge-do" class="gauge-container"></div>
+                            <h3 class="parameter-name">घुली हुई ऑक्सीजन</h3>
+                            <div class="range-indicator">
+                                <span class="range-dot optimal"></span>
+                                <span class="range-text">सामान्य: 4 - 7 पीपीएम</span>
+                            </div>
+                        </div>
+
+                        <!-- pH Level -->
+                        <div class="stat-card glass-effect gauge-card">
+                            <div id="gauge-ph" class="gauge-container"></div>
+                            <h3 class="parameter-name">पीएच स्तर</h3>
+                            <div class="range-indicator">
+                                <span class="range-dot optimal"></span>
+                                <span class="range-text">सामान्य: 6.0 - 8.0</span>
+                            </div>
+                        </div>
+
+                        <!-- Water Temperature -->
+                        <div class="stat-card glass-effect gauge-card">
+                            <div id="gauge-temp" class="gauge-container"></div>
+                            <h3 class="parameter-name">जल का तापमान</h3>
+                            <div class="range-indicator">
+                                <span class="range-dot optimal"></span>
+                                <span class="range-text">सामान्य: 25 - 31 °C</span>
+                            </div>
+                        </div>
+
+                        <!-- Turbidity -->
+                        <div class="stat-card glass-effect gauge-card">
+                            <div id="gauge-turbidity" class="gauge-container"></div>
+                            <h3 class="parameter-name">गंदलापन</h3>
+                            <div class="range-indicator">
+                                <span class="range-dot optimal"></span>
+                                <span class="range-text">सामान्य: &lt; 35 %</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-section">
+                        <button class="primary-btn auto-width" id="refreshDataBtn">
+                            <svg id="refreshIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path><path d="M16 21v-5h5"></path></svg>
+                            <span>लाइव डेटा रीफ्रेश करें</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Historical Data View -->
+                <section id="historical" class="tab-pane fade-in">
+                    <header class="section-header">
+                        <h2>ऐतिहासिक डेटा</h2>
+                        <p>पिछले रुझान और एनालिटिक्स देखें</p>
+                    </header>
+                    <div class="content-card glass-effect chart-card">
+                        <div class="chart-container">
+                            <canvas id="historicalChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Customized Reports View -->
+                <section id="reports" class="tab-pane fade-in">
+                    <header class="section-header">
+                        <h2>अनुकूलित रिपोर्ट</h2>
+                        <p>अपनी रिपोर्ट जेनरेट और प्रबंधित करें</p>
+                    </header>
+                    <div class="reports-list">
+                        <div class="content-card glass-effect report-item">
+                            <div class="report-info">
+                                <h4>साप्ताहिक गुणवत्ता सारांश</h4>
+                                <p>जेनरेट किया गया: 10 मार्च, 2026</p>
+                            </div>
+                            <button class="secondary-btn">पीडीएफ डाउनलोड करें</button>
+                        </div>
+                        <div class="content-card glass-effect report-item">
+                            <div class="report-info">
+                                <h4>मासिक उपज भविष्यवाणी</h4>
+                                <p>जेनरेट किया गया: 01 मार्च, 2026</p>
+                            </div>
+                            <button class="secondary-btn">पीडीएफ डाउनलोड करें</button>
+                        </div>
+                    </div>
+                    <button class="primary-btn mt-4">नई रिपोर्ट बनाएं</button>
+                </section>
+
+                <!-- Alerts View -->
+                <section id="alerts" class="tab-pane fade-in">
+                    <header class="section-header">
+                        <h2>सिस्टम अलर्ट</h2>
+                        <p>सक्रिय अलर्ट की समीक्षा करें और कार्रवाई करें</p>
+                    </header>
+                    <div class="alerts-list">
+                        <div class="alert-card warning">
+                            <div class="alert-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                            </div>
+                            <div class="alert-content">
+                                <h4>उच्च लवणता का पता चला</h4>
+                                <p>तालाब 3 की लवणता 18.0 पीपीटी है, जो इष्टतम सीमा से थोड़ी अधिक है।</p>
+                                <span class="time">10 मिनट पहले</span>
+                            </div>
+                            <button class="dismiss-btn">खारिज करें</button>
+                        </div>
+                        <div class="alert-card danger">
+                            <div class="alert-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                            </div>
+                            <div class="alert-content">
+                                <h4>एरेटर में खराबी</h4>
+                                <p>तालाब 1 में एरेटर #2 ने काम करना बंद कर दिया है।</p>
+                                <span class="time">1 घंटे पहले</span>
+                            </div>
+                            <button class="dismiss-btn">खारिज करें</button>
+                        </div>
+                         <div class="alert-card info">
+                            <div class="alert-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                            </div>
+                            <div class="alert-content">
+                                <h4>नियमित रखरखाव देय</h4>
+                                <p>तालाब 4 के लिए फिल्टर की सफाई कल निर्धारित है।</p>
+                                <span class="time">2 घंटे पहले</span>
+                            </div>
+                            <button class="dismiss-btn">खारिज करें</button>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+    
+    <script>
+        const dictionaryHiToEn = {
+            "एक्वाटिक इंटरनेट ऑफ थिंग्स - डैशबोर्ड": "Aquatic Internet of Things - Dashboard",
+            "एआईओटी डैशबोर्ड": "AIOT Dashboard",
+            "नमस्ते, ": "Hello, ",
+            "किसान": "Farmer",
+            "रियल-टाइम डेटा": "Real-Time Data",
+            "ऐतिहासिक डेटा": "Historical Data",
+            "अनुकूलित रिपोर्ट": "Customized Reports",
+            "अलर्ट": "Alerts",
+            "रियल-टाइम अवलोकन": "Real-Time Overview",
+            "अंतिम अपडेट: अभी-अभी": "Last updated: Just now",
+            "घुली हुई ऑक्सीजन": "Dissolved Oxygen",
+            "सामान्य: 4 - 7 पीपीएम": "Normal: 4 - 7 ppm",
+            "पीएच स्तर": "pH Level",
+            "सामान्य: 6.0 - 8.0": "Normal: 6.0 - 8.0",
+            "जल का तापमान": "Water Temperature",
+            "सामान्य: 25 - 31 °C": "Normal: 25 - 31 °C",
+            "गंदलापन": "Turbidity",
+            "सामान्य: < 35 %": "Normal: < 35 %",
+            "लाइव डेटा रीफ्रेश करें": "Refresh Live Data",
+            "पिछले रुझान और एनालिटिक्स देखें": "View past trends and analytics",
+            "अपनी रिपोर्ट जेनरेट और प्रबंधित करें": "Generate and manage your reports",
+            "साप्ताहिक गुणवत्ता सारांश": "Weekly Quality Summary",
+            "जेनरेट किया गया: 10 मार्च, 2026": "Generated: Mar 10, 2026",
+            "पीडीएफ डाउनलोड करें": "Download PDF",
+            "मासिक उपज भविष्यवाणी": "Monthly Yield Prediction",
+            "जेनरेट किया गया: 01 मार्च, 2026": "Generated: Mar 01, 2026",
+            "नई रिपोर्ट बनाएं": "Generate New Report",
+            "सिस्टम अलर्ट": "System Alerts",
+            "सक्रिय अलर्ट की समीक्षा करें और कार्रवाई करें": "Review and act on active alerts",
+            "उच्च लवणता का पता चला": "High Salinity Detected",
+            "तालाब 3 की लवणता 18.0 पीपीटी है, जो इष्टतम सीमा से थोड़ी अधिक है।": "Pond 3 salinity is at 18.0 ppt, which is slightly above the optimal range.",
+            "10 मिनट पहले": "10 mins ago",
+            "खारिज करें": "Dismiss",
+            "एरेटर में खराबी": "Aerator Malfunction",
+            "तालाब 1 में एरेटर #2 ने काम करना बंद कर दिया है।": "Aerator #2 in Pond 1 has stopped responding.",
+            "1 घंटे पहले": "1 hour ago",
+            "नियमित रखरखाव देय": "Routine Maintenance Due",
+            "तालाब 4 के लिए फिल्टर की सफाई कल निर्धारित है।": "Filter cleaning for Pond 4 is scheduled for tomorrow.",
+            "2 घंटे पहले": "2 hours ago",
+            "घुली हुई ऑक्सीजन (ppm)": "Dissolved Oxygen (ppm)",
+            "जल का तापमान (°C)": "Water Temp (°C)",
+            "गंदलापन (%)": "Turbidity (%)",
+            "तापमान (°C)": "Temperature (°C)"
+        };
+
+        const dictionaryHiToMr = {
+            "एक्वाटिक इंटरनेट ऑफ थिंग्स - डैशबोर्ड": "अॅक्वाटिक इंटरनेट ऑफ थिंग्स - डॅशबोर्ड",
+            "एआईओटी डैशबोर्ड": "एआयओटी डॅशबोर्ड",
+            "नमस्ते, ": "नमस्कार, ",
+            "किसान": "शेतकरी",
+            "रियल-टाइम डेटा": "रीअल-टाइम डेटा",
+            "ऐतिहासिक डेटा": "ऐतिहासिक डेटा",
+            "अनुकूलित रिपोर्ट": "सानुकूलित अहवाल",
+            "अलर्ट": "अलर्ट",
+            "रियल-टाइम अवलोकन": "रीअल-टाइम विहंगावलोकन",
+            "अंतिम अपडेट: अभी-अभी": "शेवटचे अपडेट: नुकतेच",
+            "घुली हुई ऑक्सीजन": "विरघळलेला ऑक्सिजन",
+            "सामान्य: 4 - 7 पीपीएम": "सामान्य: ४ - ७ पीपीएम",
+            "पीएच स्तर": "पीएच पातळी",
+            "सामान्य: 6.0 - 8.0": "सामान्य: ६.० - ८.०",
+            "जल का तापमान": "पाण्याचे तापमान",
+            "सामान्य: 25 - 31 °C": "सामान्य: २५ - ३१ °C",
+            "गंदलापन": "गढूळपणा",
+            "सामान्य: < 35 %": "सामान्य: < ३५ %",
+            "लाइव डेटा रीफ्रेश करें": "थेट डेटा रिफ्रेश करा",
+            "पिछले रुझान और एनालिटिक्स देखें": "मागील ट्रेंड आणि विश्लेषण पहा",
+            "अपनी रिपोर्ट जेनरेट और प्रबंधित करें": "तुमचे अहवाल व्युत्पन्न आणि व्यवस्थापित करा",
+            "साप्ताहिक गुणवत्ता सारांश": "साप्ताहिक गुणवत्ता सारांश",
+            "जेनरेट किया गया: 10 मार्च, 2026": "व्युत्पन्न: १० मार्च, २०२६",
+            "पीडीएफ डाउनलोड करें": "पीडीएफ डाउनलोड करा",
+            "मासिक उपज भविष्यवाणी": "मासिक उत्पन्नाचा अंदाज",
+            "जेनरेट किया गया: 01 मार्च, 2026": "व्युत्पन्न: ०१ मार्च, २०२६",
+            "नई रिपोर्ट बनाएं": "नवीन अहवाल तयार करा",
+            "सिस्टम अलर्ट": "सिस्टम अलर्ट",
+            "सक्रिय अलर्ट की समीक्षा करें और कार्रवाई करें": "सक्रिय अलर्टचे पुनरावलोकन करा आणि कारवाई करा",
+            "उच्च लवणता का पता चला": "उच्च क्षारता आढळली",
+            "तालाब 3 की लवणता 18.0 पीपीटी है, जो इष्टतम सीमा से थोड़ी अधिक है।": "तलाव ३ ची क्षारता १८.० पीपीटी आहे, जी इष्टतम मर्यादेपेक्षा थोडी जास्त आहे.",
+            "10 मिनट पहले": "१० मिनिटांपूर्वी",
+            "खारिज करें": "डिसमिस करा",
+            "एरेटर में खराबी": "एरेटरमध्ये बिघाड",
+            "तालाब 1 में एरेटर #2 ने काम करना बंद कर दिया है।": "तलाव १ मधील एरेटर #२ ने काम करणे थांबवले आहे.",
+            "1 घंटे पहले": "१ तासापूर्वी",
+            "नियमित रखरखाव देय": "नियमित देखभाल देय",
+            "तालाब 4 के लिए फिल्टर की सफाई कल निर्धारित है।": "तलाव ४ साठी फिल्टर साफ करणे उद्या निर्धारित आहे.",
+            "2 घंटे पहले": "२ तासांपूर्वी",
+            "घुली हुई ऑक्सीजन (ppm)": "विरघळलेला ऑक्सिजन (ppm)",
+            "जल का तापमान (°C)": "पाण्याचे तापमान (°C)",
+            "गंदलापन (%)": "गढूळपणा (%)",
+            "तापमान (°C)": "तापमान (°C)"
+        };
+
+        const dictionaries = {
+            'hi': { 'en': dictionaryHiToEn, 'mr': dictionaryHiToMr },
+            'en': { 'hi': {}, 'mr': {} },
+            'mr': { 'hi': {}, 'en': {} }
+        };
+        for (const [hi, en] of Object.entries(dictionaryHiToEn)) {
+            dictionaries['en']['hi'][en] = hi;
+        }
+        for (const [hi, mr] of Object.entries(dictionaryHiToMr)) {
+            dictionaries['mr']['hi'][mr] = hi;
+        }
+        for (const [hi, en] of Object.entries(dictionaryHiToEn)) {
+            const mr = dictionaryHiToMr[hi];
+            if (mr) {
+                dictionaries['en']['mr'][en] = mr;
+                dictionaries['mr']['en'][mr] = en;
+            }
+        }
+
+        let currentLang = 'hi';
+
+        function applyLanguage(lang) {
+            if (currentLang === lang) return;
+            
+            let dict = dictionaries[currentLang][lang];
+            currentLang = lang;
+            
+            let newTitle = document.title;
+            if (currentLang === 'en') {
+                newTitle = "Aquatic Internet of Things - Dashboard";
+            } else if (currentLang === 'mr') {
+                newTitle = "अॅक्वाटिक इंटरनेट ऑफ थिंग्स - डॅशबोर्ड";
+            } else {
+                newTitle = "एक्वाटिक इंटरनेट ऑफ थिंग्स - डैशबोर्ड";
+            }
+            document.title = newTitle;
+
+            const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const nodesToReplace = [];
+            while (node = walk.nextNode()) {
+                if (node.parentElement && node.parentElement.tagName !== 'SCRIPT' && node.parentElement.tagName !== 'STYLE' && node.parentElement.id !== 'langSelect' && node.parentElement.tagName !== 'OPTION') {
+                    let txt = node.nodeValue;
+                    if (txt.trim()) {
+                        let replaced = false;
+                        // First try exact match of trimmed text
+                        if (dict[txt.trim()]) {
+                            nodesToReplace.push({node, original: txt.trim(), text: dict[txt.trim()], partial: false});
+                            replaced = true;
+                        } 
+                        // If not, perform multiple partial replacements within the string
+                        if (!replaced) {
+                            // Sort keys by length descending to prevent partial word overlap issues
+                            const keys = Object.keys(dict).sort((a, b) => b.length - a.length);
+                            let newTxt = txt;
+                            let matches = false;
+                            for (let key of keys) {
+                                if (newTxt.includes(key)) {
+                                    newTxt = newTxt.split(key).join(dict[key]);
+                                    matches = true;
+                                }
+                            }
+                            if (matches) {
+                                // We handle replacing all matches at once
+                                nodesToReplace.push({node, original: txt, text: newTxt, partial: false});
+                            }
+                        }
+                    }
+                }
+            }
+            
+            nodesToReplace.forEach(item => {
+                if (item.partial) {
+                    item.node.nodeValue = item.node.nodeValue.replace(item.original, item.text);
+                } else {
+                    item.node.nodeValue = item.node.nodeValue.replace(item.original, item.text);
+                }
+            });
+
+            if (window.mainChart) {
+                window.mainChart.data.datasets[0].label = currentLang === 'en' ? 'Water Temperature (°C)' : (currentLang === 'mr' ? 'पाण्याचे तापमान (°C)' : 'जल का तापमान (°C)');
+                window.mainChart.data.datasets[1].label = currentLang === 'en' ? 'Dissolved Oxygen (ppm)' : (currentLang === 'mr' ? 'विरघळलेला ऑक्सिजन (ppm)' : 'घुली हुई ऑक्सीजन (ppm)');
+                window.mainChart.options.scales.y.title.text = currentLang === 'en' ? 'Temperature (°C)' : (currentLang === 'mr' ? 'तापमान (°C)' : 'तापमान (°C)');
+                window.mainChart.options.scales.y1.title.text = currentLang === 'en' ? 'Dissolved Oxygen (ppm)' : (currentLang === 'mr' ? 'विरघळलेला ऑक्सिजन (ppm)' : 'घुली हुई ऑक्सीजन (ppm)');
+                window.mainChart.update();
+            }
+
+            if (window.gaugeDO && window.gaugeDO.txtTitle) {
+                window.gaugeDO.txtTitle.attr({text: currentLang === 'en' ? 'Dissolved Oxygen (ppm)' : (currentLang === 'mr' ? 'विरघळलेला ऑक्सिजन (ppm)' : 'घुली हुई ऑक्सीजन (ppm)')});
+                window.gaugePH.txtTitle.attr({text: currentLang === 'en' ? 'pH Level' : (currentLang === 'mr' ? 'पीएच पातळी' : 'पीएच स्तर')});
+                window.gaugeTemp.txtTitle.attr({text: currentLang === 'en' ? 'Water Temp (°C)' : (currentLang === 'mr' ? 'पाण्याचे तापमान (°C)' : 'जल का तापमान (°C)')});
+                window.gaugeTurbidity.txtTitle.attr({text: currentLang === 'en' ? 'Turbidity (%)' : (currentLang === 'mr' ? 'गढूळपणा (%)' : 'गंदलापन (%)')});
+            }
+        }
+
+        function applyTheme(isLight) {
+            const themeIcon = document.getElementById('themeIcon');
+
+            if (isLight) {
+                document.body.classList.add('light-mode');
+                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            } else {
+                document.body.classList.remove('light-mode');
+                themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>';
+            }
+
+            // Update Chart Colors
+            if (window.mainChart) {
+                const textColor = isLight ? '#121212' : '#f3f4f6';
+                const gridColor = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)';
+                
+                window.mainChart.options.plugins.legend.labels.color = textColor;
+                window.mainChart.options.scales.x.ticks.color = textColor;
+                window.mainChart.options.scales.y.ticks.color = textColor;
+                window.mainChart.options.scales.y1.ticks.color = textColor;
+                
+                window.mainChart.options.scales.x.grid.color = gridColor;
+                window.mainChart.options.scales.y.grid.color = gridColor;
+                
+                // Professional Blue and Green chart accents
+                window.mainChart.data.datasets[0].borderColor = '#0284c7'; // Blue
+                window.mainChart.data.datasets[0].backgroundColor = 'rgba(2, 132, 199, 0.1)';
+                
+                window.mainChart.data.datasets[1].borderColor = '#10b981'; // Green
+                window.mainChart.data.datasets[1].backgroundColor = 'rgba(16, 185, 129, 0.1)';
+                
+                window.mainChart.options.scales.y.title.color = '#0284c7';
+                window.mainChart.options.scales.y1.title.color = '#10b981';
+
+                window.mainChart.update();
+            }
+
+            // Update Gauges Colors
+            const gaugeValueColor = isLight ? "#121212" : "#f3f4f6";
+            const gaugeTitleColor = isLight ? "#6b7280" : "#9ca3af";
+
+            if (window.gaugeDO && window.gaugeDO.txtValue) {
+                [window.gaugeDO, window.gaugePH, window.gaugeTemp, window.gaugeTurbidity].forEach(g => {
+                   if(g.txtValue) g.txtValue.attr({fill: gaugeValueColor});
+                   if(g.txtTitle) g.txtTitle.attr({fill: gaugeTitleColor});
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const toastEl = document.getElementById('toastNotification');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMsg = document.getElementById('toastMessage');
+            const toastClose = document.getElementById('closeToastBtn');
+            let toastTimeout = null;
+
+            window.showToast = function(title, message, type) {
+                if (!toastEl) return;
+                toastTitle.textContent = title;
+                toastMsg.textContent = message;
+                // Remove old type classes
+                toastEl.classList.remove('toast-success', 'toast-info', 'hidden');
+                if (type === 'success') toastEl.classList.add('toast-success');
+                else if (type === 'info') toastEl.classList.add('toast-info');
+                // Force reflow before adding show
+                toastEl.offsetHeight;
+                toastEl.classList.add('show');
+                if (toastTimeout) clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toastEl.classList.remove('show');
+                }, 5000);
+            };
+
+            if (toastClose) {
+                toastClose.addEventListener('click', () => {
+                    toastEl.classList.remove('show');
+                    if (toastTimeout) clearTimeout(toastTimeout);
+                });
+            }
+
+            // Remove hidden class on load so CSS transitions work
+            toastEl.classList.remove('hidden');
+
+            const langSelect = document.getElementById('langSelect');
+            if (langSelect) {
+                langSelect.addEventListener('change', (e) => {
+                    applyLanguage(e.target.value);
+                });
+            }
+
+            const themeToggle = document.getElementById('themeToggle');
+            let isLightMode = localStorage.getItem('theme') === 'light';
+            applyTheme(isLightMode);
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    isLightMode = !isLightMode;
+                    localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+                    applyTheme(isLightMode);
+                });
+            }
+
+            // Tab Switching Logic
+            const navTabs = document.querySelectorAll('.nav-tab');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    navTabs.forEach(t => t.classList.remove('active'));
+                    tabPanes.forEach(p => {
+                        p.classList.remove('active');
+                        p.style.animation = 'none';
+                        p.offsetHeight; /* trigger reflow */
+                        p.style.animation = null; 
+                    });
+
+                    tab.classList.add('active');
+                    const targetId = tab.getAttribute('data-target');
+                    const targetPane = document.getElementById(targetId);
+                    if (targetPane) {
+                        targetPane.classList.add('active');
+                    }
+                });
+            });
+
+            // --- HISTORICAL DATA CHART (Chart.js) ---
+            const ctx = document.getElementById('historicalChart');
+            if (ctx) {
+                const labels = [];
+                const tempData = [];
+                const doData = [];
+                
+                let now = new Date();
+                for (let i = 12; i >= 0; i--) {
+                    let time = new Date(now.getTime() - (i * 2 * 60 * 60 * 1000));
+                    labels.push(`${time.getHours().toString().padStart(2, '0')}:00`);
+                    
+                    let baseTemp = 26 + Math.sin(i * 0.5) * 2;
+                    tempData.push(parseFloat((baseTemp + Math.random() * 0.5).toFixed(1)));
+                    
+                    let baseDO = 6.5 - Math.sin(i * 0.5) * 0.5;
+                    doData.push(parseFloat((baseDO + Math.random() * 0.2).toFixed(1)));
+                }
+
+                window.mainChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'जल का तापमान (°C)',
+                                data: tempData,
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                yAxisID: 'y',
+                            },
+                            {
+                                label: 'घुली हुई ऑक्सीजन (ppm)',
+                                data: doData,
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                yAxisID: 'y1',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    font: { family: "'Inter', sans-serif", size: 13 },
+                                    color: document.body.classList.contains('light-mode') ? '#121212' : '#f3f4f6'
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(18, 18, 18, 0.9)',
+                                titleFont: { family: "'Inter', sans-serif", size: 13 },
+                                bodyFont: { family: "'Inter', sans-serif", size: 12 },
+                                padding: 10,
+                                cornerRadius: 8
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { color: document.body.classList.contains('light-mode') ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { font: { family: "'Inter', sans-serif" }, color: document.body.classList.contains('light-mode') ? '#121212' : '#f3f4f6' }
+                            },
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: { display: true, text: 'तापमान (°C)', color: '#0284c7', font: { family: "'Inter', sans-serif", weight: 'bold' } },
+                                grid: { color: document.body.classList.contains('light-mode') ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { color: document.body.classList.contains('light-mode') ? '#121212' : '#f3f4f6' }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                title: { display: true, text: 'घुली हुई ऑक्सीजन (ppm)', color: '#10b981', font: { family: "'Inter', sans-serif", weight: 'bold' } },
+                                grid: { drawOnChartArea: false },
+                                ticks: { color: document.body.classList.contains('light-mode') ? '#121212' : '#f3f4f6' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Gauges Initialization
+            window.gaugeDO = null;
+            window.gaugePH = null;
+            window.gaugeTemp = null;
+            window.gaugeTurbidity = null;
+            
+            if (document.getElementById('gauge-do') && typeof JustGage !== 'undefined') {
+                const commonGaugeOptions = {
+                    pointer: true,
+                    pointerOptions: {
+                        toplength: -15, bottomlength: 10, bottomwidth: 12,
+                        color: '#8e8e93', stroke: '#ffffff', stroke_width: 3, stroke_linecap: 'round'
+                    },
+                    gaugeWidthScale: 0.6,
+                    counter: true,
+                    valueFontColor: document.body.classList.contains('light-mode') ? "#121212" : "#f3f4f6",
+                    titleFontColor: document.body.classList.contains('light-mode') ? "#6b7280" : "#9ca3af",
+                    valueFontFamily: "Inter, sans-serif",
+                    titleFontFamily: "Inter, sans-serif",
+                    titleMinFontSize: 14,
+                    valueMinFontSize: 24,
+                    hideMinMax: true
+                };
+
+                window.gaugeDO = new JustGage({
+                    id: "gauge-do", value: 6.5, min: 0, max: 15,
+                    title: "घुली हुई ऑक्सीजन (ppm)", label: "ppm",
+                    levelColors: ["#ef4444", "#eab308", "#10b981", "#eab308", "#ef4444"],
+                    ...commonGaugeOptions
+                });
+
+                window.gaugePH = new JustGage({
+                    id: "gauge-ph", value: 7.2, min: 0, max: 14,
+                    title: "पीएच स्तर", label: "pH",
+                    levelColors: ["#ef4444", "#eab308", "#10b981", "#eab308", "#ef4444"],
+                    ...commonGaugeOptions
+                });
+
+                window.gaugeTemp = new JustGage({
+                    id: "gauge-temp", value: 26.5, min: 0, max: 40,
+                    title: "जल का तापमान (°C)", label: "°C",
+                    levelColors: ["#3b82f6", "#10b981", "#ef4444"],
+                    ...commonGaugeOptions
+                });
+
+                window.gaugeTurbidity = new JustGage({
+                    id: "gauge-turbidity", value: 12, min: 0, max: 100,
+                    title: "गंदलापन (%)", label: "%",
+                    levelColors: ["#10b981", "#eab308", "#ef4444"],
+                    ...commonGaugeOptions
+                });
+
+                const thresholds = {
+                    temp: { min: 25, max: 31 },
+                    ph: { min: 6, max: 8 },
+                    do: { min: 4, max: 7 },
+                    turbidity: { max: 35 }
+                };
+
+                // Toast logic moved to global scope
+
+                // Simulate Real-Time Data Fetching every 3 seconds
+                setInterval(() => {
+                    let tempVal = parseFloat((26 + (Math.random() * 4 - 1) + (Math.random() > 0.9 ? Math.random() * 4 : 0)).toFixed(1)); 
+                    let doVal = parseFloat((5.5 + (Math.random() * 1.5 - 0.75) - (Math.random() > 0.9 ? Math.random() * 1.5 : 0)).toFixed(1));
+                    let phVal = parseFloat((7.0 + (Math.random() * 0.8 - 0.4) + (Math.random() > 0.9 ? (Math.random() > 0.5 ? 1 : -1) : 0)).toFixed(1));
+                    let turbVal = parseFloat((20 + (Math.random() * 10 - 5) + (Math.random() > 0.9 ? Math.random() * 15 : 0)).toFixed(1));
+
+                    if (window.gaugeDO) window.gaugeDO.refresh(doVal);
+                    if (window.gaugePH) window.gaugePH.refresh(phVal);
+                    if (window.gaugeTemp) window.gaugeTemp.refresh(tempVal);
+                    if (window.gaugeTurbidity) window.gaugeTurbidity.refresh(turbVal);
+
+                    let alerts = [];
+
+                    if (tempVal < thresholds.temp.min || tempVal > thresholds.temp.max) {
+                        alerts.push(currentLang === 'en' ? `Temperature (${tempVal}°C) is out of safe range (25-31°C).` : (currentLang === 'mr' ? `तापमान (${tempVal}°C) सुरक्षित मर्यादेबाहेर आहे (25-31°C).` : `तापमान (${tempVal}°C) सुरक्षित सीमा (25-31°C) से बाहर है।`));
+                    }
+                    if (phVal < thresholds.ph.min || phVal > thresholds.ph.max) {
+                        alerts.push(currentLang === 'en' ? `pH Level (${phVal}) is out of safe range (6-8). ${phVal < thresholds.ph.min ? 'Water is too acidic.' : 'Water is too alkaline.'}` : (currentLang === 'mr' ? `पीएच पातळी (${phVal}) सुरक्षित मर्यादेबाहेर आहे (6-8). ${phVal < thresholds.ph.min ? 'पाणी खूप अम्लीय आहे.' : 'पाणी खूप क्षारीय आहे.'}` : `पीएच स्तर (${phVal}) सुरक्षित सीमा (6-8) से बाहर है। ${phVal < thresholds.ph.min ? 'पानी बहुत अम्लीय है।' : 'पानी बहुत क्षारीय है।'}`));
+                    }
+                    if (doVal < thresholds.do.min || doVal > thresholds.do.max) {
+                        alerts.push(currentLang === 'en' ? `Dissolved Oxygen (${doVal} ppm) is out of safe range (4-7 ppm).` : (currentLang === 'mr' ? `विरघळलेला ऑक्सिजन (${doVal} ppm) सुरक्षित मर्यादेबाहेर आहे (4-7 ppm).` : `घुली हुई ऑक्सीजन (${doVal} ppm) सुरक्षित सीमा (4-7 ppm) से बाहर है।`));
+                    }
+                    if (turbVal > thresholds.turbidity.max) {
+                        alerts.push(currentLang === 'en' ? `Turbidity (${turbVal}%) exceeds maximum safe limit (35%).` : (currentLang === 'mr' ? `गढूळपणा (${turbVal}%) कमाल सुरक्षित मर्यादेपेक्षा जास्त आहे (35%).` : `गंदलापन (${turbVal}%) अधिकतम सुरक्षित सीमा (35%) से अधिक है।`));
+                    }
+
+                    if (alerts.length > 0 && !toastEl.classList.contains('show')) {
+                        const titleMsg = currentLang === 'en' ? 'Critical Limit Reached' : (currentLang === 'mr' ? 'गंभीर मर्यादा गाठली' : 'महत्वपूर्ण सीमा तक पहुंच गया');
+                        const bodyMsg = currentLang === 'en' ? `${alerts[0]} Please adjust nutrient dose/aeration immediately.` : (currentLang === 'mr' ? `${alerts[0]} कृपया पोषक तत्वांचा डोस / वायुवीजन त्वरित समायोजित करा.` : `${alerts[0]} कृपया तुरंत पोषक तत्व खुराक / वातन समायोजित करें।`);
+                        window.showToast(titleMsg, bodyMsg);
+                    }
+
+                }, 3000);
+            }
+
+            const refreshBtn = document.getElementById('refreshDataBtn');
+            const refreshIcon = document.getElementById('refreshIcon');
+            
+            if (refreshBtn && refreshIcon) {
+                refreshBtn.addEventListener('click', () => {
+                    refreshIcon.classList.add('animate-spin');
+                    setTimeout(() => {
+                        refreshIcon.classList.remove('animate-spin');
+                        if (window.gaugeDO) window.gaugeDO.refresh(parseFloat((6.5 + (Math.random() * 2 - 1)).toFixed(1)));
+                        if (window.gaugePH) window.gaugePH.refresh(parseFloat((7.2 + (Math.random() * 0.4 - 0.2)).toFixed(1)));
+                        if (window.gaugeTemp) window.gaugeTemp.refresh(parseFloat((26.5 + (Math.random() * 1.5 - 0.75)).toFixed(1)));
+                        if (window.gaugeTurbidity) window.gaugeTurbidity.refresh(parseFloat((12 + (Math.random() * 5 - 2.5)).toFixed(1)));
+                        
+                        const titleMsg = currentLang === 'en' ? 'Data Refreshed' : (currentLang === 'mr' ? 'डेटा रिफ्रेश झाला' : 'डेटा रीफ्रेश किया गया');
+                        const bodyMsg = currentLang === 'en' ? 'Live data has been updated.' : (currentLang === 'mr' ? 'थेट डेटा अद्यतनित केला गेला आहे.' : 'लाइव डेटा अपडेट किया गया है।');
+                        window.showToast(titleMsg, bodyMsg, 'success');
+                    }, 500);
+                });
+            }
+
+            // Make Dismiss Buttons Work (with smooth animation)
+            function attachDismissHandler(btn) {
+                btn.addEventListener('click', (e) => {
+                    const card = e.target.closest('.alert-card');
+                    if (card) {
+                        // Set explicit max-height for smooth collapse
+                        card.style.maxHeight = card.scrollHeight + 'px';
+                        card.offsetHeight; // force reflow
+                        card.classList.add('dismissing');
+                        
+                        // Update badge count
+                        const badge = document.querySelector('.badge');
+                        if (badge) {
+                            let count = parseInt(badge.textContent) - 1;
+                            if (count <= 0) {
+                                badge.style.opacity = '0';
+                                setTimeout(() => badge.style.display = 'none', 300);
+                            } else {
+                                badge.textContent = count;
+                            }
+                        }
+
+                        // Show dismissal toast
+                        const alertTitle = card.querySelector('.alert-content h4');
+                        const titleMsg = currentLang === 'en' ? 'Alert Dismissed' : (currentLang === 'mr' ? 'अलर्ट डिसमिस केला' : 'अलर्ट खारिज किया गया');
+                        const bodyMsg = currentLang === 'en' ? `"${alertTitle ? alertTitle.textContent : 'Alert'}" has been dismissed.` : (currentLang === 'mr' ? `"${alertTitle ? alertTitle.textContent : 'अलर्ट'}" डिसमिस केला गेला.` : `"${alertTitle ? alertTitle.textContent : 'अलर्ट'}" खारिज कर दिया गया।`);
+                        window.showToast(titleMsg, bodyMsg, 'success');
+
+                        // Remove from DOM after animation
+                        setTimeout(() => card.remove(), 500);
+                    }
+                });
+            }
+            document.querySelectorAll('.dismiss-btn').forEach(attachDismissHandler);
+
+            // Make Download PDF Buttons Work (generates and downloads a real file)
+            function attachDownloadHandler(btn) {
+                btn.addEventListener('click', function() {
+                    const reportItem = this.closest('.report-item');
+                    const reportTitle = reportItem ? reportItem.querySelector('h4').textContent : 'Report';
+                    const reportDate = reportItem ? reportItem.querySelector('p').textContent : '';
+                    
+                    // Show loading state on button
+                    const originalText = this.textContent;
+                    this.innerHTML = '<span class="download-progress"></span>' + (currentLang === 'en' ? 'Downloading...' : (currentLang === 'mr' ? 'डाउनलोड होत आहे...' : 'डाउनलोड हो रहा...'));
+                    this.disabled = true;
+                    this.style.opacity = '0.7';
+
+                    setTimeout(() => {
+                        // Generate report content
+                        const now = new Date();
+                        const reportContent = [
+                            '═══════════════════════════════════════════════════',
+                            '          AIOT - Aquatic IoT Dashboard Report',
+                            '═══════════════════════════════════════════════════',
+                            '',
+                            `Report: ${reportTitle}`,
+                            `${reportDate}`,
+                            `Downloaded: ${now.toLocaleString()}`,
+                            '',
+                            '───────────────────────────────────────────────────',
+                            '  CURRENT READINGS SNAPSHOT',
+                            '───────────────────────────────────────────────────',
+                            '',
+                            `  Dissolved Oxygen:  ${window.gaugeDO ? window.gaugeDO.config.value + ' ppm' : 'N/A'}`,
+                            `  pH Level:          ${window.gaugePH ? window.gaugePH.config.value : 'N/A'}`,
+                            `  Water Temperature: ${window.gaugeTemp ? window.gaugeTemp.config.value + ' °C' : 'N/A'}`,
+                            `  Turbidity:         ${window.gaugeTurbidity ? window.gaugeTurbidity.config.value + ' %' : 'N/A'}`,
+                            '',
+                            '───────────────────────────────────────────────────',
+                            '  SAFE RANGES',
+                            '───────────────────────────────────────────────────',
+                            '',
+                            '  Dissolved Oxygen:  4 - 7 ppm',
+                            '  pH Level:          6.0 - 8.0',
+                            '  Water Temperature: 25 - 31 °C',
+                            '  Turbidity:         < 35 %',
+                            '',
+                            '───────────────────────────────────────────────────',
+                            '  SYSTEM STATUS',
+                            '───────────────────────────────────────────────────',
+                            '',
+                            '  All sensors: ONLINE',
+                            '  Data refresh rate: Every 3 seconds',
+                            '  System uptime: 99.7%',
+                            '',
+                            '═══════════════════════════════════════════════════',
+                            '  Generated by AIOT Dashboard - Smart Aquaculture',
+                            '═══════════════════════════════════════════════════'
+                        ].join('\n');
+
+                        // Create and trigger download
+                        const blob = new Blob([reportContent], { type: 'text/plain' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = reportTitle.replace(/\s+/g, '_') + '_Report.txt';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+
+                        // Reset button
+                        this.textContent = originalText;
+                        this.disabled = false;
+                        this.style.opacity = '1';
+
+                        const titleMsg = currentLang === 'en' ? 'Download Complete' : (currentLang === 'mr' ? 'डाउनलोड पूर्ण' : 'डाउनलोड पूर्ण');
+                        const bodyMsg = currentLang === 'en' ? `"${reportTitle}" has been downloaded successfully.` : (currentLang === 'mr' ? `"${reportTitle}" यशस्वीरित्या डाउनलोड झाला.` : `"${reportTitle}" सफलतापूर्वक डाउनलोड हो गई।`);
+                        window.showToast(titleMsg, bodyMsg, 'success');
+                    }, 1200);
+                });
+            }
+            document.querySelectorAll('.report-item .secondary-btn').forEach(attachDownloadHandler);
+
+            // Make Generate Report Button Work (adds a new report to the list)
+            let reportCounter = 0;
+            const generateBtn = document.querySelector('#reports .primary-btn');
+            if (generateBtn) {
+                generateBtn.addEventListener('click', function() {
+                    reportCounter++;
+                    const now = new Date();
+                    const months = currentLang === 'en' 
+                        ? ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+                        : (currentLang === 'mr' 
+                            ? ['जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे','जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर']
+                            : ['जनवरी','फरवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर']);
+                    const dateStr = currentLang === 'en' 
+                        ? `Generated: ${months[now.getMonth()]} ${now.getDate().toString().padStart(2,'0')}, ${now.getFullYear()}`
+                        : (currentLang === 'mr'
+                            ? `व्युत्पन्न: ${now.getDate().toString().padStart(2,'0')} ${months[now.getMonth()]}, ${now.getFullYear()}`
+                            : `जेनरेट किया गया: ${now.getDate().toString().padStart(2,'0')} ${months[now.getMonth()]}, ${now.getFullYear()}`);
+
+                    const reportTypes = currentLang === 'en'
+                        ? ['Daily Water Analysis', 'Feeding Schedule Report', 'Pond Health Summary', 'Equipment Status Report', 'Growth Rate Analysis']
+                        : (currentLang === 'mr'
+                            ? ['दैनिक पाणी विश्लेषण', 'आहार वेळापत्रक अहवाल', 'तलाव आरोग्य सारांश', 'उपकरण स्थिती अहवाल', 'वाढ दर विश्लेषण']
+                            : ['दैनिक जल विश्लेषण', 'फीडिंग शेड्यूल रिपोर्ट', 'तालाब स्वास्थ्य सारांश', 'उपकरण स्थिति रिपोर्ट', 'विकास दर विश्लेषण']);
+                    const reportName = reportTypes[(reportCounter - 1) % reportTypes.length];
+                    const downloadText = currentLang === 'en' ? 'Download PDF' : (currentLang === 'mr' ? 'पीडीएफ डाउनलोड करा' : 'पीडीएफ डाउनलोड करें');
+
+                    // Disable button temporarily with loading state
+                    const originalBtnHTML = this.innerHTML;
+                    this.innerHTML = '<span class="download-progress"></span>' + (currentLang === 'en' ? 'Generating...' : (currentLang === 'mr' ? 'तयार करत आहे...' : 'जनरेट हो रहा है...'));
+                    this.disabled = true;
+                    this.style.opacity = '0.7';
+
+                    setTimeout(() => {
+                        // Create new report item HTML
+                        const newReport = document.createElement('div');
+                        newReport.className = 'content-card glass-effect report-item new-report';
+                        newReport.innerHTML = `
+                            <div class="report-info">
+                                <h4>${reportName}</h4>
+                                <p>${dateStr}</p>
+                            </div>
+                            <button class="secondary-btn">${downloadText}</button>
+                        `;
+
+                        // Insert at top of reports list
+                        const reportsList = document.querySelector('.reports-list');
+                        if (reportsList) {
+                            reportsList.insertBefore(newReport, reportsList.firstChild);
+                        }
+
+                        // Attach download handler to the new button
+                        const newDownloadBtn = newReport.querySelector('.secondary-btn');
+                        attachDownloadHandler(newDownloadBtn);
+
+                        // Reset generate button
+                        this.innerHTML = originalBtnHTML;
+                        this.disabled = false;
+                        this.style.opacity = '1';
+
+                        const titleMsg = currentLang === 'en' ? 'Report Generated' : (currentLang === 'mr' ? 'अहवाल तयार' : 'रिपोर्ट तैयार');
+                        const bodyMsg = currentLang === 'en' ? `"${reportName}" has been generated successfully.` : (currentLang === 'mr' ? `"${reportName}" यशस्वीरित्या तयार झाला.` : `"${reportName}" सफलतापूर्वक जनरेट की गई।`);
+                        window.showToast(titleMsg, bodyMsg, 'success');
+                    }, 1500);
+                });
+            }
+
+            // Make Logout Button Work
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    const confirmMsg = currentLang === 'en' ? 'Are you sure you want to logout?' : (currentLang === 'mr' ? 'तुम्हाला लॉगआउट करायचे आहे का?' : 'क्या आप लॉगआउट करना चाहते हैं?');
+                    if (confirm(confirmMsg)) {
+                        localStorage.clear();
+                        const titleMsg = currentLang === 'en' ? 'Logged Out' : (currentLang === 'mr' ? 'लॉगआउट झाले' : 'लॉगआउट हो गया');
+                        const bodyMsg = currentLang === 'en' ? 'You have been logged out successfully.' : (currentLang === 'mr' ? 'तुम्ही यशस्वीरित्या लॉगआउट झालात.' : 'आप सफलतापूर्वक लॉगआउट हो गए।');
+                        window.showToast(titleMsg, bodyMsg, 'info');
+                        setTimeout(() => location.reload(), 1500);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

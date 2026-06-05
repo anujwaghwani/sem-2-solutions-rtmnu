@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Tech Second Semester - Back Exam Papers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6;}
+        .paper-font { font-family: 'Merriweather', serif; }
+        
+        @media print {
+            .no-print { display: none !important; }
+            .print-full-width { width: 100% !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important;}
+            body { background-color: white; }
+            .paper-container { display: block !important; margin-bottom: 0 !important; box-shadow: none !important;}
+            .page-break { page-break-after: always; break-after: page; }
+            .page-break-inside-avoid { break-inside: avoid; }
+        }
+
+        .marks { float: right; font-weight: bold; background: #e5e7eb; padding: 2px 10px; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.9rem;}
+        @media print { .marks { background: transparent; } }
+        
+        .or-divider { text-align: center; font-weight: bold; margin: 2.5rem 0; letter-spacing: 4px; position: relative; }
+        .or-divider::before { content: ""; position: absolute; left: 0; top: 50%; width: 45%; height: 1px; background: #d1d5db; }
+        .or-divider::after { content: ""; position: absolute; right: 0; top: 50%; width: 45%; height: 1px; background: #d1d5db; }
+    </style>
+</head>
+<body class="text-gray-900">
+
+    <!-- Navigation / Table of Contents (Hidden on Print) -->
+    <div class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-gray-900">End-Semester Back Papers &amp; Solutions</h1>
+                <p class="text-xs text-gray-500 font-medium mt-1">70-Mark University Examinations • B.Tech II Sem</p>
+            </div>
+            <div class="relative group">
+                <button class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md font-bold text-sm transition-colors border border-gray-300">
+                    <i data-lucide="list" class="w-4 h-4"></i> Jump to Section
+                </button>
+                <div class="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-2 z-50">
+                    <div class="text-xs font-bold text-gray-400 uppercase mb-2 px-2">Back Papers</div>
+                    <a href="#physics-back" class="block px-3 py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors">Essentials of Physics <span class="text-xs text-gray-400 float-right font-normal">70 Marks</span></a>
+                    <a href="#cao-back" class="block px-3 py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors">Computer Architecture <span class="text-xs text-gray-400 float-right font-normal">70 Marks</span></a>
+                    <a href="#psychology-back" class="block px-3 py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors">Consciousness Studies <span class="text-xs text-gray-400 float-right font-normal">70 Marks</span></a>
+                    <div class="text-xs font-bold text-gray-400 uppercase mb-2 px-2 mt-3 border-t pt-3">Solutions</div>
+                    <a href="#cao-solutions" class="block px-3 py-3 text-sm font-semibold text-indigo-700 hover:bg-indigo-50 rounded-md transition-colors">CAO Back Paper Solutions <span class="text-xs text-indigo-400 float-right font-normal">Visual</span></a>
+                    <a href="#psychology-solutions" class="block px-3 py-3 text-sm font-semibold text-pink-700 hover:bg-pink-50 rounded-md transition-colors">Psychology Back Solutions <span class="text-xs text-pink-400 float-right font-normal">Visual</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 relative print-full-width">
+        
+        <!-- Print Button -->
+        <button onclick="window.print()" class="fixed bottom-8 right-8 bg-blue-700 text-white p-4 rounded-full shadow-2xl hover:bg-blue-800 transition-colors z-20 no-print" title="Print Papers">
+            <i data-lucide="printer"></i>
+        </button>
+
+        <!-- ============================================== -->
+        <!-- 1. ESSENTIALS OF PHYSICS (BACK PAPER)          -->
+        <!-- ============================================== -->
+        <div id="physics-back" class="paper-container page-break mb-16 max-w-4xl mx-auto bg-white p-8 md:p-14 shadow-xl border border-gray-300 rounded-sm paper-font">
+            <div class="text-center border-b-[3px] border-black pb-8 mb-10">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Faculty of Science & Technology</h3>
+                <p class="text-[0.95rem] mt-2 font-medium leading-relaxed">Second Semester B.Tech. (C.S.E./CE/IT/CT/CSE (DS)/CSE (CS)/CSE (AIML)/AI/AIML/AIDS/IOT/ROBOTICS AI/CYBER SECURITY) (CBCS) (NEP) Examination</p>
+                <h1 class="text-3xl font-extrabold mt-6 tracking-wider uppercase underline underline-offset-8">Essentials of Physics</h1>
+                <div class="flex justify-between font-bold mt-8 text-base px-2">
+                    <span>Time: Three Hours]</span>
+                    <span>[Maximum Marks: 70</span>
+                </div>
+            </div>
+
+            <div class="mb-10 pl-6 border-l-4 border-gray-400">
+                <h4 class="font-bold underline mb-3 text-lg">Note:</h4>
+                <ol class="list-[decimal] list-inside text-base space-y-1.5 font-medium text-gray-800">
+                    <li>All questions carry marks as indicated.</li>
+                    <li>Solve Question No. 1 <b>OR</b> Question No. 2.</li>
+                    <li>Solve Question No. 3 <b>OR</b> Question No. 4.</li>
+                    <li>Solve Question No. 5 <b>OR</b> Question No. 6.</li>
+                    <li>Solve Question No. 7 <b>OR</b> Question No. 8.</li>
+                    <li>Solve Question No. 9 <b>OR</b> Question No. 10.</li>
+                    <li>Use of non-programmable calculator is permitted.</li>
+                    <li>Illustrate your answers wherever necessary with the help of neat sketches.</li>
+                </ol>
+            </div>
+
+            <!-- Constants Box -->
+            <div class="mb-10 p-5 bg-gray-50 border-2 border-gray-200 text-base rounded-md shadow-sm">
+                <h4 class="font-bold underline mb-3">List of constants:</h4>
+                <ol class="list-[lower-roman] list-inside grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 text-gray-800 font-medium">
+                    <li>Planck's Constant "h" = 6.63 &times; 10<sup>-34</sup> Js</li>
+                    <li>Velocity of Light "C" = 3 &times; 10<sup>8</sup> m/s</li>
+                    <li>Boltzmann's Constant "k" = 1.380 &times; 10<sup>-23</sup> J/K</li>
+                    <li>Charge of electron "e" = 1.602 &times; 10<sup>-19</sup> C</li>
+                    <li>Mass of electron "m" = 9.11 &times; 10<sup>-31</sup> Kg</li>
+                    <li>1 electron volt = 1.602 &times; 10<sup>-19</sup> J</li>
+                </ol>
+            </div>
+
+            <div class="space-y-8 text-lg text-gray-900">
+                <!-- Q1 / Q2 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-xl">1.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) What are matter waves? Explain and prove the existence of matter waves with the help of Davisson and Germer experiment.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Differentiate between bits and Q bits.</p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(c) A bullet of mass 50 gms and an electron both travel with velocity of 1000 m/s. What wavelength can be associated with them? Why is the wave nature not significant in the case of a bullet?</p>
+                            <span class="marks">4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-xl">2.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Define wave function and obtain the equation of eigen energy for a particle confined in a one dimensional infinite potential well of width 'L'. Also show that energy is quantized.</p>
+                            <span class="marks">6</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) State and explain Heisenberg's Uncertainty Principle.</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(c) A small object of mass 1 gm is confined to move between two rigid walls separated by 1 cm. Calculate its lowest two energy levels.</p>
+                            <span class="marks">4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q3 / Q4 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">3.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) What is acceptance angle? Obtain the expression of acceptance angle in case of optical fiber.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <div class="flex-1">
+                                <p>(b) Define: (any two)</p>
+                                <ol class="list-[decimal] list-inside ml-6 mt-2 space-y-1">
+                                    <li>Critical angle</li>
+                                    <li>Numerical Aperture</li>
+                                    <li>Fractional refractive index change</li>
+                                    <li>V-number of optical fiber</li>
+                                </ol>
+                            </div>
+                            <span class="marks">4</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(c) Calculate the numerical aperture of a step index fiber having core refractive index 1.48 and that of cladding 1.46. What is the maximum acceptance angle for this fiber?</p>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">4.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) What is attenuation in optical fiber? Explain absorption.</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <div class="flex-1">
+                                <p>(b) Explain the classification of optical fibers on the basis of:</p>
+                                <ol class="list-[decimal] list-inside ml-6 mt-2 space-y-1">
+                                    <li>Refractive index profile</li>
+                                    <li>Modes of propagation</li>
+                                </ol>
+                            </div>
+                            <span class="marks">4</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(c) Explain any one application of optical fiber in detail.</p>
+                            <span class="marks">3</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(d) A certain optical fiber has an attenuation of 1.5 dB/km. If 0.5 mW optical power is initially launched into the fiber, what is the power level after 10 km?</p>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q5 / Q6 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">5.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Distinguish between conductors, semiconductors, and insulators on the basis of band theory of solids.</p>
+                            <span class="marks">6</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) What is a Zener diode? Explain Zener breakdown with the help of its V-I characteristic curve.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(c) A semiconductor wafer is 0.5 mm thick. A potential of 100 mV is applied across the wafer. What is the electron drift velocity if their mobility is 0.2 m<sup>2</sup>/Vs?</p>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">6.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) What is the gain of transistor? Explain the application of a transistor as an amplifier.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <div class="flex-1">
+                                <p>(b) Write notes on:</p>
+                                <ol class="list-[decimal] list-inside ml-6 mt-2 space-y-1">
+                                    <li>Emitter</li>
+                                    <li>Base</li>
+                                    <li>Collector terminals of a transistor</li>
+                                </ol>
+                            </div>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(c) A transistor has a current gain factor &alpha; = 0.95. The transistor is connected in common-emitter configuration. Calculate the change in collector current when the base current is changed by 0.1 mA.</p>
+                            <span class="marks">4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q7 / Q8 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">7.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <div class="flex-1">
+                                <p>(a) Explain the motion of charged particles in a magnetic field when the direction of the magnetic field and its velocity is:</p>
+                                <ol class="list-[decimal] list-inside ml-6 mt-2 space-y-1">
+                                    <li>Parallel</li>
+                                    <li>Perpendicular</li>
+                                </ol>
+                            </div>
+                            <span class="marks">6</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Explain the construction and working of a velocity selector. Write its applications.</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(c) Determine the velocity of ions that pass undeflected through crossed E and B fields for which E = 7.7 kV/m and B = 0.14 T.</p>
+                            <span class="marks">4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">8.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Draw the well-labeled diagram of CRT and explain the use of aquadag coating in it.</p>
+                            <span class="marks">6</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) What is CRO? Explain its use for the measurement of phase and frequency of the AC signal.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(c) Electrons accelerated under a potential of 200 V enters the electric field at an angle of incidence 45&deg; and get refracted through an angle of 30&deg;. Find the potential difference between the two regions.</p>
+                            <span class="marks">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q9 / Q10 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">9.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) What are nanomaterials? Why are the properties of nanomaterials different from bulk materials?</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Discuss in detail the synthesis of nanomaterials by the sol-gel method.</p>
+                            <span class="marks">5</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(c) Explain any four applications of nanomaterials and nanotechnology in engineering.</p>
+                            <span class="marks">4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">10.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Explain the classification of nanomaterials on the basis of their dimensions.</p>
+                            <span class="marks">4</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Explain in detail the synthesis of nanomaterials by the Ball Mill method.</p>
+                            <span class="marks">6</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <div class="flex-1">
+                                <p>(c) Write notes on properties and applications of:</p>
+                                <ol class="list-[decimal] list-inside ml-6 mt-2 space-y-1">
+                                    <li>Graphene</li>
+                                    <li>Zeolite</li>
+                                </ol>
+                            </div>
+                            <span class="marks">4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 2. COMPUTER ARCHITECTURE & ORG (BACK PAPER)    -->
+        <!-- ============================================== -->
+        <div id="cao-back" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-14 shadow-xl border border-gray-300 rounded-sm paper-font">
+             <div class="text-center border-b-[3px] border-black pb-8 mb-10">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Faculty of Science & Technology</h3>
+                <p class="text-[0.95rem] mt-2 font-medium leading-relaxed">Second Semester B.Tech. (CSE/CE/IT/CT/CSE(DS)/CSE (CS)/CSE (AIML)) (CBCS) (NEP) Examination</p>
+                <h1 class="text-3xl font-extrabold mt-6 tracking-wider uppercase underline underline-offset-8">Computer Architecture and Organization</h1>
+                <div class="flex justify-between font-bold mt-8 text-base px-2">
+                    <span>Time: Three Hours]</span>
+                    <span>[Maximum Marks: 70</span>
+                </div>
+            </div>
+
+            <div class="mb-10 pl-6 border-l-4 border-gray-400">
+                <h4 class="font-bold underline mb-3 text-lg">INSTRUCTIONS TO CANDIDATES</h4>
+                <ol class="list-[decimal] list-inside text-base space-y-1.5 font-medium text-gray-800">
+                    <li>All questions carry marks as indicated.</li>
+                    <li>Solve Question No. 1 <b>OR</b> Question No. 2.</li>
+                    <li>Solve Question No. 3 <b>OR</b> Question No. 4.</li>
+                    <li>Solve Question No. 5 <b>OR</b> Question No. 6.</li>
+                    <li>Solve Question No. 7 <b>OR</b> Question No. 8.</li>
+                    <li>Due credit will be given to neatness and adequate dimensions.</li>
+                    <li>Assume suitable data wherever necessary.</li>
+                    <li>Illustrate your answers wherever necessary with the help of neat sketches.</li>
+                </ol>
+            </div>
+
+            <div class="space-y-8 text-lg text-gray-900">
+                <!-- Q1 / Q2 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-xl">1.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(A) Discuss the role of registers in a CPU. Differentiate between the types of registers used in instruction execution.</p>
+                            <span class="marks">9</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(B) Explain the classification of instructions and provide examples of how different types of instructions are executed.</p>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-xl">2.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(A) Explain the instruction execution cycle in a CPU. Describe each phase of the cycle, including fetch, decode, execute, and store, with examples.</p>
+                            <span class="marks">9</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(B) Discuss the significance of each mode, including direct, indirect, indexed, and register addressing, with examples.</p>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q3 / Q4 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">3.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(A) Explain the concept of signed number representation. Discuss the different methods used for representing signed numbers in binary.</p>
+                            <span class="marks">8</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(B) Describe the shift-and-add method for multiplication. Explain how this technique works for both unsigned and signed binary numbers.</p>
+                            <span class="marks">6</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">4.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(A) Discuss how floating-point numbers are represented and how arithmetic operations like addition, subtraction, multiplication, and division are performed.</p>
+                            <span class="marks">8</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(B) Explain the process of integer addition and subtraction in binary. Discuss the use of a ripple carry adder and how it performs these operations.</p>
+                            <span class="marks">6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q5 / Q6 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">5.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(A) Discuss the significance of improving memory access speed and how it is implemented in a system.</p>
+                            <span class="marks">9</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(B) Explain the role of cache memory in a computer system. Discuss how it bridges the gap between the fast CPU and slower main memory.</p>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">6.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(A) Explain the concept of mapping functions used in cache memory. Discuss different types of cache mapping techniques.</p>
+                            <span class="marks">9</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(B) Describe the concept of hierarchical memory organization. Explain the different levels of memory hierarchy (registers, cache, main memory, secondary storage) and their roles in improving system performance.</p>
+                            <span class="marks">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q7 / Q8 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">7.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(A) Compare and contrast interrupt-driven I/O transfer with program-controlled I/O transfer.</p>
+                            <span class="marks">8</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(B) Explain the concept of software interrupts and exceptions. Illustrate with examples how software interrupts and exceptions are used in modern operating systems.</p>
+                            <span class="marks">6</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">8.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(A) Describe the different types of peripheral devices and their characteristics. Discuss how peripheral devices interact with the Central Processing Unit (CPU) through I/O sub-systems.</p>
+                            <span class="marks">8</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(B) Explain how Direct Memory Access (DMA) works for data transfer between peripherals and memory without CPU intervention.</p>
+                            <span class="marks">6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================== -->
+        <!-- 3. CONSCIOUSNESS STUDIES (BACK PAPER)          -->
+        <!-- ============================================== -->
+        <div id="psychology-back" class="paper-container mb-16 max-w-4xl mx-auto bg-white p-8 md:p-14 shadow-xl border border-gray-300 rounded-sm paper-font">
+             <div class="text-center border-b-[3px] border-black pb-8 mb-10">
+                <h3 class="text-xl font-bold uppercase tracking-wide">Faculty of Humanities</h3>
+                <p class="text-[0.95rem] mt-2 font-medium leading-relaxed">Second Semester B.Tech. (CBCS) (NEP) Examination</p>
+                <h1 class="text-3xl font-extrabold mt-6 tracking-wider uppercase underline underline-offset-8">Consciousness Studies</h1>
+                <div class="flex justify-between font-bold mt-8 text-base px-2">
+                    <span>Time: Three Hours]</span>
+                    <span>[Maximum Marks: 70</span>
+                </div>
+            </div>
+
+            <div class="mb-10 pl-6 border-l-4 border-gray-400">
+                <h4 class="font-bold underline mb-3 text-lg">Note:</h4>
+                <ol class="list-[decimal] list-inside text-base space-y-1.5 font-medium text-gray-800">
+                    <li>All questions carry marks as indicated.</li>
+                    <li>Solve Question No. 1 <b>OR</b> Question No. 2.</li>
+                    <li>Solve Question No. 3 <b>OR</b> Question No. 4.</li>
+                    <li>Solve Question No. 5 <b>OR</b> Question No. 6.</li>
+                    <li>Solve Question No. 7 <b>OR</b> Question No. 8.</li>
+                    <li>Solve Question No. 9 <b>OR</b> Question No. 10.</li>
+                </ol>
+            </div>
+
+            <div class="space-y-8 text-lg text-gray-900">
+                <!-- Q1 / Q2 -->
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-xl">1.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Define Psychology &amp; Subject matter.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Explain the origin and historical background of psychology.</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start">
+                    <span class="w-12 font-bold text-xl">2.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Describe two influential schools of psychology.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) What are the main subfields of psychology and their functions?</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q3 / Q4 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">3.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Explain perceptual organization and its principles.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Discuss Extrasensory Perception (ESP) and its types.</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">4.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Explain the process of perception in detail.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) What are the factors that influence perception?</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q5 / Q6 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">5.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Explain observational learning and its conditions.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Discuss the role of nature in classical conditioning.</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">6.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Describe Pavlov's experiment on classical conditioning.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Explain the role of reinforcement and punishment in shaping behavior.</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q7 / Q8 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">7.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Explain the Working-Model Theory of memory with examples.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Describe the key aspects of Short-Term Memory in detail.</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">8.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Discuss the factors responsible for forgetting.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Explain the relationship between brain and memory.</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-gray-800 my-10 border-dashed"></div>
+
+                <!-- Q9 / Q10 -->
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">9.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) Discuss the application of Psychology in Science and Engineering.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Write a brief note on two senses: vision and hearing.</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="or-divider">OR</div>
+                <div class="flex items-start page-break-inside-avoid">
+                    <span class="w-12 font-bold text-xl">10.</span>
+                    <div class="flex-1 space-y-5">
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(a) What is learning? Discuss the characteristics of learning.</p>
+                            <span class="marks">7</span>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <p>(b) Define memory and explain its importance in personal and professional life.</p>
+                            <span class="marks">7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 4. CAO BACK PAPER SOLUTIONS                    -->
+        <!-- ============================================== -->
+        <div id="cao-solutions" class="mb-16 max-w-4xl mx-auto no-print">
+            <div class="text-center mb-8">
+                <span class="inline-block bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3">Visual Solutions</span>
+                <h2 class="text-3xl font-extrabold text-gray-900">CAO Back Paper — Solutions</h2>
+                <p class="text-gray-500 mt-2 text-sm">Computer Architecture &amp; Organization • 70 Marks</p>
+                <a href="CAO/CAO back.html" target="_blank" class="inline-flex items-center gap-2 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-lg font-bold text-sm transition-colors shadow-md">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> Open Full Visual Solutions
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Q1/Q2 -->
+                <div class="bg-white border border-indigo-100 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3"><span class="bg-indigo-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">Q1 &amp; Q2</span><span class="text-sm font-bold text-gray-700">CPU Registers &amp; Instruction Cycle</span></div>
+                    <ul class="text-sm text-gray-600 space-y-1 list-disc ml-4">
+                        <li><strong>Registers:</strong> GPRs (R0–Rn) store operands; Special: PC (next instruction), IR (current), MAR (address bus), MDR (data bus).</li>
+                        <li><strong>Instruction Cycle:</strong> Fetch → Decode → Execute → Store (Write-Back). PC increments after fetch.</li>
+                        <li><strong>Addressing Modes:</strong> Direct, Indirect (pointer), Register (fastest), Indexed (EA = Base + Index).</li>
+                    </ul>
+                </div>
+                <!-- Q3/Q4 -->
+                <div class="bg-white border border-emerald-100 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3"><span class="bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">Q3 &amp; Q4</span><span class="text-sm font-bold text-gray-700">Number Representation &amp; Arithmetic</span></div>
+                    <ul class="text-sm text-gray-600 space-y-1 list-disc ml-4">
+                        <li><strong>Signed Numbers:</strong> Sign-Magnitude (two zeros) → 1's Complement (flip bits) → <strong>2's Complement</strong> (flip+1, modern standard).</li>
+                        <li><strong>Shift-and-Add Multiplication:</strong> Check LSB of multiplier → Add multiplicand if 1 → Shift AQ right. For signed: Booth's Algorithm.</li>
+                        <li><strong>Floating Point (IEEE 754):</strong> 1 Sign + 8 Exponent + 23 Mantissa bits. Add/Sub: align exponents first. Mul: add exponents, multiply mantissas.</li>
+                        <li><strong>Ripple Carry Adder:</strong> Chain of Full Adders. Subtraction = 1's complement of B + Cin=1.</li>
+                    </ul>
+                </div>
+                <!-- Q5/Q6 -->
+                <div class="bg-white border border-amber-100 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3"><span class="bg-amber-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">Q5 &amp; Q6</span><span class="text-sm font-bold text-gray-700">Memory Organization &amp; Cache</span></div>
+                    <ul class="text-sm text-gray-600 space-y-1 list-disc ml-4">
+                        <li><strong>Memory Hierarchy:</strong> Registers (~1ns) → Cache SRAM (~5ns) → Main RAM (~50ns) → Disk (~5ms). Higher = faster + smaller.</li>
+                        <li><strong>Cache Role:</strong> Exploits Temporal &amp; Spatial Locality. On miss: fetches entire Block from RAM.</li>
+                        <li><strong>Mapping:</strong> Direct (1 fixed slot), Fully Associative (any slot), <strong>Set-Associative</strong> (any slot within a set — best balance).</li>
+                        <li><strong>Interleaving:</strong> Memory split into banks; CPU fetches from all banks concurrently to maximize bandwidth.</li>
+                    </ul>
+                </div>
+                <!-- Q7/Q8 -->
+                <div class="bg-white border border-rose-100 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3"><span class="bg-rose-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">Q7 &amp; Q8</span><span class="text-sm font-bold text-gray-700">Peripheral Devices &amp; I/O</span></div>
+                    <ul class="text-sm text-gray-600 space-y-1 list-disc ml-4">
+                        <li><strong>Program-Controlled (Polling):</strong> CPU busy-loops checking device status — wastes CPU cycles.</li>
+                        <li><strong>Interrupt-Driven:</strong> Device signals CPU only when ready — CPU free to do other work between transfers.</li>
+                        <li><strong>DMA:</strong> Dedicated controller handles bulk memory↔device transfers without CPU; raises interrupt only on completion.</li>
+                        <li><strong>Software Interrupts:</strong> System calls (INT 21h) allow user programs to request OS services.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 5. PSYCHOLOGY BACK PAPER SOLUTIONS             -->
+        <!-- ============================================== -->
+        <div id="psychology-solutions" class="mb-16 max-w-4xl mx-auto no-print">
+            <div class="text-center mb-8 mt-16 border-t border-gray-200 pt-16">
+                <span class="inline-block bg-pink-100 text-pink-700 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3">Visual Solutions</span>
+                <h2 class="text-3xl font-extrabold text-gray-900">Psychology Back Paper — Solutions</h2>
+                <p class="text-gray-500 mt-2 text-sm">Consciousness Studies • 70 Marks</p>
+                <a href="Psychology/psychology back papers.html" target="_blank" class="inline-flex items-center gap-2 mt-4 bg-pink-600 hover:bg-pink-700 text-white px-6 py-2.5 rounded-lg font-bold text-sm transition-colors shadow-md">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> Open Full Visual Solutions
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white border border-pink-100 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3"><span class="bg-pink-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">Part A</span><span class="text-sm font-bold text-gray-700">Schools &amp; Basics</span></div>
+                    <ul class="text-sm text-gray-600 space-y-1 list-disc ml-4">
+                        <li><strong>Schools:</strong> Psychoanalysis (Freud, Unconscious) and Behaviorism (Watson, Observable).</li>
+                        <li><strong>Subfields:</strong> Clinical, Cognitive, Developmental, Social, I/O.</li>
+                    </ul>
+                </div>
+                <div class="bg-white border border-purple-100 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3"><span class="bg-purple-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">Part B</span><span class="text-sm font-bold text-gray-700">Perception &amp; Senses</span></div>
+                    <ul class="text-sm text-gray-600 space-y-1 list-disc ml-4">
+                        <li><strong>Gestalt Principles:</strong> Similarity, Proximity, Continuity, Closure.</li>
+                        <li><strong>ESP Types:</strong> Telepathy, Clairvoyance, Precognition, Psychokinesis.</li>
+                        <li><strong>Process:</strong> Selection → Organization → Interpretation.</li>
+                    </ul>
+                </div>
+                <div class="bg-white border border-fuchsia-100 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3"><span class="bg-fuchsia-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">Part C</span><span class="text-sm font-bold text-gray-700">Learning &amp; Memory</span></div>
+                    <ul class="text-sm text-gray-600 space-y-1 list-disc ml-4">
+                        <li><strong>Classical Conditioning:</strong> Pavlov's Dog (UCS, UCR, NS, CS, CR).</li>
+                        <li><strong>Observational Learning:</strong> Attention, Retention, Reproduction, Motivation.</li>
+                        <li><strong>Memory Model:</strong> Central Executive, Phonological Loop, Visuospatial Sketchpad.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-16 text-center text-sm text-gray-500 pb-8 no-print font-medium">
+            <p>End of End-Semester Back Exam Archive &amp; Solutions.</p>
+            <p class="mt-2 text-xs">Digitally Transcribed 70-Mark University Papers</p>
+        </div>
+
+    </main>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

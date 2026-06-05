@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Physics Exam Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; line-height: 1.7; }
+        .solution-card { background-color: #ffffff; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); padding: 1.5rem; margin-bottom: 2rem; }
+        .question-header { font-weight: 800; font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+        .marks-tag { font-size: 0.8rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 9999px; float: right; }
+        .math-block { background-color: #f1f5f9; padding: 0.75rem; border-left: 4px solid #94a3b8; overflow-x: auto; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0; }
+        .diagram-container { background-color: #f8fafc; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; margin: 1rem 0; text-align: center; }
+        .diagram-caption { font-size: 0.8rem; color: #4b5563; margin-top: 0.5rem; font-style: italic; }
+        h3 { color: #0f172a; font-weight: 700; font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p, ul, ol { margin-bottom: 1rem; }
+        ul, ol { margin-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem;}
+        th, td { border: 1px solid #cbd5e1; padding: 0.5rem; text-align: left; }
+        th { background-color: #f1f5f9; color: #334155; }
+        .highlight-answer { background-color: #dcfce7; border: 1px solid #86efac; padding: 0.75rem; border-radius: 0.5rem; font-weight: 700; color: #166534; display: inline-block; }
+        
+        .qa-label { font-weight: 800; color: #334155; }
+
+        .question-box {
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: #1e293b;
+        }
+
+        .theme-blue .question-header { color: #1d4ed8; border-color: #bfdbfe; }
+        .theme-blue .marks-tag { background-color: #dbeafe; color: #1e40af; }
+        .theme-blue .math-block { border-color: #3b82f6; }
+        .theme-blue .question-box { border: 1px solid #bfdbfe; background-color: #eff6ff; }
+
+        .theme-purple .question-header { color: #7e22ce; border-color: #e9d5ff; }
+        .theme-purple .marks-tag { background-color: #f3e8ff; color: #6b21a8; }
+        .theme-purple .math-block { border-color: #a855f7; }
+        .theme-purple .question-box { border: 1px solid #e9d5ff; background-color: #faf5ff; }
+
+        .theme-orange .question-header { color: #c2410c; border-color: #fed7aa; }
+        .theme-orange .marks-tag { background-color: #ffedd5; color: #9a3412; }
+        .theme-orange .math-block { border-color: #ea580c; }
+        .theme-orange .question-box { border: 1px solid #fed7aa; background-color: #fff7ed; }
+
+        .theme-cyan .question-header { color: #0369a1; border-color: #bae6fd; }
+        .theme-cyan .marks-tag { background-color: #e0f2fe; color: #075985; }
+        .theme-cyan .math-block { border-color: #0ea5e9; }
+        .theme-cyan .question-box { border: 1px solid #bae6fd; background-color: #f0f9ff; }
+
+        .theme-emerald .question-header { color: #047857; border-color: #a7f3d0; }
+        .theme-emerald .marks-tag { background-color: #d1fae5; color: #065f46; }
+        .theme-emerald .math-block { border-color: #10b981; }
+        .theme-emerald .question-box { border: 1px solid #a7f3d0; background-color: #ecfdf5; }
+    .tab-btn { transition: all 0.2s; }
+    .tab-btn.active { background: #1e293b; color: #fff; }
+    .tab-section { display: none; }
+    .tab-section.active { display: block; }
+    </style>
+</head>
+<body class="p-4 md:p-8 bg-gray-100 pt-24">
+
+    <!-- Sticky Tab Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50 border-b border-gray-200">
+        <!-- Tab switcher -->
+        <div class="flex justify-center gap-2 px-4 py-2 border-b border-gray-100">
+            <button id="tab-exam-btn" onclick="switchTab('exam')" class="tab-btn active px-5 py-2 rounded-full font-bold text-sm border border-gray-300">📄 Exam Solutions</button>
+            <button id="tab-num-btn" onclick="switchTab('num')" class="tab-btn px-5 py-2 rounded-full font-bold text-sm border border-gray-300 bg-gray-100 text-gray-700">🔢 Numericals & Tutorials</button>
+        </div>
+        <!-- Exam Solutions sub-nav -->
+        <div id="nav-exam" class="py-2 px-4 flex justify-center space-x-3 md:space-x-6 overflow-x-auto whitespace-nowrap text-sm md:text-base font-bold">
+            <a href="#unit1" class="text-blue-600 hover:text-blue-800 transition">U1: Quantum</a>
+            <span class="text-gray-300 hidden sm:inline">|</span>
+            <a href="#unit2" class="text-purple-600 hover:text-purple-800 transition">U2: Opt. Fiber</a>
+            <span class="text-gray-300 hidden sm:inline">|</span>
+            <a href="#unit3" class="text-orange-600 hover:text-orange-800 transition">U3: Semicond.</a>
+            <span class="text-gray-300 hidden sm:inline">|</span>
+            <a href="#unit4" class="text-cyan-600 hover:text-cyan-800 transition">U4: Elec. Optics</a>
+            <span class="text-gray-300 hidden sm:inline">|</span>
+            <a href="#unit5" class="text-emerald-600 hover:text-emerald-800 transition">U5: Nanotech</a>
+        </div>
+        <!-- Numericals sub-nav -->
+        <div id="nav-num" class="py-2 px-4 hidden flex justify-center space-x-3 md:space-x-6 overflow-x-auto whitespace-nowrap text-sm md:text-base font-bold">
+            <a href="#exam-back" onclick="switchTab('num')" class="text-blue-600 hover:text-blue-800 transition">Exam (Q2-Q10)</a>
+            <span class="text-gray-300 hidden sm:inline">|</span>
+            <a href="#tut-u1" onclick="switchTab('num')" class="text-indigo-600 hover:text-indigo-800 transition">Tut: U1 Quantum</a>
+            <span class="text-gray-300 hidden sm:inline">|</span>
+            <a href="#tut-u3" onclick="switchTab('num')" class="text-orange-600 hover:text-orange-800 transition">Tut: U3 Semicond.</a>
+            <span class="text-gray-300 hidden sm:inline">|</span>
+            <a href="#tut-u2" onclick="switchTab('num')" class="text-purple-600 hover:text-purple-800 transition">Tut: U2 Opt. Fiber</a>
+            <span class="text-gray-300 hidden sm:inline">|</span>
+            <a href="#tut-u4" onclick="switchTab('num')" class="text-cyan-600 hover:text-cyan-800 transition">Tut: U4 Elec Optics</a>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto">
+
+    <!-- ======================================================= -->
+    <!-- TAB 1: EXAM SOLUTIONS                                    -->
+    <!-- ======================================================= -->
+    <div id="tab-exam" class="tab-section active">
+        <header class="text-center mb-10 bg-white p-6 rounded-xl shadow-sm border-t-4 border-gray-800">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Master Exam Solutions</h1>
+            <p class="text-gray-600">Pointwise Detailed Guide: Units 1 through 5</p>
+        </header>
+
+        <!-- ================= UNIT 1 ================= -->
+        <section id="unit1" class="scroll-mt-20">
+            <h2 class="text-2xl font-bold text-blue-800 uppercase tracking-widest mb-4 border-b-2 border-blue-200 pb-2">Unit I: Quantum Computing</h2>
+
+            <article class="solution-card theme-blue border-t-8 border-blue-600">
+                <h2 class="question-header">Question 1(a) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Explain Planck's hypothesis. Deduce the expression of deBroglie wavelength for an electron accelerated through a potential difference of V volt.</div>
+                
+                <p class="qa-label mt-4">Answer:</p>
+                <ul class="list-disc">
+                    <li><strong>Planck's Hypothesis:</strong> Proposed to resolve the ultraviolet catastrophe, it states that electromagnetic energy is emitted or absorbed in discrete, indivisible packets called quanta (photons). The energy of each quantum is directly proportional to its frequency: \(E=h\nu\).</li>
+                    <li><strong>de Broglie Wavelength:</strong> Extending wave-particle duality to matter, moving material particles (like electrons) exhibit wave-like properties. Their wavelength is inversely proportional to their momentum (\(\lambda=h/p\)).</li>
+                </ul>
+
+                <h3 class="mt-4">Derivation:</h3>
+                <ul class="list-none">
+                    <li>1. When an electron is accelerated from rest through a potential difference \(V\), the work done transforms entirely into kinetic energy (\(K\)):
+                        <div class="math-block">$$K = eV$$</div>
+                    </li>
+                    <li>2. The classical relationship between momentum (\(p\)) and kinetic energy is derived from \(K = \frac{p^2}{2m}\):
+                        <div class="math-block">$$p = \sqrt{2mK}$$</div>
+                    </li>
+                    <li>3. Substitute the electrostatic kinetic energy (\(K = eV\)):
+                        <div class="math-block">$$p = \sqrt{2meV}$$</div>
+                    </li>
+                    <li>4. Substitute this momentum \(p\) back into de Broglie's fundamental wave equation (\(\lambda = h/p\)):
+                        <div class="math-block">$$\lambda = \frac{h}{\sqrt{2meV}}$$</div>
+                    </li>
+                    <li>5. Inserting the standard constants (Planck's constant \(h\), electron mass \(m_e\), and elementary charge \(e\)) yields the specific formula for an electron:
+                        <div class="highlight-answer mt-2 block w-max">\( \lambda = \frac{12.27}{\sqrt{V}} \text{ Å} \)</div>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-blue">
+                <h2 class="question-header">Question 1(b) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Differentiate Bit and Qubit. Describe the term Quantum entanglement.</div>
+                
+                <p class="qa-label mt-4">Answer:</p>
+                <ul class="list-disc">
+                    <li><strong>Quantum Entanglement:</strong> A deeply non-classical phenomenon where particles interact such that their quantum states become universally linked. Because their states are shared, measuring the exact state of one particle instantaneously forces its entangled partner to collapse into a defined state, regardless of the spatial distance separating them.</li>
+                </ul>
+                
+                <h3 class="mt-4">Difference: Bit vs Qubit</h3>
+                <div class="flex flex-col md:flex-row gap-6 items-center">
+                    <div class="flex-1">
+                        <ul class="list-disc">
+                            <li><strong>State:</strong> A classical Bit is strictly deterministic and binary (always exactly 0 or 1). A Qubit exists in a coherent linear superposition of both states simultaneously (\(\alpha|0\rangle + \beta|1\rangle\)).</li>
+                            <li><strong>Capacity & Processing:</strong> A system of \(n\) bits stores exactly 1 state at a time. A system of \(n\) qubits can hold and process all \(2^n\) possible states simultaneously, granting exponential parallel processing power.</li>
+                            <li><strong>Physical Basis:</strong> Bits are physically implemented using macroscopic voltage thresholds in silicon transistors. Qubits rely on delicate quantum properties of subatomic particles, like electron spin or photon polarization.</li>
+                        </ul>
+                    </div>
+                    <div class="w-full md:w-1/3 diagram-container p-2">
+                        <svg viewBox="0 0 100 100" class="mx-auto">
+                            <defs>
+                                <radialGradient id="sphereGrad" cx="30%" cy="30%" r="70%">
+                                    <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#e2e8f0"/>
+                                </radialGradient>
+                                <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb" />
+                                </marker>
+                            </defs>
+                            <circle cx="50" cy="50" r="40" fill="url(#sphereGrad)" stroke="#94a3b8"/>
+                            <ellipse cx="50" cy="50" rx="40" ry="12" fill="none" stroke="#cbd5e1" stroke-dasharray="2,2"/>
+                            <line x1="50" y1="10" x2="50" y2="90" stroke="#64748b"/>
+                            <line x1="50" y1="50" x2="75" y2="20" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+                            <text x="50" y="8" font-size="8" text-anchor="middle" font-weight="bold">|0⟩</text>
+                            <text x="50" y="98" font-size="8" text-anchor="middle" font-weight="bold">|1⟩</text>
+                            <text x="82" y="18" fill="#2563eb" font-size="10" font-weight="bold">|ψ⟩</text>
+                        </svg>
+                        <p class="diagram-caption mt-2">Bloch Sphere (Qubit representation)</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="solution-card theme-blue">
+                <h2 class="question-header">Question 1(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Calculate the de-Broglie wavelengths of a 150g baseball moving at 35 m/s and an electron accelerated through 120V.</div>
+                
+                <p class="qa-label mt-4">Answer:</p>
+                <ul class="list-none">
+                    <li><strong>Case 1: 150g Baseball at 35 m/s (Macroscopic)</strong>
+                        <ul class="list-disc ml-4 mb-4">
+                            <li>Given: \( m = 0.150 \text{ kg} \), \( v = 35 \text{ m/s} \)</li>
+                            <li>\(\lambda = \frac{h}{mv} = \frac{6.626 \times 10^{-34}}{0.150 \times 35}\)</li>
+                            <li><div class="highlight-answer mt-2 block w-max">\(\lambda = 1.262 \times 10^{-34} \text{ m}\)</div></li>
+                            <li><em>Note: This wavelength is infinitesimally small, showing why wave-particle duality is unobservable in everyday objects.</em></li>
+                        </ul>
+                    </li>
+                    <li><strong>Case 2: Electron at 120 V (Microscopic)</strong>
+                        <ul class="list-disc ml-4">
+                            <li>Given: \( V = 120 \text{ V} \)</li>
+                            <li>Using the shortcut formula: \(\lambda = \frac{12.27}{\sqrt{V}} \text{ Å} = \frac{12.27}{\sqrt{120}} \text{ Å}\)</li>
+                            <li><div class="highlight-answer mt-2 block w-max">\(\lambda = 1.120 \text{ Å}\)</div></li>
+                            <li><em>Note: This wavelength is on the order of atomic spacing, which is why electron diffraction occurs in crystal lattices.</em></li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-blue">
+                <h2 class="question-header">Question 2(a) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Show that the energy of a micro particle confined in an infinite one-dimensional potential well of length 'L' is quantized.</div>
+                
+                <p class="qa-label mt-4">Answer: Derivation</p>
+                <ul class="list-none">
+                    <li>1. Consider a particle in a 1D box of length \(L\). Inside the box (\(0 < x < L\)), the potential \(V=0\). Outside the box, \(V=\infty\). Since the particle cannot escape the infinite walls, the probability of finding it outside is zero, forcing the wave function to vanish at the boundaries (\(\psi=0\)).</li>
+                    <li>2. The time-independent Schrödinger's Equation inside the box simplifies to:
+                        <div class="math-block">$$\frac{d^2\psi}{dx^2} + k^2\psi = 0 \quad \text{where } k^2 = \frac{2mE}{\hbar^2}$$</div>
+                    </li>
+                    <li>3. The general mathematical solution for this harmonic equation is:
+                        <div class="math-block">$$\psi(x) = A\sin(kx) + B\cos(kx)$$</div>
+                    </li>
+                    <li>4. Applying Boundary Condition 1 (\(x = 0, \psi = 0\)):
+                        <div class="math-block">$$0 = A(0) + B(1) \implies B = 0 \implies \psi(x) = A\sin(kx)$$</div>
+                    </li>
+                    <li>5. Applying Boundary Condition 2 (\(x = L, \psi = 0\)):
+                        <div class="math-block">$$0 = A\sin(kL) \implies kL = n\pi \implies k = \frac{n\pi}{L}$$</div>
+                        <em>(where \(n\) is an integer \(1, 2, 3 \dots\))</em>
+                    </li>
+                    <li>6. Equating our two definitions of \( k^2 \):
+                        <div class="math-block">$$\frac{2mE}{\hbar^2} = \frac{n^2\pi^2}{L^2}$$</div>
+                    </li>
+                    <li>7. Substituting the reduced Planck's constant \( \hbar = \frac{h}{2\pi} \), the \(\pi^2\) terms cancel:
+                        <div class="highlight-answer mt-2 block w-max">$$E_n = \frac{n^2 h^2}{8mL^2}$$</div>
+                    </li>
+                    <li><em>Conclusion: The energy \(E_n\) is directly proportional to \(n^2\), proving it is quantized. Furthermore, the lowest energy state (\(n=1\)) is non-zero, meaning the particle is never perfectly at rest (Zero-point energy).</em></li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-blue">
+                <h2 class="question-header">Question 2(b) & 2(c) <span class="marks-tag">9 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> What is a wave function (\(\psi\))? Explain its physical significance. Calculate the Uncertainty in position of a 50g bullet at 30 m/s (0.01% accuracy) and an electron at 30 m/s (0.01% accuracy).</div>
+                
+                <p class="qa-label mt-4">Answer: Wave Function & Significance</p>
+                <ul class="list-disc">
+                    <li><strong>Wave Function (\(\psi\)):</strong> A complex-valued mathematical function that contains all the dynamical information and fully describes the quantum state of a thermodynamic system or isolated particle.</li>
+                    <li><strong>Physical Significance (Born's Interpretation):</strong> Because \(\psi\) is a complex number, it cannot be measured directly and has no physical meaning on its own. However, its squared absolute magnitude \(|\psi|^2\) represents the <strong>probability density</strong> of finding the particle at a specific location in space.</li>
+                    <li><strong>Acceptability Conditions:</strong> To represent physical reality, \(\psi\) must be single-valued (no multiple probabilities for one spot), continuous (no breaks), finite, and normalizable (total universe probability equals 1).</li>
+                </ul>
+                
+                <p class="qa-label mt-4">Answer: Uncertainty Calculation</p>
+                <ul class="list-none">
+                    <li>Common velocity uncertainty based on 0.01% accuracy: \( \Delta v = 30 \times 0.0001 = 0.003 \text{ m/s} \).</li>
+                    <li>Heisenberg's Formula: \( \Delta x \cdot \Delta p \ge \frac{h}{4\pi} \implies \Delta x = \frac{h}{4\pi m \Delta v} \)</li>
+                    <li><strong>1. Bullet (0.05 kg):</strong>
+                        <div class="math-block">$$\Delta x = \frac{6.626 \times 10^{-34}}{4\pi (0.05)(0.003)} = 3.515 \times 10^{-31} \text{ m}$$</div>
+                    </li>
+                    <li><strong>2. Electron (\(9.11 \times 10^{-31} \text{ kg}\)):</strong>
+                        <div class="math-block">$$\Delta x = \frac{6.626 \times 10^{-34}}{4\pi (9.11 \times 10^{-31})(0.003)} = 0.0193 \text{ m} \text{ (or 1.93 cm)}$$</div>
+                    </li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- ================= UNIT 2 ================= -->
+        <section id="unit2" class="scroll-mt-20">
+            <h2 class="text-2xl font-bold text-purple-800 uppercase tracking-widest mb-4 border-b-2 border-purple-200 pb-2 mt-8">Unit II: Optical Fiber</h2>
+
+            <article class="solution-card theme-purple border-t-8 border-purple-600">
+                <h2 class="question-header">Question 3(a) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Derive the mathematical expression for the numerical aperture and acceptance angle for optical fibre.</div>
+                
+                <p class="qa-label mt-4">Answer: Definitions</p>
+                <ul class="list-disc">
+                    <li><strong>Numerical Aperture (NA):</strong> A dimensionless parameter characterizing the light-gathering capability of the optical fiber.</li>
+                    <li><strong>Acceptance Angle (\(\theta_a\)):</strong> The maximum angle of incidence (relative to the fiber axis) at the entry face, at which light rays will be successfully guided via Total Internal Reflection (TIR). Note that TIR requires the core index to be greater than the cladding index (\(n_1 > n_2\)).</li>
+                </ul>
+
+                <div class="diagram-container bg-white">
+                    <svg viewBox="0 0 500 150" class="w-full max-w-md mx-auto drop-shadow-sm">
+                        <rect x="150" y="30" width="300" height="20" fill="#f3e8ff"/>
+                        <rect x="150" y="100" width="300" height="20" fill="#f3e8ff"/>
+                        <rect x="150" y="50" width="300" height="50" fill="#d8b4fe" opacity="0.4"/>
+                        <line x1="20" y1="75" x2="480" y2="75" stroke="#94a3b8" stroke-dasharray="8,4" stroke-width="2"/>
+                        <line x1="30" y1="125" x2="150" y2="75" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="150" y1="75" x2="250" y2="50" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="250" y1="50" x2="350" y2="75" stroke="#ef4444" stroke-width="3" stroke-dasharray="4,4"/>
+                        <line x1="150" y1="40" x2="150" y2="110" stroke="#1e293b" stroke-dasharray="2,2"/>
+                        <line x1="250" y1="30" x2="250" y2="75" stroke="#1e293b" stroke-dasharray="2,2"/>
+                        <path d="M 110 75 A 40 40 0 0 0 115 90" fill="none" stroke="#1e293b" stroke-width="2"/>
+                        <text x="100" y="100" font-weight="bold">θa</text>
+                        <path d="M 180 75 A 30 30 0 0 0 175 69" fill="none" stroke="#1e293b" stroke-width="2"/>
+                        <text x="185" y="67" font-weight="bold">θr</text>
+                        <path d="M 230 55 A 20 20 0 0 0 250 60" fill="none" stroke="#1e293b" stroke-width="2"/>
+                        <text x="225" y="70" font-weight="bold">θc</text>
+                    </svg>
+                </div>
+
+                <h3 class="mt-4">Derivation:</h3>
+                <ul class="list-none">
+                    <li>1. Applying Snell's Law at the external Air-Core interface:
+                        <div class="math-block">$$n_0 \sin\theta_a = n_1 \sin\theta_r$$</div>
+                    </li>
+                    <li>2. From the right-triangle geometry inside the core (\(\theta_r + \theta_c = 90^\circ\)):
+                        <div class="math-block">$$\sin\theta_r = \cos\theta_c$$</div>
+                    </li>
+                    <li>3. Applying Snell's Law at the Core-Cladding interface for the critical TIR condition (refracted angle = \(90^\circ\)):
+                        <div class="math-block">$$n_1 \sin\theta_c = n_2 \sin(90^\circ) \implies \sin\theta_c = \frac{n_2}{n_1}$$</div>
+                    </li>
+                    <li>4. Using the trigonometric identity \(\cos\theta_c = \sqrt{1 - \sin^2\theta_c}\):
+                        <div class="math-block">$$\cos\theta_c = \frac{\sqrt{n_1^2 - n_2^2}}{n_1}$$</div>
+                    </li>
+                    <li>5. Substitute this back into the first equation (\(n_0 \sin\theta_a = n_1 \cos\theta_c\)):
+                        <div class="math-block">$$n_0 \sin\theta_a = n_1 \left( \frac{\sqrt{n_1^2 - n_2^2}}{n_1} \right) = \sqrt{n_1^2 - n_2^2}$$</div>
+                    </li>
+                    <li>6. Final Expressions:
+                        <div class="highlight-answer mt-2 block w-max">
+                            \(NA = \sqrt{n_1^2 - n_2^2}\)<br>
+                            \(\theta_a = \sin^{-1}\left( \frac{\sqrt{n_1^2 - n_2^2}}{n_0} \right)\)
+                        </div>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-purple">
+                <h2 class="question-header">Question 3(b) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Classification of optical fibre on index profile.</div>
+                
+                <p class="qa-label mt-4">Answer: Classification</p>
+                <ul class="list-disc">
+                    <li><strong>Step-Index Fiber:</strong> The refractive index of the core is perfectly uniform and drops abruptly (in a sharp step) at the cladding interface. It is cheaper to manufacture but suffers from high modal dispersion because rays reflecting at steep angles take significantly longer to traverse the fiber than axial rays.</li>
+                    <li><strong>Graded-Index Fiber (GRIN):</strong> The core's refractive index is maximum at the center axis and decreases parabolically towards the cladding. Because light travels faster in mediums with a lower index, rays curving near the cladding speed up, equalizing their travel time with the shorter central rays, effectively minimizing modal dispersion.</li>
+                </ul>
+            </article>
+            
+            <article class="solution-card theme-purple">
+                <h2 class="question-header">Question 3(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> An optical fibre has a NA of 0.3 and cladding of refractive index of 1.3. Determine the acceptance angle for the fibre in water which has refractive index of 1.33.</div>
+
+                <p class="qa-label mt-4">Answer: Acceptance Angle Calculation</p>
+                <ul class="list-none">
+                    <li>Given: \(\text{NA} = \sqrt{n_1^2 - n_2^2} = 0.3\), Water medium index \(n_0 = 1.33\).</li>
+                    <li>Formula incorporating the surrounding medium: \( n_0 \sin\theta_{aw} = \text{NA} \)</li>
+                    <li>
+                        <div class="math-block">$$1.33 \sin\theta_{aw} = 0.3 \implies \sin\theta_{aw} = \frac{0.3}{1.33} = 0.22556$$</div>
+                    </li>
+                    <li>
+                        <div class="highlight-answer mt-2 block w-max">\(\theta_{aw} = \sin^{-1}(0.22556) = 13.04^\circ \)</div>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-purple">
+                <h2 class="question-header">Question 4(a) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> What is attenuation? Express the various mechanisms of attenuation in optical fibers.</div>
+                
+                <p class="qa-label mt-4">Answer: Attenuation & Mechanisms</p>
+                <ul class="list-disc">
+                    <li><strong>Attenuation:</strong> The progressive reduction or loss of optical signal power as light travels down the length of the fiber. It limits transmission distance and is measured in dB/km.</li>
+                    <li><strong>Absorption Loss:</strong> Optical energy is absorbed and converted into heat. This occurs intrinsically due to pure silica atomic resonance, or extrinsically due to trapped impurities like OH⁻ (water) ions or transition metals during manufacturing.</li>
+                    <li><strong>Scattering Loss (Rayleigh):</strong> Deviation of light rays due to microscopic, localized glass density and composition variations that are permanently frozen into the glass as it cools. This is the dominant loss factor at shorter wavelengths (\(\text{Loss} \propto 1/\lambda^4\)).</li>
+                    <li><strong>Bending Loss:</strong> Radiation of light energy escaping out of the core into the cladding. This happens during macro-bends (when the fiber is physically curved too tightly) or micro-bends (microscopic mechanical stresses acting on the fiber).</li>
+                </ul>
+            </article>
+                
+            <article class="solution-card theme-purple">
+                <h2 class="question-header">Question 4(b) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Describe the application of optical fiber as a sensor.</div>
+
+                <p class="qa-label mt-4">Answer: Fiber as a Sensor</p>
+                <ul class="list-disc">
+                    <li><strong>Working Principle:</strong> Because light propagation is highly sensitive to the medium, an external stimulus (like temperature, physical pressure, or mechanical strain) physically alters the fiber's geometry or local refractive index. This directly modulates the transmitted light's intensity, phase, or wavelength, which is then measured to calculate the external parameter.</li>
+                    <li><strong>Real-World Examples:</strong> Fiber Bragg Gratings (FBG) are used as strain and temperature monitors embedded directly into bridges and airplane wings. Hydrophones utilize acoustic waves to alter the optical phase for advanced underwater sonar sensing.</li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-purple">
+                <h2 class="question-header">Question 4(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Express attenuation in dB/Km, if 15% of the power fed at launching end of 1/2 km fibre is lost during propagation.</div>
+
+                <p class="qa-label mt-4">Answer: Calculation</p>
+                <ul class="list-none">
+                    <li>Given: Length \(L = 0.5 \text{ km}\). Since 15% of the power is lost, 85% successfully reaches the output, so \( P_{out} = 0.85 P_{in} \).</li>
+                    <li>Standard Attenuation Formula: \( \alpha = \frac{10}{L} \log_{10}\left(\frac{P_{in}}{P_{out}}\right) \)</li>
+                    <li>
+                        <div class="math-block">$$\alpha = \frac{10}{0.5} \log_{10}\left(\frac{1}{0.85}\right) = 20 \times 0.07058$$</div>
+                    </li>
+                    <li><div class="highlight-answer mt-2 block w-max">Attenuation \(\alpha = 1.4116 \text{ dB/km}\)</div></li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- ================= UNIT 3 ================= -->
+        <section id="unit3" class="scroll-mt-20">
+            <div class="flex items-center mb-6 mt-12">
+                <div class="h-1 flex-grow bg-orange-200"></div>
+                <h2 class="px-6 text-2xl font-bold text-orange-800 uppercase tracking-widest">Unit III: Semiconductors</h2>
+                <div class="h-1 flex-grow bg-orange-200"></div>
+            </div>
+
+            <article class="solution-card theme-orange border-t-8 border-orange-500">
+                <h2 class="question-header">Question 5(a) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Define Electrical Conductivity of metal and derive expression for Electrical Conductivity.</div>
+                
+                <p class="qa-label mt-4">Answer:</p>
+                <ul class="list-disc">
+                    <li><strong>Electrical Conductivity (\(\sigma\)):</strong> The fundamental measure of a material's ability to transport an electric charge. Macroscopically, it is defined as the ratio of current density to the applied electric field (\(\sigma = J/E\)).</li>
+                </ul>
+                
+                <h3 class="mt-4">Derivation:</h3>
+                <ul class="list-none">
+                    <li>1. Consider \(n\) free electrons (charge \(e\), mass \(m\)). The electrostatic force on an electron in an electric field \(E\) is:
+                        <div class="math-block">$$F = eE$$</div>
+                    </li>
+                    <li>2. By Newton's second law, this induces an acceleration (\(a\)):
+                        <div class="math-block">$$a = \frac{F}{m} = \frac{eE}{m}$$</div>
+                    </li>
+                    <li>3. The electrons collide with the crystal lattice but acquire a steady average terminal speed called the drift velocity (\(v_d\)) over a relaxation time \(\tau\):
+                        <div class="math-block">$$v_d = a\tau = \frac{eE\tau}{m}$$</div>
+                    </li>
+                    <li>4. The electric current density (\(J\)) relates to drift velocity as \(J = n e v_d\). Substituting \(v_d\):
+                        <div class="math-block">$$J = n e \left( \frac{eE\tau}{m} \right) = \left( \frac{n e^2 \tau}{m} \right) E$$</div>
+                    </li>
+                    <li>5. Comparing this to the microscopic form of Ohm's law (\(J = \sigma E\)) gives the final expression:
+                        <div class="highlight-answer mt-2 block w-max">$$\sigma = \frac{n e^2 \tau}{m}$$</div>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-orange">
+                <h2 class="question-header">Question 5(b) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Discuss the classification of material on the basis of band gap.</div>
+                
+                <p class="qa-label mt-4">Answer: Classification</p>
+                <ul class="list-disc">
+                    <li><strong>Insulators:</strong> Characterized by a massive forbidden band gap (\(E_g > 3\text{ eV}\)). The valence band is completely full, and the conduction band is completely empty. Electrons cannot gain sufficient ambient thermal energy to jump this gap, resulting in zero electrical conductivity at normal temperatures.</li>
+                    <li><strong>Semiconductors:</strong> Possess a relatively narrow band gap (\(E_g \approx 1\text{ eV}\)). At absolute zero (0K), they act identically to insulators. However, at room temperature, thermal energy is high enough to excite a small fraction of electrons across the gap into the conduction band, allowing moderate, controllable conductivity.</li>
+                    <li><strong>Conductors (Metals):</strong> The Conduction and Valence energy bands physically overlap, meaning there is no forbidden gap at all (\(E_g = 0\)). The continuous availability of abundant free electrons yields extremely high electrical conductivity.</li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-orange">
+                <h2 class="question-header">Question 5(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Calculate the drift velocity of the free electrons with a mobility of \(3.5 \times 10^{-3} \text{ m}^2/\text{Vs}\) in Copper for electric field strength of \(0.5 \text{ Vm}^{-1}\).</div>
+
+                <p class="qa-label mt-4">Answer: Drift Velocity Calculation</p>
+                <ul class="list-none">
+                    <li>Formula relating drift velocity to electric field via mobility: \(v_d = \mu E\)</li>
+                    <li><div class="math-block">$$v_d = (3.5 \times 10^{-3} \text{ m}^2/\text{Vs}) \times 0.5 \text{ V/m}$$</div></li>
+                    <li><div class="highlight-answer mt-2 block w-max">\(v_d = 1.75 \times 10^{-3} \text{ m/s}\)</div></li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-orange">
+                <h2 class="question-header">Question 6(a) <span class="marks-tag">2+3 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Draw the symbol of PNP and NPN Transistor. Explain the function of Emitter, Base and Collector.</div>
+                
+                <p class="qa-label mt-4">Answer: BJT Symbols</p>
+                <div class="flex gap-4 mb-4">
+                    <div class="text-center bg-white border p-2 rounded"><svg viewBox="0 0 100 100" class="w-16"><circle cx="50" cy="50" r="40" fill="none" stroke="#000"/><line x1="10" y1="50" x2="35" y2="50" stroke="#000"/><line x1="35" y1="30" x2="35" y2="70" stroke="#000" stroke-width="3"/><line x1="35" y1="40" x2="70" y2="20" stroke="#000"/><line x1="35" y1="60" x2="70" y2="80" stroke="#000"/><polygon points="65,80 55,70 70,70" fill="#000" transform="rotate(30 65 80)"/></svg><p class="text-xs font-bold">NPN (Arrow Out)</p></div>
+                    <div class="text-center bg-white border p-2 rounded"><svg viewBox="0 0 100 100" class="w-16"><circle cx="50" cy="50" r="40" fill="none" stroke="#000"/><line x1="10" y1="50" x2="35" y2="50" stroke="#000"/><line x1="35" y1="30" x2="35" y2="70" stroke="#000" stroke-width="3"/><line x1="35" y1="40" x2="70" y2="20" stroke="#000"/><line x1="35" y1="60" x2="70" y2="80" stroke="#000"/><polygon points="45,65 55,75 55,60" fill="#000" transform="rotate(30 45 65)"/></svg><p class="text-xs font-bold">PNP (Arrow In)</p></div>
+                </div>
+
+                <p class="qa-label mt-4">Answer: Region Functions</p>
+                <ul class="list-disc mb-4">
+                    <li><strong>Emitter (E):</strong> The most heavily doped region. In active mode, it is strictly forward-biased. Its primary function is to inject/emit a massive supply of majority charge carriers into the base region.</li>
+                    <li><strong>Base (B):</strong> An extremely thin and very lightly doped central region. Its geometry and low doping intentionally minimize carrier recombination, effectively controlling the flow of carriers passing from the emitter to the collector.</li>
+                    <li><strong>Collector (C):</strong> Moderately doped and possessing the largest physical size. Because it operates under high reverse bias, it generates significant heat. Its large size safely dissipates this heat while fulfilling its primary function of collecting the arriving carriers.</li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-orange">
+                <h2 class="question-header">Question 6(b) <span class="marks-tag">2+3 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> What is Tunnel Diode with symbolic diagram? Draw V-I Characteristics of Tunnel Diode.</div>
+
+                <p class="qa-label mt-4">Answer: Tunnel Diode</p>
+                <ul class="list-disc mb-4">
+                    <li><strong>Definition:</strong> An Esaki or Tunnel diode is an extremely heavily doped PN junction diode. The ultra-high doping creates an incredibly thin depletion region. Unlike classical diodes, electrons here quantum tunnel directly through the potential barrier, resulting in a unique V-I curve featuring a <strong>Negative Resistance</strong> region (where increasing the voltage paradoxically decreases the current).</li>
+                </ul>
+                <div class="flex flex-col md:flex-row items-center justify-around gap-8 diagram-container bg-white">
+                    <div class="text-center">
+                        <svg viewBox="0 0 150 100" class="w-32 h-24 mx-auto drop-shadow-sm">
+                            <line x1="10" y1="50" x2="60" y2="50" stroke="#1e293b" stroke-width="4"/>
+                            <polygon points="60,20 60,80 100,50" fill="#ea580c"/>
+                            <line x1="100" y1="20" x2="100" y2="80" stroke="#1e293b" stroke-width="4"/>
+                            <line x1="100" y1="20" x2="115" y2="20" stroke="#1e293b" stroke-width="4"/>
+                            <line x1="100" y1="80" x2="115" y2="80" stroke="#1e293b" stroke-width="4"/>
+                            <line x1="100" y1="50" x2="140" y2="50" stroke="#1e293b" stroke-width="4"/>
+                        </svg>
+                        <p class="font-bold text-orange-800 text-sm mt-2">Tunnel Diode Symbol</p>
+                    </div>
+                    <div class="text-center w-full max-w-xs">
+                        <svg viewBox="0 0 300 250" class="w-full drop-shadow-sm bg-gray-50 border border-gray-200 p-2 rounded">
+                            <line x1="30" y1="220" x2="280" y2="220" stroke="#64748b" stroke-width="2"/>
+                            <line x1="50" y1="240" x2="50" y2="20" stroke="#64748b" stroke-width="2"/>
+                            <text x="285" y="215" font-weight="bold" font-size="12">V</text>
+                            <text x="50" y="10" text-anchor="middle" font-weight="bold" font-size="12">I</text>
+                            <path d="M 50 220 Q 70 50 90 60 C 120 70, 140 180, 180 180 C 220 180, 240 100, 270 40" fill="none" stroke="#ea580c" stroke-width="3"/>
+                            <circle cx="90" cy="60" r="4" fill="#1e293b"/><text x="90" y="50" text-anchor="middle" font-size="10" font-weight="bold">Peak</text>
+                            <circle cx="160" cy="177" r="4" fill="#1e293b"/><text x="160" y="195" text-anchor="middle" font-size="10" font-weight="bold">Valley</text>
+                            <line x1="90" y1="60" x2="160" y2="177" stroke="#3b82f6" stroke-width="8" opacity="0.3" stroke-linecap="round"/>
+                            <text x="165" y="110" font-size="10" fill="#2563eb" font-weight="bold">Negative Resistance</text>
+                        </svg>
+                        <p class="font-bold text-orange-800 mt-2 text-sm">V-I Characteristics</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="solution-card theme-orange">
+                <h2 class="question-header">Question 6(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Evaluate dc current gain for a PNP transistor in a common emitter mode if collector current is 2mA and base current is 20 \(\mu\)A.</div>
+                
+                <p class="qa-label mt-4">Answer: DC Current Gain (\(\beta\))</p>
+                <ul class="list-none">
+                    <li>Given: \(I_C = 2 \text{ mA}\), \(I_B = 20 \mu\text{A} = 0.02 \text{ mA}\).</li>
+                    <li><div class="math-block">$$\beta = \frac{I_C}{I_B} = \frac{2}{0.02}$$</div></li>
+                    <li><div class="highlight-answer mt-2 block w-max">\(\beta = 100\)</div></li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- ================= UNIT 4 ================= -->
+        <section id="unit4" class="scroll-mt-20">
+            <div class="flex items-center mb-6 mt-12">
+                <div class="h-1 flex-grow bg-cyan-200"></div>
+                <h2 class="px-6 text-2xl font-bold text-cyan-800 uppercase tracking-widest">Unit IV: Electron Optics</h2>
+                <div class="h-1 flex-grow bg-cyan-200"></div>
+            </div>
+
+            <article class="solution-card theme-cyan border-t-8 border-cyan-600">
+                <h2 class="question-header">Question 7(a) <span class="marks-tag">6 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Deduce the expression of Bethe's law. Discuss similarities and differences between Bethe's law and Snell's law.</div>
+                
+                <p class="qa-label mt-4">Answer: Bethe's Law Derivation</p>
+                <ul class="list-none">
+                    <li>1. Since the electrostatic field driving the electron acts purely perpendicular to the equipotential boundary separating regions 1 and 2, there is no force parallel to the boundary. Thus, the tangential velocity component remains perfectly constant:
+                        <div class="math-block">$$v_1 \sin\theta_1 = v_2 \sin\theta_2 \implies \frac{\sin\theta_1}{\sin\theta_2} = \frac{v_2}{v_1}$$</div>
+                    </li>
+                    <li>2. Using the law of conservation of energy (\(\frac{1}{2}mv^2 = eV\)), velocity is proportional to the square root of the regional potential:
+                        <div class="math-block">$$v_1 = \sqrt{\frac{2e}{m}V_1} \quad ; \quad v_2 = \sqrt{\frac{2e}{m}V_2}$$</div>
+                    </li>
+                    <li>3. Substitute these velocity relationships into the sine ratio:
+                        <div class="highlight-answer mt-2 block w-max">$$\frac{\sin\theta_1}{\sin\theta_2} = \sqrt{\frac{V_2}{V_1}}$$</div>
+                    </li>
+                </ul>
+
+                <p class="qa-label mt-4">Answer: Comparison</p>
+                <ul class="list-disc">
+                    <li><strong>Equation:</strong> Snell's Law for photons is \(\frac{\sin\theta_1}{\sin\theta_2} = \frac{v_1}{v_2}\). Bethe's Law for electrons is inverted with respect to velocity: \(\frac{\sin\theta_1}{\sin\theta_2} = \frac{v_2}{v_1}\).</li>
+                    <li><strong>Bending Mechanics:</strong> Light refracts and bends towards the normal when entering a denser medium where its velocity fundamentally <strong>decreases</strong>. In stark contrast, electrons bend towards the normal when entering a higher potential region where their kinetic velocity <strong>increases</strong>.</li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-cyan">
+                <h2 class="question-header">Question 7(b) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Show that electron describe a parabolic path when it enters in uniform transverse electric field.</div>
+                
+                <p class="qa-label mt-4">Answer: Parabolic Path Derivation</p>
+                <ul class="list-none">
+                    <li>This derivation closely mimics projectile motion under gravity.</li>
+                    <li>1. <strong>X-axis motion:</strong> With no horizontal electric force, horizontal velocity \(v_x\) is constant.
+                        <div class="math-block">$$x = v_x t \implies t = \frac{x}{v_x}$$</div>
+                    </li>
+                    <li>2. <strong>Y-axis motion:</strong> The transverse field \(E\) exerts a constant force, giving a constant vertical acceleration \(a_y = \frac{eE}{m}\).
+                        <div class="math-block">$$y = \frac{1}{2}a_y t^2 = \frac{1}{2}\left(\frac{eE}{m}\right)t^2$$</div>
+                    </li>
+                    <li>3. Substitute the time \(t\):
+                        <div class="math-block">$$y = \frac{1}{2}\left(\frac{eE}{m}\right)\left(\frac{x}{v_x}\right)^2 = \left(\frac{eE}{2mv_x^2}\right)x^2$$</div>
+                    </li>
+                    <li>4. Result: Since all terms in the parenthesis are constants, let them equal \(K\):
+                        <div class="highlight-answer mt-2 block w-max">\(y = Kx^2\)</div>
+                    </li>
+                    <li><em>Conclusion: The equation \(y = Kx^2\) is the standard geometric formula for a parabola, proving the path is parabolic.</em></li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-cyan">
+                <h2 class="question-header">Question 7(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Determine the velocity of ions that pass undeflected through crossed E and B fields for which \(E=7.7kV/m\) and \(B=0.14T\).</div>
+                
+                <p class="qa-label mt-4">Answer: Undeflected Velocity Calculation</p>
+                <ul class="list-none">
+                    <li>Condition: For zero deflection in a velocity selector, the opposing Electric and Magnetic forces must exactly cancel out.</li>
+                    <li>Formula: \(F_e = F_m \implies qE = qvB \implies v = \frac{E}{B}\)</li>
+                    <li><div class="math-block">$$v = \frac{7700 \text{ V/m}}{0.14 \text{ T}}$$</div></li>
+                    <li><div class="highlight-answer mt-2 block w-max">\(v = 55,000 \text{ m/s}\)</div></li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- ================= UNIT 5 ================= -->
+        <section id="unit5" class="scroll-mt-20 mb-24">
+            <div class="flex items-center mb-6 mt-12">
+                <div class="h-1 flex-grow bg-emerald-200"></div>
+                <h2 class="px-6 text-2xl font-bold text-emerald-800 uppercase tracking-widest">Unit V: Nanotechnology</h2>
+                <div class="h-1 flex-grow bg-emerald-200"></div>
+            </div>
+
+            <article class="solution-card theme-emerald border-t-8 border-emerald-600">
+                <h2 class="question-header">Question 8(a) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Explain the concept of Nanotechnology.</div>
+
+                <p class="qa-label mt-4">Answer: Concept</p>
+                <ul class="list-disc">
+                    <li><strong>Nanotechnology:</strong> The multidisciplinary science of controlling and engineering materials exactly at the 1-100 nm scale, where classical physics laws fade and quantum effects dominate material behavior.</li>
+                    <li><strong>High Surface/Volume Ratio:</strong> As size shrinks to the nanoscale, a massive percentage of atoms reside on the exposed surface. This causes immense chemical reactivity, lowers melting points, and results in extraordinary catalytic efficiency compared to bulk materials.</li>
+                    <li><strong>Quantum Confinement:</strong> Inside nanoparticles, the continuous energy bands of bulk metals fracture into discrete, quantized energy levels. This fundamentally changes the optical and electrical properties of the material (e.g., gold nanoparticles changing color from yellow to red/purple based purely on particle diameter).</li>
+                </ul>
+            </article>
+            
+            <article class="solution-card theme-emerald">
+                <h2 class="question-header">Question 8(b) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Differentiate between Top-Down and Bottom-Up synthesis approaches.</div>
+
+                <p class="qa-label mt-4">Answer: Synthesis Approaches</p>
+                <ul class="list-disc">
+                    <li><strong>Top-Down (Destructive):</strong> This approach acts like a sculptor, breaking massive bulk materials mechanically or chemically down to nanoscale dimensions (e.g., Ball Milling, Lithography).
+                        <br><em>Pros:</em> Highly scalable for heavy industry, fast production. 
+                        <br><em>Cons:</em> Generates heavy internal lattice stress, impurities, and surface defects.</li>
+                    <li><strong>Bottom-Up (Constructive):</strong> This approach relies on thermodynamic forces to chemically assemble nanostructures atom-by-atom or molecule-by-molecule (e.g., Sol-gel, Self-assembly).
+                        <br><em>Pros:</em> Yields extreme high purity, molecular precision, and zero structural defects. 
+                        <br><em>Cons:</em> Very slow processing time, expensive and difficult to scale up.</li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-emerald">
+                <h2 class="question-header">Question 9(a) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Describe Ball Milling and Sol-Gel processes.</div>
+
+                <p class="qa-label mt-4">Answer: Synthesis Processes Details</p>
+                <ul class="list-disc">
+                    <li><strong>Ball Milling (Top-Down):</strong> A rotating cylindrical drum filled with hardened steel/ceramic balls violently impacts the bulk precursor powder. The continuous high-energy kinetic impacts repeatedly fracture the material into nanoparticles via severe plastic deformation and cold welding.</li>
+                    <li><strong>Sol-Gel (Bottom-Up):</strong> A multi-step wet-chemical technique. Liquid precursors (metal alkoxides) are mixed with water (hydrolysis) to form a colloidal liquid suspension (<strong>Sol</strong>). These particles chemically link together (condensation) into an integrated 3D continuous network (<strong>Gel</strong>), which is subsequently dried and calcined to yield extremely pure nanoscale metal oxides.</li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-emerald">
+                <h2 class="question-header">Question 9(b) <span class="marks-tag">5 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Discuss the properties of Zeolites and Graphene.</div>
+
+                <p class="qa-label mt-4">Answer: Special Nanomaterials</p>
+                <ul class="list-disc">
+                    <li><strong>Zeolites:</strong> Microporous, crystalline aluminosilicate minerals possessing a remarkably rigid 3D framework of interconnected nanoscale pores and channels. Their highly specific geometry allows them to act as physical "molecular sieves" and they are used extensively as cracking catalysts in petroleum oil refining.</li>
+                    <li><strong>Graphene:</strong> A 2-Dimensional single atomic layer of carbon arranged seamlessly in a hexagonal (honeycomb) lattice. Its electrons behave as massless relativistic particles, yielding unprecedented electrical and thermal conductivity. It is highly transparent yet measurably 200 times stronger than structural steel.</li>
+                </ul>
+            </article>
+
+            <article class="solution-card theme-emerald">
+                <h2 class="question-header">Question 9(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> List the real-world applications of Nanotechnology.</div>
+
+                <p class="qa-label mt-4">Answer: Applications across Disciplines</p>
+                <ul class="list-disc">
+                    <li><strong>Modern Medicine:</strong> Targeted drug delivery (using engineered gold or lipid nanoparticles to transport highly toxic chemotherapy drugs exclusively into tumors without harming healthy cells) and highly sensitive nano-biosensors for early disease detection.</li>
+                    <li><strong>Next-Gen Electronics:</strong> Commercial Quantum Dot displays (QLED) producing vibrant colors based entirely on particle diameter, and crucial scaling of ultra-fast nano-transistors below 3nm in modern CPUs.</li>
+                    <li><strong>Green Energy:</strong> Utilization in highly efficient, lightweight flexible solar cells, and advanced reactive catalysts that vastly increase the surface area inside lithium-ion batteries and hydrogen fuel cells.</li>
+                    <li><strong>Advanced Materials:</strong> Engineering of self-cleaning surface coatings (mimicking the biological Lotus effect), ultra-stain-resistant synthetic fabrics, and ultra-strong, lightweight carbon-nanotube composites deployed in aerospace engineering.</li>
+                </ul>
+            </article>
+        </section>
+    </div> <!-- end tab-exam -->
+
+    <!-- TAB 2: NUMERICALS & TUTORIALS -->
+    <div id="tab-num" class="tab-section">
+        <header class="text-center mb-10 bg-white p-6 rounded-xl shadow-sm border-t-4 border-indigo-600">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Master Solutions Guide</h1>
+            <p class="text-gray-600">Exam Back Page (Q2–Q10) + Complete Tutorial Sheets 1 &amp; 2</p>
+        </header>
+
+        <h2 id="exam-back" class="text-2xl font-black text-center uppercase tracking-widest border-b-4 border-gray-800 pb-2 mb-8 mt-4">Part A: Exam Paper Solutions (Q2 – Q10)</h2>
+
+        <!-- UNIT 1 -->
+        <section>
+            <h2 class="text-2xl font-bold text-blue-800 uppercase tracking-widest mb-4 border-b-2 border-blue-200 pb-2">Unit I: Quantum Computing</h2>
+            <article class="solution-card theme-blue border-t-8 border-blue-600">
+                <h2 class="question-header">Question 2(a) <span class="marks-tag">6 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Define wave function and obtain eigen energy for infinite potential well of width 'L'. Show energy is quantized.</div>
+                <p class="qa-label mt-4">Answer:</p>
+                <ul class="list-disc"><li><strong>Wave Function (\(\psi\)):</strong> A complex function whose squared magnitude \(|\psi|^2\) gives the probability density of finding the particle.</li></ul>
+                <p class="qa-label mt-4">Derivation:</p>
+                <ul class="list-none">
+                    <li>Inside the well, \(V=0\). Schrödinger equation: <div class="math-block">$$\frac{d^2\psi}{dx^2}+k^2\psi=0,\quad k^2=\frac{2mE}{\hbar^2}$$</div></li>
+                    <li>General solution: \(\psi=A\sin(kx)+B\cos(kx)\). BC at \(x=0\): \(B=0\). BC at \(x=L\): \(kL=n\pi\).</li>
+                    <li>Result: <div class="highlight-answer mt-2 block w-max">$$E_n=\frac{n^2h^2}{8mL^2}$$</div></li>
+                    <li><strong>Quantization:</strong> \(E_n\propto n^2\) (integer), so energy takes only discrete values.</li>
+                </ul>
+            </article>
+            <article class="solution-card theme-blue">
+                <h2 class="question-header">Question 2(b) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> State and explain Heisenberg's Uncertainty Principle.</div>
+                <p class="qa-label mt-4">Answer:</p>
+                <ul class="list-disc"><li><strong>Statement:</strong> It is impossible to simultaneously determine the exact position and momentum of a particle: <div class="math-block">$$\Delta x\cdot\Delta p\ge\frac{h}{4\pi}$$</div></li></ul>
+            </article>
+            <article class="solution-card theme-blue">
+                <h2 class="question-header">Question 2(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> A small object of mass 1 gm is confined between walls 1 cm apart. Calculate its lowest two energy levels.</div>
+                <p class="qa-label mt-4">Calculation:</p>
+                <ul class="list-none">
+                    <li>\(m=10^{-3}\text{ kg},\;L=10^{-2}\text{ m}\)</li>
+                    <li><div class="math-block">$$E_1=\frac{h^2}{8mL^2}=\frac{(6.63\times10^{-34})^2}{8\times10^{-3}\times10^{-4}}$$</div><div class="highlight-answer mt-1 block w-max">\(E_1=5.49\times10^{-62}\text{ J}\)</div></li>
+                    <li><div class="highlight-answer mt-2 block w-max">\(E_2=4E_1=21.96\times10^{-62}\text{ J}\)</div></li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- UNIT 2 -->
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold text-purple-800 uppercase tracking-widest mb-4 border-b-2 border-purple-200 pb-2">Unit II: Optical Fiber</h2>
+            <article class="solution-card theme-purple border-t-8 border-purple-600">
+                <h2 class="question-header">Question 3(a) <span class="marks-tag">7 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> What is acceptance angle? Obtain its expression for optical fiber.</div>
+                <ul class="list-none">
+                    <li>Apply Snell's law at air-core: \(n_0\sin\theta_a=n_1\sin\theta_r\)</li>
+                    <li>At core-cladding critical: \(\sin\theta_c=n_2/n_1\implies\cos\theta_c=\sqrt{n_1^2-n_2^2}/n_1\)</li>
+                    <li><div class="highlight-answer mt-2 block w-max">\(\theta_a=\sin^{-1}\!\left(\tfrac{\sqrt{n_1^2-n_2^2}}{n_0}\right)\)</div></li>
+                </ul>
+            </article>
+            <article class="solution-card theme-purple">
+                <h2 class="question-header">Question 3(c) <span class="marks-tag">3 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> \(n_1=1.48,\;n_2=1.46\). Find NA and acceptance angle.</div>
+                <ul class="list-none">
+                    <li><div class="math-block">$$\text{NA}=\sqrt{1.48^2-1.46^2}=\sqrt{0.0588}$$</div><div class="highlight-answer mt-1 block w-max">NA = 0.2425, \(\theta_a\approx14.03^\circ\)</div></li>
+                </ul>
+            </article>
+            <article class="solution-card theme-purple">
+                <h2 class="question-header">Question 4(d) <span class="marks-tag">3 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Fiber attenuation 1.5 dB/km. Power launched 0.5 mW. Power after 10 km?</div>
+                <ul class="list-none">
+                    <li>Total loss = \(1.5\times10=15\text{ dB}\). \(15=10\log(0.5/P_{out})\implies P_{out}=0.5/31.62\)</li>
+                    <li><div class="highlight-answer mt-2 block w-max">\(P_{out}=0.0158\text{ mW}\)</div></li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- UNIT 3 -->
+        <section class="mt-8">
+            <div class="flex items-center mb-6"><div class="h-1 flex-grow bg-orange-200"></div><h2 class="px-6 text-2xl font-bold text-orange-800 uppercase tracking-widest">Unit III: Semiconductors</h2><div class="h-1 flex-grow bg-orange-200"></div></div>
+            <article class="solution-card theme-orange border-t-8 border-orange-500">
+                <h2 class="question-header">Question 5(c) <span class="marks-tag">3 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Semiconductor wafer 0.5 mm thick. Potential 100 mV. Mobility 0.2 m²/Vs. Find drift velocity.</div>
+                <ul class="list-none">
+                    <li>\(E=V/L=0.1/(5\times10^{-4})=200\text{ V/m}\)</li>
+                    <li><div class="highlight-answer mt-2 block w-max">\(v_d=\mu E=0.2\times200=40\text{ m/s}\)</div></li>
+                </ul>
+            </article>
+            <article class="solution-card theme-orange">
+                <h2 class="question-header">Question 6(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Transistor \(\alpha=0.95\), CE config. Find \(\Delta I_C\) when \(\Delta I_B=0.1\text{ mA}\).</div>
+                <ul class="list-none">
+                    <li>\(\beta=\alpha/(1-\alpha)=0.95/0.05=19\)</li>
+                    <li><div class="highlight-answer mt-2 block w-max">\(\Delta I_C=\beta\times\Delta I_B=19\times0.1=1.9\text{ mA}\)</div></li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- UNIT 4 -->
+        <section class="mt-8">
+            <div class="flex items-center mb-6"><div class="h-1 flex-grow bg-cyan-200"></div><h2 class="px-6 text-2xl font-bold text-cyan-800 uppercase tracking-widest">Unit IV: Electron Optics</h2><div class="h-1 flex-grow bg-cyan-200"></div></div>
+            <article class="solution-card theme-cyan border-t-8 border-cyan-600">
+                <h2 class="question-header">Question 7(c) <span class="marks-tag">4 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Velocity of ions through crossed fields \(E=7.7\text{ kV/m},\;B=0.14\text{ T}\).</div>
+                <ul class="list-none"><li><div class="highlight-answer mt-2 block w-max">\(v=E/B=7700/0.14=55{,}000\text{ m/s}\)</div></li></ul>
+            </article>
+            <article class="solution-card theme-cyan">
+                <h2 class="question-header">Question 8(c) <span class="marks-tag">3 Marks</span></h2>
+                <div class="question-box"><span class="qa-label">Question:</span> Electrons at 200 V enter at 45°, refracted at 30°. Find potential difference.</div>
+                <ul class="list-none">
+                    <li>Bethe's Law: \(\sin45°/\sin30°=\sqrt{V_2/200}\implies\sqrt2=\sqrt{V_2/200}\implies V_2=400\text{ V}\)</li>
+                    <li><div class="highlight-answer mt-2 block w-max">\(\Delta V=400-200=200\text{ V}\)</div></li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- UNIT 5 -->
+        <section class="mt-8 mb-12">
+            <div class="flex items-center mb-6"><div class="h-1 flex-grow bg-emerald-200"></div><h2 class="px-6 text-2xl font-bold text-emerald-800 uppercase tracking-widest">Unit V: Nanotechnology</h2><div class="h-1 flex-grow bg-emerald-200"></div></div>
+            <article class="solution-card theme-emerald border-t-8 border-emerald-600">
+                <h2 class="question-header">Questions 9 &amp; 10 — Key Points</h2>
+                <ul class="list-disc">
+                    <li><strong>Nanomaterials:</strong> Materials with at least one dimension 1–100 nm. Properties differ due to high surface/volume ratio and quantum confinement.</li>
+                    <li><strong>Sol-Gel (Bottom-Up):</strong> Hydrolysis → Sol → Condensation → Gel → Drying → Calcination → nanopowder.</li>
+                    <li><strong>Ball Milling (Top-Down):</strong> Rotating drum with hardened balls pulverizes bulk material into nanoparticles.</li>
+                    <li><strong>Graphene:</strong> 2D carbon hexagonal lattice; 200× stronger than steel; exceptional electrical/thermal conductivity.</li>
+                    <li><strong>Zeolites:</strong> Microporous aluminosilicates; used as molecular sieves and cracking catalysts.</li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- TUTORIALS -->
+        <h2 id="tut-u1" class="text-2xl font-black text-center uppercase tracking-widest border-b-4 border-gray-800 pb-2 mb-8 mt-8 scroll-mt-24">Part B: Tutorial Sheet Solutions</h2>
+
+        <section>
+            <h2 class="text-2xl font-bold text-gray-800 uppercase tracking-widest mb-4 border-b-2 border-gray-300 pb-2">Unit I: Quantum Computing (Tutorial 1)</h2>
+            <article class="solution-card border-t-8 border-blue-600">
+                <h2 class="question-header">Problems 1–10: Key Results</h2>
+                <ul class="list-disc">
+                    <li><strong>P1</strong> Solar radiation 100 cal/cm²·hr → <span class="highlight-answer">\(1.929\times10^{19}\text{ photons/cm}^2\text{·min}\)</span></li>
+                    <li><strong>P2</strong> 150 V electron: \(\lambda=1.00\text{ Å}\); Bragg 1st order: <span class="highlight-answer">\(\theta=30.06°\)</span>; crystal lattice.</li>
+                    <li><strong>P3</strong> Thermal neutron at 300 K: <span class="highlight-answer">\(\lambda=1.455\text{ Å}\)</span></li>
+                    <li><strong>P4</strong> Neutron \(\lambda=1\text{ Å}\): \(v=3967.7\text{ m/s}\), <span class="highlight-answer">\(K=1.314\times10^{-20}\text{ J}\)</span></li>
+                    <li><strong>P5</strong> 1 MeV electron ≈0.0123 Å; proton ≈0.000286 Å; photon =0.0124 Å</li>
+                    <li><strong>P6</strong> Proton at c/20: <span class="highlight-answer">\(\lambda=2.645\times10^{-14}\text{ m}\)</span></li>
+                    <li><strong>P7</strong> 1 keV electron, \(\Delta x=1\text{ Å}\): <span class="highlight-answer">% uncertainty = 6.17%</span></li>
+                    <li><strong>P8</strong> State lifetime \(10^{-11}\text{ s}\): <span class="highlight-answer">\(\Delta E=5.27\times10^{-24}\text{ J}\)</span></li>
+                    <li><strong>P9</strong> Electron \(\Delta x=8.09\times10^{-4}\text{ m}\); Baseball <span class="highlight-answer">\(\Delta x=4.91\times10^{-32}\text{ m}\)</span></li>
+                    <li><strong>P10</strong> Fractional change: <span class="highlight-answer">\(3.31\times10^{-12}\)</span></li>
+                </ul>
+            </article>
+        </section>
+
+        <section id="tut-u3" class="scroll-mt-24 mt-8">
+            <h2 class="text-2xl font-bold text-orange-800 uppercase tracking-widest mb-4 border-b-2 border-orange-200 pb-2">Unit III: Semiconductor Physics (Tutorial 2)</h2>
+            <article class="solution-card theme-orange border-t-8 border-orange-600">
+                <h2 class="question-header">Problems 1–5: Key Results</h2>
+                <ul class="list-disc">
+                    <li><strong>P1</strong> Cu wire 100A, 10 mm²: <span class="highlight-answer">\(v_d=7.34\times10^{-4}\text{ m/s}\)</span></li>
+                    <li><strong>P2</strong> Intrinsic Ge (\(n_i=2.5\times10^{19}\)): <span class="highlight-answer">\(\rho=0.43\;\Omega\cdot\text{m}\)</span></li>
+                    <li><strong>P3</strong> N-type, \(\rho=20\times10^{-4}\;\Omega\cdot\text{m}\): <span class="highlight-answer">\(n=3.125\times10^{23}\text{ /m}^3\)</span></li>
+                    <li><strong>P4</strong> NPN, \(I_C=15\text{ mA}\), 95% reach collector: <span class="highlight-answer">\(I_B=0.789\text{ mA}\)</span></li>
+                    <li><strong>P5</strong> CB config, \(I_E=2\text{ mA}\), \(I_B=20\mu\text{A}\): \(I_C=1.98\text{ mA}\), <span class="highlight-answer">\(\alpha=0.99\)</span></li>
+                </ul>
+            </article>
+        </section>
+
+        <section id="tut-u2" class="scroll-mt-24 mt-8">
+            <h2 class="text-2xl font-bold text-purple-800 uppercase tracking-widest mb-4 border-b-2 border-purple-200 pb-2">Unit II: Optical Fiber (Tutorial 2)</h2>
+            <article class="solution-card theme-purple border-t-8 border-purple-600">
+                <h2 class="question-header">Problems 1–8: Key Results</h2>
+                <ul class="list-disc">
+                    <li><strong>P1</strong> \(n_1=1.55,n_2=1.50\): <span class="highlight-answer">NA = 0.3905</span></li>
+                    <li><strong>P2</strong> \(n_1=1.563,n_2=1.498\): <span class="highlight-answer">\(\theta_a=26.49°\)</span></li>
+                    <li><strong>P3</strong> NA=0.39, \(\Delta=0.05\): <span class="highlight-answer">\(n_1=1.2334\)</span></li>
+                    <li><strong>P4</strong> \(n_1=1.563,n_2=1.498\): <span class="highlight-answer">\(\Delta=0.0416\)</span></li>
+                    <li><strong>P5</strong> \(n_1=1.48,n_2=1.45\): NA=0.2965, <span class="highlight-answer">\(\theta_a=17.25°\)</span></li>
+                    <li><strong>P6</strong> \(n_1=1.5,\Delta=0.0005\): \(n_2=1.499\), <span class="highlight-answer">\(\theta_a=2.71°\)</span></li>
+                    <li><strong>P7</strong> 15% loss in 0.5 km: <span class="highlight-answer">\(\alpha=1.411\text{ dB/km}\)</span></li>
+                    <li><strong>P8</strong> \(n_1=1.52,\Delta=0.0007,\lambda=1.3\mu\text{m},a=14.5\mu\text{m}\): V=3.98, <span class="highlight-answer">8 modes</span></li>
+                </ul>
+            </article>
+        </section>
+
+        <section id="tut-u4" class="scroll-mt-24 mt-8 mb-24">
+            <h2 class="text-2xl font-bold text-cyan-800 uppercase tracking-widest mb-4 border-b-2 border-cyan-200 pb-2">Unit IV: Electron Optics (Tutorial 2)</h2>
+            <article class="solution-card theme-cyan border-t-8 border-cyan-600">
+                <h2 class="question-header">Problems 1–7: Key Results</h2>
+                <ul class="list-disc">
+                    <li><strong>P1</strong> E=1500 V/m: <span class="highlight-answer">\(F=2.403\times10^{-16}\text{ N},\;a=2.63\times10^{14}\text{ m/s}^2\)</span></li>
+                    <li><strong>P2</strong> Proton at 500 V/m, v=2.5×10⁶ m/s: a=4.79×10¹⁰, t=52.1 μs, s=65 m, <span class="highlight-answer">K=5.21×10⁻¹⁵ J</span></li>
+                    <li><strong>P3</strong> 200 V, B=0.01 T: v=8.38×10⁶ m/s, <span class="highlight-answer">r=4.8 mm</span></li>
+                    <li><strong>P4</strong> B=0.23 T, 45°, v=3×10⁷ m/s: R=0.52 mm, <span class="highlight-answer">pitch=3.3 mm</span></li>
+                    <li><strong>P5</strong> 75V→100V, 45°: <span class="highlight-answer">\(\theta_2=37.7°\)</span></li>
+                    <li><strong>P7</strong> CRT deflection 3cm, L=15cm, V=2000V: <span class="highlight-answer">\(B=4.02\times10^{-4}\text{ Wb/m}^2\)</span></li>
+                </ul>
+            </article>
+        </section>
+    </div> <!-- end tab-num -->
+
+    </div> <!-- end max-w-4xl -->
+
+    <script>
+    function switchTab(tab) {
+        document.getElementById('tab-exam').classList.toggle('active', tab === 'exam');
+        document.getElementById('tab-num').classList.toggle('active', tab === 'num');
+        document.getElementById('tab-exam-btn').classList.toggle('active', tab === 'exam');
+        document.getElementById('tab-num-btn').classList.toggle('active', tab === 'num');
+        document.getElementById('nav-exam').classList.toggle('hidden', tab !== 'exam');
+        document.getElementById('nav-num').classList.toggle('hidden', tab !== 'num');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    </script>
+</body>
+</html>
